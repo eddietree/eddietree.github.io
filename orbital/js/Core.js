@@ -35,7 +35,7 @@ function Core()
 	{
 		this.objects = new Array();
 
- 		//this.objects.push( new DebugGrid() );
+ 		this.objects.push( new DebugGrid() );
  		this.objects.push( new Satellite() );
  		this.objects.push( new Face() );
  		//this.objects.push( new Floor() );
