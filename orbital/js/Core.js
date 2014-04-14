@@ -72,8 +72,8 @@ function Core()
 		g_camera.position.y = radius * 0.2;*/
 
 		g_camera.position.x = radius * Math.cos(time);
-		g_camera.position.z = radius * Math.sin(0.5+-mousePos.x*0.001);
-		g_camera.position.y = mousePos.y*0.015;
+		g_camera.position.z = radius * Math.sin(0.7+-mousePos.x*0.0007);
+		g_camera.position.y = mousePos.y*0.01-0.5;
 
 		g_camera.lookAt( new THREE.Vector3(-5.0,1.5,0.0) );
 	}
