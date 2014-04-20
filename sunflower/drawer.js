@@ -347,6 +347,7 @@ function onFrame(event)
 	//path.rotate(event.time);
 }
 
+/*
 var stats = new Stats();
 stats.setMode(0); // 0: fps, 1: ms
 
@@ -365,4 +366,4 @@ setInterval( function () {
 
     stats.end();
 
-}, 1000 / 60 );
+}, 1000 / 60 );*/
