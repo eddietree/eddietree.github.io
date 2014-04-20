@@ -84,7 +84,7 @@ function Flower()
 		var petalStyle = {
 				fillColor: '#F3D110',
 				strokeColor: '#BC9D04',
-				strokeWidth: 2,
+				strokeWidth: 1,
 			};
 
 		for ( var i = 0; i < numPetals; i++ )
@@ -192,7 +192,7 @@ function Center()
 		var petalStyle = {
 				fillColor: '#4260A9',
 				strokeColor: '#96B1BF',
-				strokeWidth: 2,
+				strokeWidth: 1,
 			};
 
 		for ( var i = 0; i < numPetals; i++ )
@@ -236,11 +236,6 @@ function Center()
 	{
 		var time = g_time * 6;
 
-		var center = new Point( view.viewSize.width/2, view.viewSize.height/2 );
-		var radius = Math.min( view.viewSize.width, view.viewSize.height ) * 0.5;
-		var radiusStart = radius * 0.2;
-		var radiusEnd = radius * 0.8;
-
 		for ( var i = 0; i < this.petals.length; i++ )
 		{
 			var petal = this.petals[i];
@@ -264,7 +259,6 @@ function Center()
 			path0.segments[1].point = posMiddle + dirOpp * Math.cos( time  + i*0.1) * 5.0;
 			//path0.segments[2].point = posEnd;
 			path0.rotate(-1.0, posMiddle);
-			
 
 		}
 	}
@@ -330,11 +324,6 @@ function Outside()
 	this.update = function()
 	{
 		var time = g_time * 10;
-
-		var center = new Point( view.viewSize.width/2, view.viewSize.height/2 );
-		var radius = Math.min( view.viewSize.width, view.viewSize.height ) * 0.5;
-		var radiusStart = radius * 0.2;
-		var radiusEnd = radius * 0.8;
 
 		for ( var i = 0; i < this.petals.length; i++ )
 		{
