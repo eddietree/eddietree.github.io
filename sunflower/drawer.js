@@ -271,18 +271,12 @@ function Outside()
 		var numPetals = 32;
 		var deltaAngle = 2 * Math.PI / numPetals;
 
-		var radiusStart = 50.0;
-		var radiusEnd = 700.0;
+		var radiusStart = 180.0;
+		var radiusEnd = 900.0;
 
 		this.petals = new Array();
 
 		var center = new Point( view.viewSize.width/2, view.viewSize.height/2 );
-
-		var petalStyle = {
-				//fillColor: '#5A7504',
-				strokeColor: '#F4E237',
-				strokeWidth: 2,
-			};
 
 		for ( var i = 0; i < numPetals; i++ )
 		{
@@ -301,8 +295,9 @@ function Outside()
 			var segments = [posStart, posSide2, posEnd, posSide1 ];
 			var path0 = new Path(segments);
 
-			path0.style = petalStyle;
-			//path0.closed = true;
+			path0.strokeColor = '#D3D04F';
+			//path0.style = petalStyle;
+			path0.closed = true;
 			//path0.smooth();
 
 
@@ -323,7 +318,6 @@ function Outside()
 
 	this.update = function()
 	{
-		var time = g_time * 10;
 
 		for ( var i = 0; i < this.petals.length; i++ )
 		{
@@ -352,3 +346,23 @@ function onFrame(event)
 	//console.log(event.time);
 	//path.rotate(event.time);
 }
+
+var stats = new Stats();
+stats.setMode(0); // 0: fps, 1: ms
+
+// Align top-left
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.left = '0px';
+stats.domElement.style.top = '0px';
+
+document.body.appendChild( stats.domElement );
+
+setInterval( function () {
+
+    stats.begin();
+
+    // your code goes here
+
+    stats.end();
+
+}, 1000 / 60 );
