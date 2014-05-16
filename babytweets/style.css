@@ -4,3 +4,13 @@
 	position: relative;
 	top: -0.1em;
 }
+
+.tweet img.tweet-profile-pic
+{
+	height: 24px;
+}
+
+.tweet
+{
+	padding:3px;
+}
