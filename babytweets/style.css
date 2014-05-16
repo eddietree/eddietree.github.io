@@ -1,6 +1,11 @@
+h1
+{
+	margin:1em 0;
+}
+
 #profile img
 {
-	height:0.9em;
+	height:1.0em;
 	position: relative;
 	top: -0.1em;
 }
@@ -12,5 +17,14 @@
 
 .tweet
 {
-	padding:3px;
+	padding:4px;
+	clear: both;
+}
+
+div.user-name
+{
+	width: 150px;
+	text-align: right;
+	float: left;
+	margin-right: 0.5em;
 }
