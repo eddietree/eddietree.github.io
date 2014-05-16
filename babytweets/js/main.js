@@ -2,7 +2,8 @@ function addTweet( a_tweetData )
 {
 	var tweetList = $('#tweets');
 
-	var tweetHtml = '<li class="list-group-item"><span class="label label-default">'+ a_tweetData.user.screen_name +'</span> ' + a_tweetData.text + '</li>';
+	var tweetHtml = '<li class="list-group-item tweet"><a href="https://twitter.com/'+ a_tweetData.user.screen_name +'" class="btn btn-primary btn-xs">@'+ a_tweetData.user.screen_name +'</a> '+a_tweetData.text+'</li>';
+	//var tweetHtml = '<li class="list-group-item"><span class="label label-default">'+ a_tweetData.user.screen_name +'</span> ' + a_tweetData.text + '</li>';
 	tweetList.append( tweetHtml );
 	//alert(a_tweetData);
 }
