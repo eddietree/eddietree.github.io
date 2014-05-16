@@ -24,7 +24,7 @@ $(function() {
 		        //alert('Hello ' + data.name)
 		    })
 
-			res.get('/1.1/statuses/home_timeline.json?count=2')
+			res.get('/1.1/statuses/home_timeline.json?count=50')
 		       .done(function(data) {
 		        //alert('Hello ' + data.name);
 
