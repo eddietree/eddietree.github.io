@@ -79,18 +79,29 @@ function Face()
 			console.log( item, loaded, total );
 		};
 
-		var loader = new THREE.OBJLoader( manager );
-		loader.load( 'obj/Critter.obj', function ( object ) {
+		var texture = new THREE.Texture();
 
-			
+			var loader = new THREE.ImageLoader( manager );
+			loader.load( 'obj/CritterCenteredMaybe.png', function ( image ) {
+
+				texture.image = image;
+				texture.needsUpdate = true;
+
+			} );
+
+		var loader = new THREE.OBJLoader( manager );
+		loader.load( 'obj/CritterCenteredMaybe.obj', function ( object ) {
+
+
 			object.traverse( function ( child ) {
 
 				if ( child instanceof THREE.Mesh ) 
 				{
 					g_faceGeometry = child.geometry;
-					//child.material =  new THREE.MeshBasicMaterial( {color: 0xffffff} );;
-					//child.material.map = texture;
+					child.material =  new THREE.MeshBasicMaterial( {color: 0xffffff} );;
+					child.material.map = texture;
 
+					return;
 					// lines
 					var geometry = new THREE.Geometry();
 					var material = new THREE.LineBasicMaterial({ color: 0x252525, transparent:true, opacity:0.5 });

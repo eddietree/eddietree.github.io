@@ -6,7 +6,7 @@ function Core()
 {
 	this.init = function()
 	{
-		var clearColor = 0x111111;
+		var clearColor = 0xAAAAAA;
 
  		// renderer
 		this.renderer = new THREE.WebGLRenderer();
@@ -66,7 +66,7 @@ function Core()
 	{
 		var time = Math.PI * 0.9;//Date.now() * 0.0003;
 		//var time = Date.now() * 0.0005;
-		var radius = 15.0;
+		var radius = 45.0;
 		/*g_camera.position.x = radius * Math.cos(time);
 		g_camera.position.z = radius * Math.sin(mousePos.x*0.001);
 		g_camera.position.y = radius * 0.2;*/
@@ -74,7 +74,7 @@ function Core()
 		var windowHeight = 	window.innerHeight;
 
 		g_camera.position.x = radius * Math.cos(time);
-		g_camera.position.z = radius * Math.sin(0.7+-mousePos.x*0.0007);
+		g_camera.position.z = radius * Math.cos(0.7+-mousePos.x*0.0007);
 		g_camera.position.y = radius*0.2 + (mousePos.y-windowHeight*0.5)*0.01;
 
 		g_camera.lookAt( new THREE.Vector3(-5.0,1.5,0.0) );

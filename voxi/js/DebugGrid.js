@@ -17,7 +17,7 @@ function DebugGrid()
 		var positions = geometry.attributes.position.array;
 		var colors = geometry.attributes.color.array;
 
-		var y = -3.0;
+		var y = -10.0;
 
 		for ( var i = 0; i < segments; i ++ ) {
 

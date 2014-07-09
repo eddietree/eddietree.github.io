@@ -5,7 +5,7 @@ function Floor()
 	this.initWater = function()
 	{
 		var maxSize = 100.0;
-		var y = -0.02;
+		var y = -30000.02;
 
 	    var geo = new THREE.Geometry();
 
