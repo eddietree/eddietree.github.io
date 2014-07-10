@@ -2,13 +2,42 @@ function Grass()
 {
 	this.id = 'grass';
 
+	this.initWater = function()
+	{
+		var maxSize = 37.0;
+		var y = -10.0;
+
+	    var geo = new THREE.Geometry();
+
+	    geo.vertices.push(new THREE.Vector3(-maxSize, y,-maxSize ));
+	    geo.vertices.push(new THREE.Vector3( maxSize, y,-maxSize ));
+	    geo.vertices.push(new THREE.Vector3( maxSize, y, maxSize ));
+	    geo.vertices.push(new THREE.Vector3(-maxSize, y, maxSize ));
+
+	    geo.faces.push( new THREE.Face3(0, 2, 1));
+	    geo.faces.push( new THREE.Face3(0, 3, 2));
+
+	    var mesh = new THREE.Mesh(
+	        geo,
+	        new THREE.MeshBasicMaterial({
+	            color:              0x3A3632,
+	            wireframe:          false,
+	            wireframeLinewidth: 3
+	        })
+	    );
+	    mesh.doubleSided = true;
+	    mesh.overdraw = true;
+	    g_scene.add(mesh);
+	}
+
+
 	this.initTerrain = function()
 	{
 		var numBlades = 4000;
 		var numSegmentsPerBlade = 4;
 		var maxDist = 35.0;
 		var yMin = -10.0;
-		var yMax = -3.0;
+		var yMax = -2.0;
 		var bladeWidth = 0.6;
 
 		//var numVertsPerBlade = ((numSegmentsPerBlade-1)*2 + 4);
@@ -29,7 +58,7 @@ function Grass()
 
 		for ( var i = 0; i < numBlades; i ++ ) 
 		{
-			var yHeight = (yMax-yMin) * randFloat(0.8,1.0);
+			var yHeight = (yMax-yMin) * randFloat(0.7,1.0);
 			var yDiff = new THREE.Vector3(0.0, yHeight, 0.0);
 
 			var bladeVertIndexOffset = i * numVertsPerBlade;
@@ -184,6 +213,7 @@ function Grass()
 	this.init = function()
 	{
 		this.initTerrain();
+		this.initWater();
 		this.time = 0.0;
 	}
 
