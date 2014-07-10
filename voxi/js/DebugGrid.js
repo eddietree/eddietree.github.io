@@ -2,7 +2,7 @@ function DebugGrid()
 {
 	this.initGrid = function()
 	{
-		var segments = 40;
+		var segments = 70;
 		var width = segments;
 		var posStep = width / segments;
 		var posStart = width * -0.5;

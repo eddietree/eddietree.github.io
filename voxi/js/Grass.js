@@ -4,11 +4,11 @@ function Grass()
 
 	this.initTerrain = function()
 	{
-		var numBlades = 3000;
+		var numBlades = 2000;
 		var numSegmentsPerBlade = 5;
 		var maxDist = 30.0;
 		var yMin = -10.0;
-		var yMax = -5.0;
+		var yMax = -3.0;
 		var bladeWidth = 0.6;
 
 		//var numVertsPerBlade = ((numSegmentsPerBlade-1)*2 + 4);
@@ -49,6 +49,9 @@ function Grass()
 
 			var deltaY = yHeight / (numSegmentsPerBlade+1);
 			var deltaPos = new THREE.Vector3( 0.0, deltaY, 0.0 );
+
+			var bladeDataRandom0 = randFloat(0.0,1.0);
+			var bladeDataRandom1 = randFloat(0.0,1.0);
 
 			for ( var j = 0; j < numSegmentsPerBlade; j++ )
 			{
@@ -117,23 +120,23 @@ function Grass()
 				colors[ segmentFloatIndexOffset + 16 ] = g;
 				colors[ segmentFloatIndexOffset + 17 ] = b;
 
-				data[ segmentFloatIndexOffset + 0 ] = rootPos.x;
+				data[ segmentFloatIndexOffset + 0 ] = bladeDataRandom0;
 				data[ segmentFloatIndexOffset + 1 ] = rootPos.z
 				data[ segmentFloatIndexOffset + 2 ] = delta*j;
-				data[ segmentFloatIndexOffset + 3 ] = rootPos.x;
+				data[ segmentFloatIndexOffset + 3 ] = bladeDataRandom0;
 				data[ segmentFloatIndexOffset + 4 ] = rootPos.z
 				data[ segmentFloatIndexOffset + 5 ] = delta*j;
-				data[ segmentFloatIndexOffset + 6 ] = rootPos.x;
+				data[ segmentFloatIndexOffset + 6 ] = bladeDataRandom0;
 				data[ segmentFloatIndexOffset + 7 ] = rootPos.z
 				data[ segmentFloatIndexOffset + 8 ] = delta*(j+1);
 
-				data[ segmentFloatIndexOffset + 9 ] = rootPos.x;
+				data[ segmentFloatIndexOffset + 9 ] = bladeDataRandom0;
 				data[ segmentFloatIndexOffset + 10 ] = rootPos.z
 				data[ segmentFloatIndexOffset + 11 ] = delta*j;
-				data[ segmentFloatIndexOffset + 12 ] = rootPos.x;
+				data[ segmentFloatIndexOffset + 12 ] = bladeDataRandom0;
 				data[ segmentFloatIndexOffset + 13 ] = rootPos.z
 				data[ segmentFloatIndexOffset + 14 ] = delta*(j+1);
-				data[ segmentFloatIndexOffset + 15 ] = rootPos.x;
+				data[ segmentFloatIndexOffset + 15 ] = bladeDataRandom0;
 				data[ segmentFloatIndexOffset + 16 ] = rootPos.z
 				data[ segmentFloatIndexOffset + 17 ] = delta*(j+1);
 			}
