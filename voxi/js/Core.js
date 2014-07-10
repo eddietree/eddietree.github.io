@@ -1,6 +1,9 @@
 
 var g_heroPos = new THREE.Vector3(0.0,0.0,0.0);
 var mousePos = {x:0,y:0};
+var mousePosPrev = {x:0,y:0};
+var mousePosDelta = {x:0,y:0};
+var mouseDown = 0;
 
 function Core()
 {
@@ -25,7 +28,7 @@ function Core()
 		g_scene.add( new THREE.AmbientLight(  0x202020 ) );
 
 		// camera
- 		g_camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 0.1, 100);
+ 		g_camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 0.1, 500);
  		g_camera.lookAt( new THREE.Vector3(0.0,0.0,0.0) );
 
  		this.initItems();	
@@ -41,11 +44,17 @@ function Core()
  		this.objects.push( new Particles() );
  		//this.objects.push( new Floor() );
 
-
  		for( var i=0; i < this.objects.length; i++ )
  		{
  			this.objects[i].init();
  		}
+
+ 		this.cameraProps = 
+ 		{
+ 			phi: 0.5 * Math.PI,
+ 			theta: 0.15 * Math.PI,
+ 			radius: 50.0,
+ 		};
 	}
 
 	this.draw = function()
@@ -65,20 +74,19 @@ function Core()
 
 	this.spinCamera = function()
 	{
-		var time = Date.now() * 0.0003;
-		//var time = Date.now() * 0.0005;
-		var radius = 45.0;
-		/*g_camera.position.x = radius * Math.cos(time);
-		g_camera.position.z = radius * Math.sin(mousePos.x*0.001);
-		g_camera.position.y = radius * 0.2;*/
+		var radius = this.cameraProps.radius;
+		var theta = this.cameraProps.theta;
+		var phi = this.cameraProps.phi;
 
-		var windowHeight = 	window.innerHeight;
+		var x = radius * Math.sin(theta) * Math.sin(phi);
+		var y = radius * Math.cos(phi);
+		var z = radius * Math.cos(theta) * Math.sin(phi);
 
-		g_camera.position.x = radius * Math.cos(time);
-		g_camera.position.z = radius * Math.cos(0.7+-mousePos.x*0.0007);
-		g_camera.position.y = radius*0.2 + (mousePos.y-windowHeight*0.5)*0.01;
+		g_camera.position.x = x;
+		g_camera.position.y = y;
+		g_camera.position.z = z;
 
-		g_camera.lookAt( new THREE.Vector3(-5.0,1.0,0.0) );
+		g_camera.lookAt( new THREE.Vector3(0.0,1.0,0.0) );
 	}
 
 	this.update = function()
@@ -134,13 +142,33 @@ var doTick = function()
 
 doTick();
 
-(function() {
-    window.onmousemove = handleMouseMove;
-    function handleMouseMove(event) {
-        event = event || window.event; // IE-ism
-        mousePos.x = event.clientX;
-        mousePos.y = event.clientY;
 
-        // event.clientX and event.clientY contain the mouse position
-    }
-})();
+document.body.onmousedown = function() { 
+  ++mouseDown;
+}
+document.body.onmouseup = function() {
+  --mouseDown;
+}
+
+document.body.onmousemove=function(event)
+{
+	mousePosDelta.x = event.clientX - mousePos.x;
+    mousePosDelta.y = event.clientY - mousePos.y;
+	mousePosPrev.x = mousePos.x;
+    mousePosPrev.y = mousePos.y;
+	mousePos.x = event.clientX;
+    mousePos.y = event.clientY;
+
+	if ( mouseDown )
+	{
+		var coeff = 0.01; 
+		g_core.cameraProps.theta = wrap( g_core.cameraProps.theta - mousePosDelta.x*coeff, 0.0, 2.0*Math.PI);
+		g_core.cameraProps.phi = clamp( g_core.cameraProps.phi - mousePosDelta.y*coeff, 0.01, Math.PI*0.5-0.01);
+	}
+};
+
+document.body.onmousewheel = function(event) {
+	var deltaY = event.deltaY;
+
+	g_core.cameraProps.radius = clamp( g_core.cameraProps.radius + deltaY * 0.05, 10.0, 200.0 );
+}

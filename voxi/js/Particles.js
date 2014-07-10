@@ -3,7 +3,7 @@ function Particles()
 	this.init = function()
 	{
 		var particles = 50;
-		var spread = 40.0;
+		var spread = 30.0;
 
 		var geometry = new THREE.BufferGeometry();
 
