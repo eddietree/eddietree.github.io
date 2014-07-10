@@ -36,8 +36,8 @@ function Core()
 		this.objects = new Array();
 
  		this.objects.push( new DebugGrid() );
- 		this.objects.push( new Satellite() );
  		this.objects.push( new Face() );
+ 		this.objects.push( new Grass() );
  		//this.objects.push( new Floor() );
 
 
@@ -64,7 +64,7 @@ function Core()
 
 	this.spinCamera = function()
 	{
-		var time = Math.PI * 0.9;//Date.now() * 0.0003;
+		var time = Date.now() * 0.0003;
 		//var time = Date.now() * 0.0005;
 		var radius = 45.0;
 		/*g_camera.position.x = radius * Math.cos(time);
@@ -77,7 +77,7 @@ function Core()
 		g_camera.position.z = radius * Math.cos(0.7+-mousePos.x*0.0007);
 		g_camera.position.y = radius*0.2 + (mousePos.y-windowHeight*0.5)*0.01;
 
-		g_camera.lookAt( new THREE.Vector3(-5.0,1.5,0.0) );
+		g_camera.lookAt( new THREE.Vector3(-5.0,1.0,0.0) );
 	}
 
 	this.update = function()

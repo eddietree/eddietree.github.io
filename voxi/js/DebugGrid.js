@@ -43,7 +43,7 @@ function DebugGrid()
 			positions[ i * stride + 11] = x_1;
 
 			// colors
-			var value = 0.04;
+			var value = 1.0;
 			colors[ i * stride + 0 ] = value;
 			colors[ i * stride + 1 ] = value;
 			colors[ i * stride + 2 ] = value;
