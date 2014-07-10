@@ -4,9 +4,9 @@ function Grass()
 
 	this.initTerrain = function()
 	{
-		var numBlades = 550;
+		var numBlades = 3000;
 		var numSegmentsPerBlade = 5;
-		var maxDist = 20.0;
+		var maxDist = 30.0;
 		var yMin = -10.0;
 		var yMax = -5.0;
 		var bladeWidth = 0.6;
@@ -15,21 +15,25 @@ function Grass()
 		var numVertsPerSegment = 6;
 		var numVertsPerBlade = numSegmentsPerBlade * numVertsPerSegment;
 		var numVertsTotal = numVertsPerBlade * numBlades;
-		var yHeight = yMax-yMin;
 
 		/// generate geometry
 		var geo = new THREE.BufferGeometry();
 
 		geo.addAttribute( 'position', Float32Array, numVertsTotal, 3 );
 		geo.addAttribute( 'color', Float32Array, numVertsTotal, 3 );
+		geo.addAttribute( 'data', Float32Array, numVertsTotal, 3 );
 
 		var positions = geo.attributes.position.array;
 		var colors = geo.attributes.color.array;
+		var data = geo.attributes.data.array;
 
-		var yDiff = new THREE.Vector3(0.0, yMax-yMin, 0.0);
+		
 
 		for ( var i = 0; i < numBlades; i ++ ) 
 		{
+			var yHeight = (yMax-yMin) * randFloat(0.8,1.0);
+			var yDiff = new THREE.Vector3(0.0, yHeight, 0.0);
+
 			var bladeVertIndexOffset = i * numVertsPerBlade;
 
 			var rootPos = new THREE.Vector3( randFloat(-maxDist, maxDist), yMin, randFloat(-maxDist, maxDist) );
@@ -49,10 +53,10 @@ function Grass()
 			for ( var j = 0; j < numSegmentsPerBlade; j++ )
 			{
 				// color
-				var delta = j / numSegmentsPerBlade;
-				var r = 0.0;
-				var g = delta;
-				var b = 0.0;
+				var delta = 1.0 / numSegmentsPerBlade;
+				var r = 0.3;
+				var g = delta*j;
+				var b = 0.3;
 
 				var numFloatsPerVertex = 3;
 				var numFloatsPerSegment = numVertsPerSegment * numFloatsPerVertex;
@@ -64,13 +68,13 @@ function Grass()
 				var pt2 = rootPosRight.clone().add( deltaPos.clone().multiplyScalar(j+1) );
 				var pt3 = rootPosLeft.clone().add( deltaPos.clone().multiplyScalar(j+1) );
 
-				/*if ( j == numSegmentsPerBlade -1 )
+				if ( j == numSegmentsPerBlade -1 )
 				{
 					pt2.x = rootPos.x;
 					pt2.z = rootPos.z;
 					pt3.x = rootPos.x;
 					pt3.z = rootPos.z;
-				}*/
+				}
 
 				// pos
 				positions[ segmentFloatIndexOffset + 0 ] = pt0.x;
@@ -112,21 +116,40 @@ function Grass()
 				colors[ segmentFloatIndexOffset + 15 ] = r;
 				colors[ segmentFloatIndexOffset + 16 ] = g;
 				colors[ segmentFloatIndexOffset + 17 ] = b;
+
+				data[ segmentFloatIndexOffset + 0 ] = rootPos.x;
+				data[ segmentFloatIndexOffset + 1 ] = rootPos.z
+				data[ segmentFloatIndexOffset + 2 ] = delta*j;
+				data[ segmentFloatIndexOffset + 3 ] = rootPos.x;
+				data[ segmentFloatIndexOffset + 4 ] = rootPos.z
+				data[ segmentFloatIndexOffset + 5 ] = delta*j;
+				data[ segmentFloatIndexOffset + 6 ] = rootPos.x;
+				data[ segmentFloatIndexOffset + 7 ] = rootPos.z
+				data[ segmentFloatIndexOffset + 8 ] = delta*(j+1);
+
+				data[ segmentFloatIndexOffset + 9 ] = rootPos.x;
+				data[ segmentFloatIndexOffset + 10 ] = rootPos.z
+				data[ segmentFloatIndexOffset + 11 ] = delta*j;
+				data[ segmentFloatIndexOffset + 12 ] = rootPos.x;
+				data[ segmentFloatIndexOffset + 13 ] = rootPos.z
+				data[ segmentFloatIndexOffset + 14 ] = delta*(j+1);
+				data[ segmentFloatIndexOffset + 15 ] = rootPos.x;
+				data[ segmentFloatIndexOffset + 16 ] = rootPos.z
+				data[ segmentFloatIndexOffset + 17 ] = delta*(j+1);
 			}
 		}
 
 		var attributes = {
 
 			position: {	type: 'f', value: null },
-			color: { type: 'f', value: null }
+			color: { type: 'f', value: null },
+			data: { type: 'f', value: null }
 
 		};
 
 		uniforms = {
 
 			time: {type: 'f', value: 2.0}
-			//color:     { type: "c", value: new THREE.Color( 0xffffff ) },
-			//texture:   { type: "t", value: THREE.ImageUtils.loadTexture( "textures/sprites/spark1.png" ) },
 
 		};
 
