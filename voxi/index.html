@@ -31,6 +31,53 @@
 
     <!--<iframe width="166" height="126" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/122524851&amp;color=000000&amp;auto_play=true&amp;hide_related=true&amp;show_artwork=false"></iframe>-->
 
+        <script id="vertexShaderGrass" type="x-shader/x-vertex">
+
+            precision mediump float;
+            precision mediump int;
+
+            //uniform mat4 modelViewMatrix; // optional
+            //uniform mat4 projectionMatrix; // optional
+
+            //attribute vec3 position;
+            attribute vec4 color;
+
+            varying vec3 vPosition;
+            varying vec4 vColor;
+
+            void main() {
+
+                vPosition = position;
+                vColor = color;
+
+                gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+            }
+
+        </script>
+
+        <script id="fragmentShaderGrass" type="x-shader/x-fragment">
+
+            precision highp float;
+            precision mediump int;
+
+            uniform float time;
+
+            varying vec3 vPosition;
+            varying vec4 vColor;
+
+            void main() {
+
+                vec4 color = vec4( time, time, time ,1.0 );
+                //color.b += cos(  time ) * 0.5;
+
+                gl_FragColor = vColor;
+                //gl_FragColor = color;
+
+            }
+
+        </script>
+
         <script src="js/extlib/three.min.js"></script>
         <script src="js/extlib/perlin.js"></script>
         <script src="js/extlib/OBJLoader.js"></script>

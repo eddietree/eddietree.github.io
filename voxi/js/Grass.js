@@ -4,8 +4,8 @@ function Grass()
 
 	this.initTerrain = function()
 	{
-		var numBlades = 150;
-		var numSegmentsPerBlade = 4;
+		var numBlades = 550;
+		var numSegmentsPerBlade = 5;
 		var maxDist = 20.0;
 		var yMin = -10.0;
 		var yMax = -5.0;
@@ -64,7 +64,15 @@ function Grass()
 				var pt2 = rootPosRight.clone().add( deltaPos.clone().multiplyScalar(j+1) );
 				var pt3 = rootPosLeft.clone().add( deltaPos.clone().multiplyScalar(j+1) );
 
-				// po
+				/*if ( j == numSegmentsPerBlade -1 )
+				{
+					pt2.x = rootPos.x;
+					pt2.z = rootPos.z;
+					pt3.x = rootPos.x;
+					pt3.z = rootPos.z;
+				}*/
+
+				// pos
 				positions[ segmentFloatIndexOffset + 0 ] = pt0.x;
 				positions[ segmentFloatIndexOffset + 1 ] = pt0.y;
 				positions[ segmentFloatIndexOffset + 2 ] = pt0.z;
@@ -107,15 +115,44 @@ function Grass()
 			}
 		}
 
+		var attributes = {
+
+			position: {	type: 'f', value: null },
+			color: { type: 'f', value: null }
+
+		};
+
+		uniforms = {
+
+			time: {type: 'f', value: 2.0}
+			//color:     { type: "c", value: new THREE.Color( 0xffffff ) },
+			//texture:   { type: "t", value: THREE.ImageUtils.loadTexture( "textures/sprites/spark1.png" ) },
+
+		};
+
+		var shaderMaterial = new THREE.ShaderMaterial( {
+
+			uniforms: 		uniforms,
+			attributes:     attributes,
+			vertexShader:   document.getElementById( 'vertexShaderGrass' ).textContent,
+			fragmentShader: document.getElementById( 'fragmentShaderGrass' ).textContent,
+
+			//blending: 		THREE.AdditiveBlending,
+			depthTest: 		true,
+			transparent:	false,
+
+		});
+
 		var vertexColorMaterial = new THREE.MeshBasicMaterial( 
 			{ vertexColors: THREE.VertexColors, side: THREE.DoubleSide } );
 
 	    this.meshTerrain = new THREE.Mesh(
 	        geo,
-	        vertexColorMaterial
+	        shaderMaterial
 	    );
+	    
 	    this.meshTerrain.doubleSided = true;
-	    this.meshTerrain.overdraw = false;
+	    //this.meshTerrain.overdraw = false;
 	    g_scene.add(this.meshTerrain);
 	}
 
@@ -130,5 +167,10 @@ function Grass()
 
 	this.update = function()
 	{
+		//var test = this.meshTerrain.material.uniforms.time;
+		this.meshTerrain.material.uniforms.time.value = Date.now() * 0.4;
+		this.meshTerrain.material.needsUpdate = true;
+
+		//console.log( this.meshTerrain.material.uniforms.time.value );
 	}
 }

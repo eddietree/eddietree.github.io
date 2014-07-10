@@ -55,7 +55,7 @@ function Core()
  		{
  			var obj = this.objects[i];
 
- 			if ( obj.hasOwnProperty('update') )
+ 			if ( obj.hasOwnProperty('draw') )
 	 			obj.draw();
  		}
 
