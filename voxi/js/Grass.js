@@ -143,15 +143,16 @@ function Grass()
 
 		});
 
-		var vertexColorMaterial = new THREE.MeshBasicMaterial( 
+		/*var vertexColorMaterial = new THREE.MeshBasicMaterial( 
 			{ vertexColors: THREE.VertexColors, side: THREE.DoubleSide } );
+*/
 
 	    this.meshTerrain = new THREE.Mesh(
 	        geo,
 	        shaderMaterial
 	    );
 	    
-	    this.meshTerrain.doubleSided = true;
+	   // this.meshTerrain.doubleSided = true;
 	    //this.meshTerrain.overdraw = false;
 	    g_scene.add(this.meshTerrain);
 	}
@@ -159,17 +160,21 @@ function Grass()
 	this.init = function()
 	{
 		this.initTerrain();
+		this.time = 0.0;
 	}
 
 	this.draw = function()
 	{
+		//this.meshTerrain.material.uniforms.time.value = Date.now() * 0.4;
+		this.meshTerrain.material.uniforms.time.value = this.time;
+		this.meshTerrain.material.needsUpdate = true;
 	}
 
 	this.update = function()
 	{
+		this.time += 1.0/60.0;
 		//var test = this.meshTerrain.material.uniforms.time;
-		this.meshTerrain.material.uniforms.time.value = Date.now() * 0.4;
-		this.meshTerrain.material.needsUpdate = true;
+		
 
 		//console.log( this.meshTerrain.material.uniforms.time.value );
 	}

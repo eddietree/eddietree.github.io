@@ -36,14 +36,13 @@
             precision mediump float;
             precision mediump int;
 
-            //uniform mat4 modelViewMatrix; // optional
-            //uniform mat4 projectionMatrix; // optional
-
             //attribute vec3 position;
             attribute vec4 color;
 
             varying vec3 vPosition;
             varying vec4 vColor;
+
+            uniform float time;
 
             void main() {
 
@@ -61,14 +60,12 @@
             precision highp float;
             precision mediump int;
 
-            uniform float time;
-
             varying vec3 vPosition;
             varying vec4 vColor;
 
             void main() {
 
-                vec4 color = vec4( time, time, time ,1.0 );
+                //vec4 color = vec4( sin(time), 0.0, 0.0 ,1.0);
                 //color.b += cos(  time ) * 0.5;
 
                 gl_FragColor = vColor;
