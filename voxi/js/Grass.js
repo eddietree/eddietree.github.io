@@ -4,9 +4,9 @@ function Grass()
 
 	this.initTerrain = function()
 	{
-		var numBlades = 2000;
-		var numSegmentsPerBlade = 5;
-		var maxDist = 30.0;
+		var numBlades = 4000;
+		var numSegmentsPerBlade = 4;
+		var maxDist = 35.0;
 		var yMin = -10.0;
 		var yMax = -3.0;
 		var bladeWidth = 0.6;
@@ -26,8 +26,6 @@ function Grass()
 		var positions = geo.attributes.position.array;
 		var colors = geo.attributes.color.array;
 		var data = geo.attributes.data.array;
-
-		
 
 		for ( var i = 0; i < numBlades; i ++ ) 
 		{
@@ -144,7 +142,7 @@ function Grass()
 
 		var attributes = {
 
-			position: {	type: 'f', value: null },
+			//position: {	type: 'f', value: null },
 			color: { type: 'f', value: null },
 			data: { type: 'f', value: null }
 
@@ -198,7 +196,7 @@ function Grass()
 
 	this.update = function()
 	{
-		this.time += 1.0/60.0;
+		this.time += 1.5/60.0;
 		//var test = this.meshTerrain.material.uniforms.time;
 		
 
