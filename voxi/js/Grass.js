@@ -4,15 +4,16 @@ function Grass()
 
 	this.initTerrain = function()
 	{
-		var numBlades = 500;
+		var numBlades = 150;
+		var numSegmentsPerBlade = 4;
 		var maxDist = 20.0;
 		var yMin = -10.0;
 		var yMax = -5.0;
 		var bladeWidth = 0.6;
-		var numSegmentsPerBlade = 5;
 
 		//var numVertsPerBlade = ((numSegmentsPerBlade-1)*2 + 4);
-		var numVertsPerBlade = numSegmentsPerBlade * 6;
+		var numVertsPerSegment = 6;
+		var numVertsPerBlade = numSegmentsPerBlade * numVertsPerSegment;
 		var numVertsTotal = numVertsPerBlade * numBlades;
 		var yHeight = yMax-yMin;
 
@@ -53,9 +54,10 @@ function Grass()
 				var g = delta;
 				var b = 0.0;
 
-				var numFloatsPerSegment =  18;
-				var segmentVertIndexOffset = bladeVertIndexOffset + j*2;
-				var segmentIndexOffset = segmentVertIndexOffset * numFloatsPerSegment;
+				var numFloatsPerVertex = 3;
+				var numFloatsPerSegment = numVertsPerSegment * numFloatsPerVertex;
+				var segmentVertIndexOffset = bladeVertIndexOffset + j*numVertsPerSegment;
+				var segmentFloatIndexOffset = segmentVertIndexOffset * numFloatsPerVertex;
 
 				var pt0 = rootPosLeft.clone().add( deltaPos.clone().multiplyScalar(j) );
 				var pt1 = rootPosRight.clone().add( deltaPos.clone().multiplyScalar(j) );
@@ -63,45 +65,45 @@ function Grass()
 				var pt3 = rootPosLeft.clone().add( deltaPos.clone().multiplyScalar(j+1) );
 
 				// po
-				positions[ segmentIndexOffset + 0 ] = pt0.x;
-				positions[ segmentIndexOffset + 1 ] = pt0.y;
-				positions[ segmentIndexOffset + 2 ] = pt0.z;
-				positions[ segmentIndexOffset + 3 ] = pt1.x;
-				positions[ segmentIndexOffset + 4 ] = pt1.y;
-				positions[ segmentIndexOffset + 5 ] = pt1.z;
-				positions[ segmentIndexOffset + 6 ] = pt2.x;
-				positions[ segmentIndexOffset + 7 ] = pt2.y;
-				positions[ segmentIndexOffset + 8 ] = pt2.z;
+				positions[ segmentFloatIndexOffset + 0 ] = pt0.x;
+				positions[ segmentFloatIndexOffset + 1 ] = pt0.y;
+				positions[ segmentFloatIndexOffset + 2 ] = pt0.z;
+				positions[ segmentFloatIndexOffset + 3 ] = pt1.x;
+				positions[ segmentFloatIndexOffset + 4 ] = pt1.y;
+				positions[ segmentFloatIndexOffset + 5 ] = pt1.z;
+				positions[ segmentFloatIndexOffset + 6 ] = pt2.x;
+				positions[ segmentFloatIndexOffset + 7 ] = pt2.y;
+				positions[ segmentFloatIndexOffset + 8 ] = pt2.z;
 
-				positions[ segmentIndexOffset + 9 ] = pt0.x;
-				positions[ segmentIndexOffset + 10 ] = pt0.y;
-				positions[ segmentIndexOffset + 11 ] = pt0.z;
-				positions[ segmentIndexOffset + 12 ] = pt2.x;
-				positions[ segmentIndexOffset + 13 ] = pt2.y;
-				positions[ segmentIndexOffset + 14 ] = pt2.z;
-				positions[ segmentIndexOffset + 15 ] = pt3.x;
-				positions[ segmentIndexOffset + 16 ] = pt3.y;
-				positions[ segmentIndexOffset + 17 ] = pt3.z;
+				positions[ segmentFloatIndexOffset + 9 ] = pt0.x;
+				positions[ segmentFloatIndexOffset + 10 ] = pt0.y;
+				positions[ segmentFloatIndexOffset + 11 ] = pt0.z;
+				positions[ segmentFloatIndexOffset + 12 ] = pt2.x;
+				positions[ segmentFloatIndexOffset + 13 ] = pt2.y;
+				positions[ segmentFloatIndexOffset + 14 ] = pt2.z;
+				positions[ segmentFloatIndexOffset + 15 ] = pt3.x;
+				positions[ segmentFloatIndexOffset + 16 ] = pt3.y;
+				positions[ segmentFloatIndexOffset + 17 ] = pt3.z;
 
-				colors[ segmentIndexOffset + 0 ] = r;
-				colors[ segmentIndexOffset + 1 ] = g;
-				colors[ segmentIndexOffset + 2 ] = b;
-				colors[ segmentIndexOffset + 3 ] = r;
-				colors[ segmentIndexOffset + 4 ] = g;
-				colors[ segmentIndexOffset + 5 ] = b;
-				colors[ segmentIndexOffset + 6 ] = r;
-				colors[ segmentIndexOffset + 7 ] = g;
-				colors[ segmentIndexOffset + 8 ] = b;
+				colors[ segmentFloatIndexOffset + 0 ] = r;
+				colors[ segmentFloatIndexOffset + 1 ] = g;
+				colors[ segmentFloatIndexOffset + 2 ] = b;
+				colors[ segmentFloatIndexOffset + 3 ] = r;
+				colors[ segmentFloatIndexOffset + 4 ] = g;
+				colors[ segmentFloatIndexOffset + 5 ] = b;
+				colors[ segmentFloatIndexOffset + 6 ] = r;
+				colors[ segmentFloatIndexOffset + 7 ] = g;
+				colors[ segmentFloatIndexOffset + 8 ] = b;
 
-				colors[ segmentIndexOffset + 9 ] = r;
-				colors[ segmentIndexOffset + 10 ] = g;
-				colors[ segmentIndexOffset + 11 ] = b;
-				colors[ segmentIndexOffset + 12 ] = r;
-				colors[ segmentIndexOffset + 13 ] = g;
-				colors[ segmentIndexOffset + 14 ] = b;
-				colors[ segmentIndexOffset + 15 ] = r;
-				colors[ segmentIndexOffset + 16 ] = g;
-				colors[ segmentIndexOffset + 17 ] = b;
+				colors[ segmentFloatIndexOffset + 9 ] = r;
+				colors[ segmentFloatIndexOffset + 10 ] = g;
+				colors[ segmentFloatIndexOffset + 11 ] = b;
+				colors[ segmentFloatIndexOffset + 12 ] = r;
+				colors[ segmentFloatIndexOffset + 13 ] = g;
+				colors[ segmentFloatIndexOffset + 14 ] = b;
+				colors[ segmentFloatIndexOffset + 15 ] = r;
+				colors[ segmentFloatIndexOffset + 16 ] = g;
+				colors[ segmentFloatIndexOffset + 17 ] = b;
 			}
 		}
 
@@ -112,7 +114,7 @@ function Grass()
 	        geo,
 	        vertexColorMaterial
 	    );
-	    this.meshTerrain.doubleSided = false;
+	    this.meshTerrain.doubleSided = true;
 	    this.meshTerrain.overdraw = false;
 	    g_scene.add(this.meshTerrain);
 	}
