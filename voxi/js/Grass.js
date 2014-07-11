@@ -33,7 +33,7 @@ function Grass()
 
 	this.initTerrain = function()
 	{
-		var numBlades = 4000;
+		var numBlades = 4500;
 		var numSegmentsPerBlade = 4;
 		var maxDist = 35.0;
 		var yMin = -10.0;
@@ -67,7 +67,9 @@ function Grass()
 			
 			var bladeAngle = randFloat(0.0, Math.PI*2.0);
 			var bladeDirNormalized = new THREE.Vector3( Math.cos(bladeAngle), 0.0, Math.sin(bladeAngle) ); 
-			var bladeDir = bladeDirNormalized.clone().multiplyScalar(-bladeWidth*0.5);
+			
+			var bladeWidthRand = randFloat( 0.6, 1.0 ) * bladeWidth;
+			var bladeDir = bladeDirNormalized.clone().multiplyScalar(-bladeWidthRand*0.5);
 
 			var rootPosLeft = rootPos.clone().add(bladeDir); 
 			var rootPosRight = rootPos.clone().sub(bladeDir); 
