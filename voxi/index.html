@@ -62,7 +62,7 @@
 
                 float swayAmmount =  sin(time + data.y*0.1 + mix(0.0,1.0,data.x) * PI * 0.5 ) * deltaY;
 
-                posFinal.x += swayAmmount * 3.0;
+                posFinal.x += swayAmmount * 3.0 * mix( 0.8, 1.0, data.x);
                 posFinal.y -= abs(swayAmmount * 1.0);
 
                 vPosition = posFinal;
