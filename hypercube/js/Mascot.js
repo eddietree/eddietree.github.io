@@ -1,3 +1,26 @@
+function MascotShadow()
+{
+	this.init = function()
+	{
+		var texture = PIXI.Texture.fromImage("img/Shadow.png");
+		this.obj = new PIXI.Sprite(texture);
+		this.obj.anchor.x = 0.5;
+		this.obj.anchor.y = 0.5;
+
+		g_stage.addChild(this.obj);
+	}
+
+	this.update = function()
+	{
+		var y_offset = 260.0;
+
+		this.obj.position.x = window.innerWidth*0.5;
+   	 	this.obj.position.y = window.innerHeight*0.5 + y_offset;
+   	 	this.obj.scale.x = 0.5;
+   	 	this.obj.scale.y = 0.5;
+	}
+}
+
 function MascotBody()
 {
 	this.init = function()

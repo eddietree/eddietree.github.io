@@ -46,3 +46,27 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+/*****************************************/
+
+#content
+{
+  font-family: Helvetica, Arial, sans;
+  padding: 20px;
+  position:fixed;
+  color:white;
+
+   pointer-events:none;
+}
+
+#content h1
+{
+  font-size: 5em;
+  color: yellow;
+}
+
+#content p
+{
+  margin: 0.7em 0;
+  font-size: 3em;
+}

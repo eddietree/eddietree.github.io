@@ -17,6 +17,7 @@ function ObjManager()
 	{
 		this.objs = 
 		{
+			shadow:new MascotShadow(),
 			body:new MascotBody(),
 			head:new MascotHead(),
 		};
