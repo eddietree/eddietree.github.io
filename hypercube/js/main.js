@@ -65,6 +65,12 @@ var g_stage = new PIXI.Stage(0xFFACA1);
 var g_renderer = new PIXI.WebGLRenderer(1, 1);//autoDetectRenderer(400, 300);
 var g_time = 0.0;
 
+
+g_stage.click = function(mouseData){
+	g_objs.get("head").onClick(mouseData);
+}
+
+
 document.body.appendChild(g_renderer.view);
 var g_objs = new ObjManager();
 g_objs.init();

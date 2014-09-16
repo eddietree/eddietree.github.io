@@ -30,21 +30,43 @@ function MascotHead()
 		g_stage.addChild(this.obj);
 
 		this.pos_offset = {x:-160.0, y:-160.0};
+		this.connected = true;
 
   		/*var tween = new TWEEN.Tween( this.obj.position )
             .to( { x: window.innerWidth*0.5, y:window.innerHeight*0.5 }, 600 )
             .easing( TWEEN.Easing.Back.Out ).start();*/
 	}
 
+	this.onClick = function( mouseData )
+	{
+		var pos = mouseData.global;
+
+		this.connected = false;
+
+		var tween = new TWEEN.Tween( this.obj.position )
+            .to( { x: pos.x, y:pos.y }, 800 )
+            .easing( TWEEN.Easing.Elastic.Out ).start();
+
+		//console.log(mouseData);
+		//console.log( mouseData.global.x );
+	}
+
 	this.update = function()
 	{
-		var base_pos = g_objs.get("body").obj.position;
+		if ( this.connected ) {
+			var base_pos = g_objs.get("body").obj.position;
 
-		this.obj.position.x = base_pos.x + this.pos_offset.x;
-   	 	this.obj.position.y = base_pos.y + this.pos_offset.y;
+			this.obj.position.x = base_pos.x + this.pos_offset.x;
+	   	 	this.obj.position.y = base_pos.y + this.pos_offset.y;
+	   	 	this.obj.scale.x = 0.25;
+	   	 	this.obj.scale.y = 0.25;
+	   	 }
+	   	 else
+	   	 {
+	   	 	var color = Math.floor(Math.random()*16777215);//.toString(16);
+	   	 	g_stage.setBackgroundColor(color);
+	   	 }
 
-   	 	this.obj.rotation += 0.01;
-   	 	this.obj.scale.x = 0.25;
-   	 	this.obj.scale.y = 0.25;
+	   	 this.obj.rotation += 0.01;
 	}
 }
