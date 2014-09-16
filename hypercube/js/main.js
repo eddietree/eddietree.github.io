@@ -11,54 +11,14 @@ function resize()
      }
 }
 
-function MascotBody()
-{
-	this.init = function()
-	{
-		var texture = PIXI.Texture.fromImage("img/Body01.png");
-		this.obj = new PIXI.Sprite(texture);
-		this.obj.anchor.x = 0.5;
-		this.obj.anchor.y = 0.5;
-
-		g_stage.addChild(this.obj);
-	}
-
-	this.update = function()
-	{
-		this.obj.position.x = window.innerWidth*0.5;
-   	 	this.obj.position.y = window.innerHeight*0.5;
-   	 	this.obj.scale.x = 0.5;
-   	 	this.obj.scale.y = 0.5;
-	}
-}
-
-function MascotHead()
-{
-	this.init = function()
-	{
-		var texture = PIXI.Texture.fromImage("img/Avatar.png");
-		this.obj = new PIXI.Sprite(texture);
-		this.obj.anchor.x = 0.5;
-		this.obj.anchor.y = 0.5;
-		g_stage.addChild(this.obj);
-	}
-
-	this.update = function()
-	{
-		this.obj.position.x = window.innerWidth*0.5;
-   	 	this.obj.position.y = window.innerHeight*0.5;
-   	 	this.obj.rotation += 0.01;
-	}
-}
-
 function ObjManager()
 {
 	this.init = function()
 	{
 		this.objs = 
 		{
+			body:new MascotBody(),
 			head:new MascotHead(),
-			body:new MascotBody()
 		};
 
 		for (var property in this.objs ) {
@@ -87,11 +47,13 @@ function ObjManager()
 	}
 }
 
-function animate() {
+function animate(time) {
 
     requestAnimFrame( animate );
+    TWEEN.update( time );
     resize();
 
+    g_time += 1.0/60.0;
     g_objs.update();
 
     // render the stage
@@ -101,6 +63,8 @@ function animate() {
 var g_currentWindowWidth = 0;
 var g_stage = new PIXI.Stage(0xFFACA1);
 var g_renderer = new PIXI.WebGLRenderer(1, 1);//autoDetectRenderer(400, 300);
+var g_time = 0.0;
+
 document.body.appendChild(g_renderer.view);
 var g_objs = new ObjManager();
 g_objs.init();
