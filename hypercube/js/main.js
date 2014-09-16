@@ -70,7 +70,6 @@ g_stage.click = function(mouseData){
 	g_objs.get("head").onClick(mouseData);
 }
 
-
 document.body.appendChild(g_renderer.view);
 var g_objs = new ObjManager();
 g_objs.init();
