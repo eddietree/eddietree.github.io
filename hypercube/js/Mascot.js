@@ -119,6 +119,25 @@ function MascotHead()
 				this.onDisconnected(posClick);
 			}
 		}
+
+		var posClick = mouseData.global;
+		var screenSize = { x:window.innerWidth, y:window.innerHeight };
+		var posClickNormalized = {x:posClick.x/screenSize.x, y:posClick.x/screenSize.y };
+		var numNotes = g_scale_0.length;
+		var index = Math.floor(numNotes * posClickNormalized.x ) % numNotes;
+		var freq = g_scale_0[ index ];
+		osc.setFrequency( freq );
+
+		var randNum = Math.random();
+		if ( randNum < 0.5 )
+		{
+			osc.setType("sine");
+		}
+
+		else
+		{
+			osc.setType("triangle");
+		}
 	}
 
 	this.update = function()

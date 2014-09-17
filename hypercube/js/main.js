@@ -69,25 +69,6 @@ var g_time = 0.0;
 
 g_stage.mousedown = function(mouseData){
 	g_objs.get("head").onClick(mouseData);
-
-	var posClick = mouseData.global;
-	var screenSize = { x:window.innerWidth, y:window.innerHeight };
-	var posClickNormalized = {x:posClick.x/screenSize.x, y:posClick.x/screenSize.y };
-	var numNotes = g_scale_0.length;
-	var index = Math.floor(numNotes * posClickNormalized.x ) % numNotes;
-	var freq = g_scale_0[ index ];
-	osc.setFrequency( freq );
-
-	var randNum = Math.random();
-	if ( randNum < 0.5 )
-	{
-		osc.setType("sine");
-	}
-
-	else
-	{
-		osc.setType("triangle");
-	}
 }
 
 g_stage.touchstart = function(mouseData){
