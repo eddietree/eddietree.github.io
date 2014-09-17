@@ -49,7 +49,6 @@ function ObjManager()
 }
 
 function animate(time) {
-
     requestAnimFrame( animate );
     TWEEN.update( time );
     resize();
@@ -64,20 +63,92 @@ function animate(time) {
 var g_currentWindowWidth = 0;
 var g_stage = new PIXI.Stage(0xFFACA1);
 var g_renderer = new PIXI.WebGLRenderer(1, 1);//autoDetectRenderer(400, 300);
-var g_time = 0.0;
+g_renderer.view.style.display = "block";
 
+// gfx
+var g_gfx = new PIXI.Graphics();
+g_stage.addChild(g_gfx);
+
+var g_time = 0.0;
+var g_mouseDown = false;
+var g_mouseDownPos = {x:0, y:0};
 
 g_stage.mousedown = function(mouseData){
+
 	g_objs.get("head").onClick(mouseData);
 	env.triggerAttack();
+	g_mouseDown = true;
+	g_mouseDownPos = {x:mouseData.global.x, y:mouseData.global.y};
 }
 
 g_stage.mouseup = function(mouseData){
+
 	env.triggerRelease();
+	g_mouseDown = false;
+}
+
+var getFreqAtPos = function( pos )
+{
+	var posClick = pos;
+	var screenSize = { x:window.innerWidth, y:window.innerHeight };
+	var posClickNormalized = {x:posClick.x/screenSize.x, y:posClick.x/screenSize.y };
+	var numNotes = g_scale_0.length;
+	var index = Math.floor(numNotes * posClickNormalized.x ) % numNotes;
+	var freq = g_scale_0[ index ];
+	return freq;
+}
+
+var onDragMouse = function(dragPos){
+
+	var freq = getFreqAtPos(g_mouseDownPos);
+
+	var deltaPos = {x:dragPos.x-g_mouseDownPos.x, y:dragPos.y-g_mouseDownPos.y };
+	osc.setFrequency( freq - deltaPos.y );
+
+	g_gfx.clear();
+	g_gfx.lineStyle(3, 0xFFFFFF);
+	g_gfx.moveTo( g_mouseDownPos.x, g_mouseDownPos.y );
+	g_gfx.lineTo( dragPos.x, dragPos.y );
+
+	g_gfx.beginFill(0xFFFF00);
+	g_gfx.drawRect( dragPos.x-10, dragPos.y-10, 20, 20);
+}
+
+g_stage.mousemove = function(mouseData){
+
+	if ( g_mouseDown == true )
+	{
+		onDragMouse( mouseData.global);
+	}
+	else
+	{
+		g_gfx.clear();
+	}
 }
 
 g_stage.touchstart = function(mouseData){
 	g_objs.get("head").onClick(mouseData);
+	env.triggerAttack();
+	g_mouseDown = true;
+	g_mouseDownPos = {x:mouseData.global.x, y:mouseData.global.y};
+}
+
+g_stage.touchend = function(mouseData){
+
+	env.triggerRelease();
+	g_mouseDown = false;
+}
+
+g_stage.touchmove = function(mouseData){
+
+	if ( g_mouseDown == true )
+	{
+		onDragMouse( mouseData.global);
+	}
+	else
+	{
+		g_gfx.clear();
+	}
 }
 
 document.body.appendChild(g_renderer.view);
@@ -88,7 +159,7 @@ requestAnimFrame( animate );
 
 
 /////////////////////////////////////////
-
+/*
 var GuiControls = function() {
   this.message = 'dat.gui';
   this.speed = 0.8;
@@ -111,3 +182,4 @@ window.onload = function() {
 	//gui.add(text, 'displayOutline');
 	gui.add(text, 'toggleMute');
 };
+*/

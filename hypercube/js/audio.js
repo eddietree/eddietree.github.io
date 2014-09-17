@@ -19,8 +19,8 @@ feedbackDelay.setWet(0.8);
 // panner
 var panner = new Tone.AutoPanner();
 panner.toMaster();
-panner.setDry(0);
-panner.setFrequency(2);
+panner.setDry(0.3);
+panner.setFrequency(0.5);
 osc.connect(panner);
 
 //a lowpass filter
@@ -29,11 +29,10 @@ osc.connect(panner);
 //lowpass.toMaster();
 
 // envelope
-var env = new Tone.Envelope(3.0, 0.1, 0.4, 0.2);
+var env = new Tone.Envelope(2.5, 0.1, 0.4, 0.2);
 env.connect(osc.output.gain);
 
 //connect it to the output
 //osc.setVolume(-10);
-
 osc.toMaster();
 osc.start();

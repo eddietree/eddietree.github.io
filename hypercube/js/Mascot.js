@@ -121,11 +121,7 @@ function MascotHead()
 		}
 
 		var posClick = mouseData.global;
-		var screenSize = { x:window.innerWidth, y:window.innerHeight };
-		var posClickNormalized = {x:posClick.x/screenSize.x, y:posClick.x/screenSize.y };
-		var numNotes = g_scale_0.length;
-		var index = Math.floor(numNotes * posClickNormalized.x ) % numNotes;
-		var freq = g_scale_0[ index ];
+		var freq = getFreqAtPos(posClick);
 		osc.setFrequency( freq );
 	}
 
