@@ -67,7 +67,11 @@ var g_renderer = new PIXI.WebGLRenderer(1, 1);//autoDetectRenderer(400, 300);
 var g_time = 0.0;
 
 
-g_stage.click = function(mouseData){
+g_stage.mousedown = function(mouseData){
+	g_objs.get("head").onClick(mouseData);
+}
+
+g_stage.touchstart = function(mouseData){
 	g_objs.get("head").onClick(mouseData);
 }
 
