@@ -61,7 +61,7 @@ table {
 
 #content h1
 {
-  font-size: 5em;
+  font-size: 3em;
   color: yellow;
 }
 
@@ -80,5 +80,5 @@ table {
 #content p
 {
   margin: 0.7em 0;
-  font-size: 3em;
+  font-size: 2em;
 }

@@ -69,6 +69,11 @@ var g_time = 0.0;
 
 g_stage.mousedown = function(mouseData){
 	g_objs.get("head").onClick(mouseData);
+	env.triggerAttack();
+}
+
+g_stage.mouseup = function(mouseData){
+	env.triggerRelease();
 }
 
 g_stage.touchstart = function(mouseData){
@@ -81,34 +86,28 @@ g_objs.init();
 
 requestAnimFrame( animate );
 
-// C E G B
-var g_scale_0 = [ 261.63, 329.63, 392.0, 493.88, 523.25, 659.25, 783.99, 987.77, 1046.50, 1318.51, 1567.98, 1975.53, 2093.00, 2637.02, 3135.96, 3951.07 ];
 
-var osc = new Tone.Oscillator(440, "sine");
-var vibrato = new Tone.LFO(6, -25, 25);
-vibrato.start();
+/////////////////////////////////////////
 
-// feedback
-var feedbackDelay = new Tone.PingPongDelay("8n");
-feedbackDelay.setFeedback(0.7);
-osc.connect(feedbackDelay);
-feedbackDelay.toMaster();	
-feedbackDelay.setWet(0.5);	
+var GuiControls = function() {
+  this.message = 'dat.gui';
+  this.speed = 0.8;
+  this.displayOutline = false;
 
-// panner
-var panner = new Tone.AutoPanner();
-panner.toMaster();
-panner.setDry(0);
-panner.setFrequency(2);
-osc.connect(panner);
+  this.toggleMute = function() 
+  { 
+  	var volume = osc.volume;
+  	var volume_on_volume = -10;
+  	var volume_off_volume = -10000;
+  	osc.setVolume(volume_off_volume);
+  };
+};
 
-//a lowpass filter
-var lowpass = new Tone.Filter(600, "highpass");
-osc.connect(lowpass);
-//lowpass.toMaster();
-
-//connect it to the output
-osc.toMaster();
-osc.setVolume(-10);
-vibrato.connect(osc.detune);
-osc.start();
+window.onload = function() {
+	var text = new GuiControls();
+	var gui = new dat.GUI();
+	gui.add(text, 'message');
+	//gui.add(text, 'speed', -5, 5);
+	//gui.add(text, 'displayOutline');
+	gui.add(text, 'toggleMute');
+};

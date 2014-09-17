@@ -127,17 +127,6 @@ function MascotHead()
 		var index = Math.floor(numNotes * posClickNormalized.x ) % numNotes;
 		var freq = g_scale_0[ index ];
 		osc.setFrequency( freq );
-
-		var randNum = Math.random();
-		if ( randNum < 0.5 )
-		{
-			osc.setType("sine");
-		}
-
-		else
-		{
-			osc.setType("triangle");
-		}
 	}
 
 	this.update = function()
