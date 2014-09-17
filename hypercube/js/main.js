@@ -73,10 +73,21 @@ g_stage.mousedown = function(mouseData){
 	var posClick = mouseData.global;
 	var screenSize = { x:window.innerWidth, y:window.innerHeight };
 	var posClickNormalized = {x:posClick.x/screenSize.x, y:posClick.x/screenSize.y };
-	var index = Math.floor (g_scale_0.length * posClickNormalized.x );
+	var numNotes = g_scale_0.length;
+	var index = Math.floor(numNotes * posClickNormalized.x ) % numNotes;
 	var freq = g_scale_0[ index ];
-	//osc.setFrequency( posClick.x );
 	osc.setFrequency( freq );
+
+	var randNum = Math.random();
+	if ( randNum < 0.5 )
+	{
+		osc.setType("sine");
+	}
+
+	else
+	{
+		osc.setType("triangle");
+	}
 }
 
 g_stage.touchstart = function(mouseData){
@@ -92,7 +103,7 @@ requestAnimFrame( animate );
 // C E G B
 var g_scale_0 = [ 261.63, 329.63, 392.0, 493.88, 523.25, 659.25, 783.99, 987.77, 1046.50, 1318.51, 1567.98, 1975.53, 2093.00, 2637.02, 3135.96, 3951.07 ];
 
-var osc = new Tone.Oscillator(440, "triangle");
+var osc = new Tone.Oscillator(440, "sine");
 var vibrato = new Tone.LFO(6, -25, 25);
 vibrato.start();
 
@@ -102,6 +113,18 @@ feedbackDelay.setFeedback(0.7);
 osc.connect(feedbackDelay);
 feedbackDelay.toMaster();	
 feedbackDelay.setWet(0.5);	
+
+// panner
+var panner = new Tone.AutoPanner();
+panner.toMaster();
+panner.setDry(0);
+panner.setFrequency(2);
+osc.connect(panner);
+
+//a lowpass filter
+var lowpass = new Tone.Filter(600, "highpass");
+osc.connect(lowpass);
+//lowpass.toMaster();
 
 //connect it to the output
 osc.toMaster();
