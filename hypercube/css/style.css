@@ -65,6 +65,18 @@ table {
   color: yellow;
 }
 
+#content h1 a
+{
+  color: yellow;
+  text-decoration: none;
+}
+
+#content h1 a:hover
+{
+  color: orange;
+  text-decoration: underline;
+}
+
 #content p
 {
   margin: 0.7em 0;
