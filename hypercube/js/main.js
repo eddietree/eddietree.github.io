@@ -117,8 +117,12 @@ var onDragMouse = function(dragPos){
 	g_gfx.lineTo( dragPos.x, dragPos.y );
 
 	g_gfx.beginFill(0xFFFF00);
-	g_gfx.drawCircle( dragPos.x, dragPos.y, 15);
 	g_gfx.drawCircle( g_mouseDownPos.x, g_mouseDownPos.y, 5);
+	g_gfx.drawCircle( dragPos.x, dragPos.y, 15);
+	g_gfx.endFill();
+	
+	g_gfx.lineStyle(4, 0xFFFFFF);
+	g_gfx.drawCircle( dragPos.x, dragPos.y, 25);
 }
 
 g_stage.mousemove = function(mouseData){
