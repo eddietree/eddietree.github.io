@@ -105,13 +105,16 @@ var onDragMouse = function(dragPos){
 	var deltaPos = {x:dragPos.x-g_mouseDownPos.x, y:dragPos.y-g_mouseDownPos.y };
 	osc.setFrequency( freq - (deltaPos.y*0.2) );
 
+	var headPos = g_objs.get("head").obj.position;
+
 	g_gfx.clear();
 	g_gfx.lineStyle(3, 0xFFFFFF);
 	g_gfx.moveTo( g_mouseDownPos.x, g_mouseDownPos.y );
 	g_gfx.lineTo( dragPos.x, dragPos.y );
 
 	g_gfx.beginFill(0xFFFF00);
-	g_gfx.drawRect( dragPos.x-10, dragPos.y-10, 20, 20);
+	g_gfx.drawCircle( dragPos.x, dragPos.y, 15);
+	g_gfx.drawCircle( g_mouseDownPos.x, g_mouseDownPos.y, 5);
 }
 
 g_stage.mousemove = function(mouseData){
