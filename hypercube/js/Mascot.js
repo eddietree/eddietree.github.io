@@ -99,6 +99,9 @@ function MascotHead()
 	{
 		var posClick = mouseData.global;
 
+		var shapeEmitter = g_objs.get("shapes");
+		shapeEmitter.spawnAt( posClick.x, posClick.y );
+
 		if ( this.isPtInSlot(posClick) )
 		{
 			if ( !this.connected )
