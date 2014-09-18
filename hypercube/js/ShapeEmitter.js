@@ -44,9 +44,26 @@ function ShapeEmitter()
 	            .start();
 	};
 
+	this.drawBgLines = function()
+	{
+		this.gfx.lineStyle(2, 0x080808);
+
+		var deltaX = window.innerWidth / g_scale_0.length;
+		var y0 = 0;
+		var y1 = window.innerHeight;
+
+		for ( var i = 0; i < g_scale_0.length; i+=1 )
+		{
+			var x = i * deltaX;
+			this.gfx.moveTo( x, y0 );
+			this.gfx.lineTo( x, y1 );
+		}
+	}
+
 	this.update = function()
 	{
 		this.gfx.clear();
+		this.drawBgLines();
 
 		for( var i = 0; i < this.count; i+=1 )
 		{
