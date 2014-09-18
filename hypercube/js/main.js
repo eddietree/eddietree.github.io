@@ -103,7 +103,7 @@ var onDragMouse = function(dragPos){
 	var freq = getFreqAtPos(g_mouseDownPos);
 
 	var deltaPos = {x:dragPos.x-g_mouseDownPos.x, y:dragPos.y-g_mouseDownPos.y };
-	osc.setFrequency( freq - deltaPos.y );
+	osc.setFrequency( freq - (deltaPos.y*0.2) );
 
 	g_gfx.clear();
 	g_gfx.lineStyle(3, 0xFFFFFF);

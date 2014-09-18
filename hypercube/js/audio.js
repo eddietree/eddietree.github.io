@@ -12,7 +12,7 @@ var osc = new Tone.Oscillator(440, "square");
 
 // feedback
 var feedbackDelay = new Tone.PingPongDelay("8n");
-feedbackDelay.setFeedback(0.7);
+feedbackDelay.setFeedback(0.6);
 osc.connect(feedbackDelay);
 feedbackDelay.toMaster();	
 feedbackDelay.setWet(0.8);	
