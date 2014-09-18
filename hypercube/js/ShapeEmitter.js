@@ -8,6 +8,13 @@ function ShapeEmitter()
 		this.objs = new Array(128);
 		this.index = 0;
 		this.count = 0;
+
+		// bg bars
+		this.bgBars = new Array(32);
+		for( var i = 0; i < this.bgBars.length; i+=1 )
+		{
+			this.bgBars[i] = {alpha:0.0};			
+		}
 	}
 
 	this.allocObj = function()
@@ -44,17 +51,40 @@ function ShapeEmitter()
 	            .start();
 	};
 
+	this.pulsateBarAtPos = function( posX, posY )
+	{
+		var index = Math.floor(posX * g_scale_0.length / window.innerWidth);
+
+		var obj = this.bgBars[index];
+		obj.alpha = 1.0;
+
+		var tween = new TWEEN.Tween( obj )
+	            .to( { alpha:0.0 }, 500 )
+	            .easing( TWEEN.Easing.Quadratic.Out )
+	            .start();
+	}
+
 	this.drawBgLines = function()
 	{
-		this.gfx.lineStyle(2, 0x080808);
-
 		var deltaX = window.innerWidth / g_scale_0.length;
 		var y0 = 0;
 		var y1 = window.innerHeight;
 
+		this.gfx.lineStyle(1, 0x5BF0A0);
+
 		for ( var i = 0; i < g_scale_0.length; i+=1 )
 		{
 			var x = i * deltaX;
+
+			/*// draw bar
+			var barValue = this.bgBars[i].alpha;
+			if ( true )
+			{
+				g_gfx.beginFill( 0xFFFF00, barValue);
+				g_gfx.drawRect( x, y0, deltaX, y1 );
+				g_gfx.endFill();
+			}*/
+			
 			this.gfx.moveTo( x, y0 );
 			this.gfx.lineTo( x, y1 );
 		}

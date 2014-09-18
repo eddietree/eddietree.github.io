@@ -112,7 +112,7 @@ var onDragMouse = function(dragPos){
 	var headPos = g_objs.get("head").obj.position;
 
 	g_gfx.clear();
-	g_gfx.lineStyle(4, 0xFF00FF);
+	g_gfx.lineStyle(4, 0xFF6AC4);
 	g_gfx.moveTo( g_mouseDownPos.x, g_mouseDownPos.y );
 	g_gfx.lineTo( dragPos.x, dragPos.y );
 

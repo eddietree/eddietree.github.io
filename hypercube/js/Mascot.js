@@ -55,6 +55,16 @@ function MascotHead()
 		this.obj.position.x = 300.0;
 		this.obj.position.y = 300.0;
 
+		this.osc = new Tone.Oscillator(440, "sawtooth");
+		this.osc.toMaster();
+		this.osc.setVolume(-15);
+
+		var feedbackDelay = new Tone.PingPongDelay("8n");
+		feedbackDelay.setFeedback(0.2);
+		this.osc.connect(feedbackDelay);
+		feedbackDelay.toMaster();	
+		feedbackDelay.setWet(0.8)
+
 		g_stage.addChild(this.obj);
 
 		this.pos_offset = {x:-160.0, y:-160.0};
@@ -88,19 +98,26 @@ function MascotHead()
 		var tween = new TWEEN.Tween( this.obj.position )
 	            .to( { x: basePos.x, y:basePos.y }, 700 )
 	            .easing( TWEEN.Easing.Back.Out ).start();
+
+	    var index = Math.floor( Math.random() * g_scale_1.length );
+		var freq = this.osc.noteToFrequency( g_scale_1[ index ] );
+		this.osc.setFrequency(freq);
+	    this.osc.start();
 	}
 
 	this.onDisconnected = function(posClick)
 	{
-		
+	    this.osc.stop();
 	}
 
 	this.onClick = function( mouseData )
 	{
+		console.log("CLICK");
 		var posClick = mouseData.global;
 
 		var shapeEmitter = g_objs.get("shapes");
 		shapeEmitter.spawnAt( posClick.x, posClick.y );
+		g_objs.get("shapes").pulsateBarAtPos( posClick.x, posClick.y );
 
 		if ( this.isPtInSlot(posClick) )
 		{
@@ -131,17 +148,12 @@ function MascotHead()
 	this.update = function()
 	{
 		if ( this.connected ) {
-
-			//var base_pos = this.getBasePos();
-			//this.obj.position.x = base_pos.x;
-	   	 	//this.obj.position.y = base_pos.y;
-	   	 	
-	   	 	g_stage.setBackgroundColor(0xFFACA1);
+	   	 	var color = Math.floor(Math.random()*16777215);//.toString(16);
+	   	 	g_stage.setBackgroundColor(color);
 	   	 }
 	   	 else
 	   	 {
-	   	 	//var color = Math.floor(Math.random()*16777215);//.toString(16);
-	   	 	g_stage.setBackgroundColor(0x00);
+	   	 	g_stage.setBackgroundColor(0xFFACA1);
 	   	 }
 
 	   	this.obj.scale.x = 0.25;

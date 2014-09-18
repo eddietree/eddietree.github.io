@@ -3,7 +3,6 @@
 var g_scale_0 = [ "D4", "E4", "F4", "A4", "E5", "F5", "Bb4", "D5", "E5", "F5", "A5", "E6", "F6", "Bb5" ];
 var g_scale_1 = [ "D4", "F4", "A4", "E5"];
 
-
 var osc = new Tone.Oscillator(440, "square");
 
 // vibrato
@@ -61,9 +60,17 @@ feedbackDelay.setWet(0.8);
 Tone.Transport.setLoopEnd("1m");
 Tone.Transport.loop = true;
 Tone.Transport.setInterval(function(time){
+
 	var index = Math.floor( Math.random() * g_scale_1.length );
 	var freq = osc_bg.noteToFrequency( g_scale_1[ index ] );
 	osc_bg.setFrequency(freq);
-
 }, "4n");
+
+Tone.Transport.setInterval(function(time){
+	var index = Math.floor( Math.random() * g_scale_0.length );
+	var freq = osc_bg.noteToFrequency( g_scale_0[ index ] );
+	g_objs.get("head").osc.setFrequency(freq);
+
+}, "16n");
+
 Tone.Transport.start();
