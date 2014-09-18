@@ -1,6 +1,7 @@
 
-// C E G B
-var g_scale_0 = [ 261.63, 329.63, 392.0, 493.88, 523.25, 659.25, 783.99, 987.77, 1046.50, 1318.51, 1567.98, 1975.53, 2093.00, 2637.02, 3135.96, 3951.07 ];
+// D-Akebono scale - http://www.hapitones.com/virtual-hapi-drum-d-akebono.html
+var g_scale_0 = [ "D3", "E3", "F3", "A3", "E4", "F4", "Bb3", "D4", "E4", "F4", "A4", "E5", "F5", "Bb4" ];
+
 
 var osc = new Tone.Oscillator(440, "square");
 
