@@ -68,7 +68,7 @@ body {
 }
 
 #wrap a {
-	color: white;
+	color: black;
 	text-decoration: none;
 }
 
@@ -76,26 +76,15 @@ body {
 	text-decoration: underline;
 }
 
-#wrap img {
-	box-shadow: 0px 0px 30px #000000;
-}
 #wrap h1 {
 	font-size:2.5em;
 	margin-top: 0.5em;
 	color: white;
-	background-color: #050505;
 	padding: 0.3em;
 }
 
 #wrap p {
 	margin-bottom: 0.5em;
-}
-
-#tagline {
-	color: white;
-	font-size: 3em;
-	background-color: green;
-	margin-top: 15px;
 }
 
 #img-header {
@@ -106,19 +95,4 @@ body {
 
 canvas {
 	display:block;
-}
-
-#navbar {
-	position: fixed;
-	top: 0px;
-	background-color: black;
-	margin: 1em;
-}
-
-#navbar ul {
-	padding: 1em;
-}
-
-#navbar ul li a {
-	color: white;
 }

@@ -83,20 +83,20 @@ function Sun()
 		var posY = ( elemImg.top + elemImg.bottom ) * 0.5;
 		var radius = (elemImg.right - elemImg.left)*0.5;
 
-		var numCircles = 5;
-		var deltaCircle = 15.0;
+		var numCircles = 10;
+		var deltaCircle = 20.0;
 
 		for ( var i = 0; i < numCircles; i+=1 )
 		{
-			var pulsate = Math.sin(g_time*2.5 + i*1.5) * 0.5 + 0.5;
-			var circleRadius = radius + deltaCircle*(numCircles - i) + deltaCircle * 1.5 * pulsate;
+			var pulsate = Math.sin(g_time*3.5 + i*0.65) * 0.5 + 0.5;
+			var circleRadius = radius + 50.0 + deltaCircle*(numCircles - i) + deltaCircle * 1.5 * pulsate;
 
-			g_ctx.fillStyle = i%2==0 ? "#600CAC" : "#6997D3";
+			//g_ctx.fillStyle = i%2==0 ? "#600CAC" : "#6997D3";
 			g_ctx.strokeStyle = "white";
 			g_ctx.beginPath();
 			g_ctx.arc( posX, posY, circleRadius, 0, 2.0 * Math.PI );
 			g_ctx.stroke();
-			g_ctx.fill();
+			//g_ctx.fill();
 		}
 			
 		//g_ctx.strokeRect( elemImg.left, elemImg.top, elemImg.right-elemImg.left, elemImg.bottom-elemImg.top);
@@ -124,7 +124,7 @@ function resizeCanvas() {
 
 function render()
 {
-	g_ctx.fillStyle="#FFC900";
+	g_ctx.fillStyle="orange";
 	g_ctx.fillRect(0,0, g_canvas.width, g_canvas.height);
 
 	g_objs.update();
