@@ -49,13 +49,13 @@ table {
 
 /***************************************************/
 
-body
-{
+html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
+
+body {
 	background-color: orange;
 }
 
-#wrap
-{
+#wrap {
 	text-align: center;
 	position: fixed;
 	top: 50%;
@@ -67,32 +67,31 @@ body
 	font-family: Georgia, Times, serif;
 }
 
-#wrap a
-{
+#wrap a {
 	color: black;
 	text-decoration: none;
 }
 
-#wrap a:hover
-{
+#wrap a:hover {
 	text-decoration: underline;
 }
 
-#wrap h1
-{
+#wrap h1 {
 	font-size:2.5em;
 	margin-top: 1em;
 	color: white;
 }
 
-#wrap p
-{
+#wrap p {
 	margin-bottom: 0.5em;
 }
 
-#img-header
-{
+#img-header {
 	border-radius: 50%;
 	-webkit-border-radius: 50%;
     -moz-border-radius: 50%;
+}
+
+canvas {
+	display:block;
 }
