@@ -92,10 +92,10 @@ function Sun()
 			var circleRadius = radius + deltaCircle*(numCircles - i) + deltaCircle * 1.5 * pulsate;
 
 			g_ctx.fillStyle = i%2==0 ? "#600CAC" : "#6997D3";
-			//g_ctx.fillStyle = "white";
+			g_ctx.strokeStyle = "white";
 			g_ctx.beginPath();
 			g_ctx.arc( posX, posY, circleRadius, 0, 2.0 * Math.PI );
-			//g_ctx.stroke();
+			g_ctx.stroke();
 			g_ctx.fill();
 		}
 			
