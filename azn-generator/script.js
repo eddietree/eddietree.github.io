@@ -19,8 +19,8 @@ var data =
 
 var imgs = 
 {
-	male: ["1.jpg", "2.jpg", "3.jpg", "1.gif"],
-	female: ["1.jpg", "2.jpg", "3.jpg"],
+	male: ["1.gif", "1.jpg", "2.gif", "2.jpg", "3.jpg", "7.jpg", "4.jpg", "11.jpg", "14.jpg", "15.jpg", "yellowbird.jpg"],
+	female: ["2.jpg", "3.jpg", "5.jpg", "6.jpg", "2.jpg", "8.jpg", "9.jpg", "10.jpg", "12.jpg", "13.jpg", "15.jpg"],
 };
 
 var g_seed = 1;
@@ -128,7 +128,9 @@ $(function() {
         var imgOfGender = imgs[gender];
         var randImg = imgOfGender[ randInt(0, imgOfGender.length) ];
         var randImgPath = "img/" + randImg;
+
         $("#img-profile").attr("src", randImgPath);
+        $("#img-profile").css("display", "block");
     }); 
 
 });
