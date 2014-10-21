@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon"type="image/png" href="favicon.png">
     <title>AZN GENERATOR</title>
 
     <!-- Bootstrap -->
@@ -20,61 +22,57 @@
   <body>
 
 	<div class="container">
-		<div class="row">
-			<div class="col-sm-12">
-				<h1>AZN Screenname Generator</h1>
-				<!--<img style="width:100%" class="img-responsive" src="header.jpg"/>-->
+		<div class="col-sm-12">
+			<h1 style="margin: 1em 0">AZN Screen Name Generator</h1>
+		</div>
+
+		<div class="col-sm-6">
+			<div class="panel panel-primary">
+			<div class="panel-heading">Your Name</div>
+			<div class="panel-body">
+			<form class="form-horizontal" role="form">
+			  <div class="form-group">
+			    <div class="col-sm-11">
+			    	<label for="input-name">Name</label>
+			      <input type="text" class="form-control" id="input-name" placeholder="Your Name">
+			    </div>
+			  </div>
+
+
+			  <div class="radio">
+				  <label>
+				    <input type="radio" name="gender" id="option-male" value="male" checked>
+				    Male
+				  </label>
+				</div>
+				<div class="radio">
+				  <label>
+				    <input type="radio" name="gender" id="option-female" value="female">
+				    Female
+				  </label>
+				</div>
+				<br/>
+			  <div class="form-group">
+			    <div class="col-sm-12">
+			      <button type="button" id="btn-submit" class="btn btn-lg btn-warning btn-block">Create Screenname</button>
+			    </div>
+			  </div>
+			</form>
+
+			</div>
+			</div>
+		</div>
+
+		<div class="col-sm-6">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Your AZN Screename</div>
+				<div class="panel-body text-center">
+						<h2 id="name-result">...</h2>
+						<img id="img-profile" style="margin: 0 auto" class="img-responsive" src="img/1.jpg"/>
+				</div>
 			</div>
 		</div>
 	</div>
-
-
-
-	<div class="container">
-		<div class="panel panel-default">
-		<div class="panel-body">
-		<form class="form-horizontal" role="form">
-		  <div class="form-group">
-		    <div class="col-sm-6">
-		    	<label for="input-name">Name</label>
-		      <input type="text" class="form-control" id="input-name" placeholder="Your Name">
-		    </div>
-		  </div>
-
-
-		  <div class="radio">
-			  <label>
-			    <input type="radio" name="gender" id="option-male" value="male" checked>
-			    Male
-			  </label>
-			</div>
-			<div class="radio">
-			  <label>
-			    <input type="radio" name="gender" id="option-female" value="female">
-			    Female
-			  </label>
-			</div>
-			<br/>
-		  <div class="form-group">
-		    <div class="col-sm-10">
-		      <button type="button" id="btn-submit" class="btn btn-warning">Create Screenname</button>
-		    </div>
-		  </div>
-		</form>
-
-		</div>
-		</div>
-	</div>
-
-	<div class="container">
-		<div class="panel panel-default">
-		<div class="panel-heading">Your AZN Screename</div>
-			<div class="panel-body text-center">
-				<h2 id="name-result">...</h2>
-			</div>
-		</div>
-	</div>
-
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="extlib/js/jquery-2.1.1.min.js"></script>
