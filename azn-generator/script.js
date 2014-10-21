@@ -17,6 +17,12 @@ var data =
 
 ];
 
+var imgs = 
+{
+	male: ["1.jpg", "2.jpg", "3.jpg", "1.gif"],
+	female: ["1.jpg", "2.jpg", "3.jpg"],
+};
+
 var g_seed = 1;
 
 function random() {
@@ -112,13 +118,17 @@ $(function() {
     
     $("#btn-submit").click(function()
     {
-        //alert("button");
         var name = $("#input-name").val();
         var gender = $("input:radio[name=gender]:checked").val();
 
         var result = generateName(name, gender);
         $("#name-result").text( result );
-        //alert( result );
+
+
+        var imgOfGender = imgs[gender];
+        var randImg = imgOfGender[ randInt(0, imgOfGender.length) ];
+        var randImgPath = "img/" + randImg;
+        $("#img-profile").attr("src", randImgPath);
     }); 
 
 });
