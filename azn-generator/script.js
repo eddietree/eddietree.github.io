@@ -17,22 +17,69 @@ var data =
 
 ];
 
+var g_seed = 1;
+
+function random() {
+    var x = Math.sin(g_seed++) * 10000;
+    return x - Math.floor(x);
+}
+
+function randSeed( a_seed )
+{
+	g_seed = a_seed;
+}
+
 function chance( a_chance )
 {
-	return Math.random() < a_chance;
+	return random() < a_chance;
 }
 
 function randInt( min, max )
 {
-	return Math.floor(Math.random() * (max - min)) + min;
+	return Math.floor(random() * (max - min)) + min;
+}
+
+function calcSeedFromName( a_name )
+{
+	var result = 0;
+	var name = a_name.toUpperCase();
+
+	for ( var i = 0; i < name.length; i++ )
+	{
+		result += name.charCodeAt(i);
+	}
+
+	return result;
+}
+
+function randomizeCaps( a_name )
+{
+	var result = "";
+
+	for ( var i = 0; i < a_name.length; i++ )
+	{
+		if ( chance(0.25) )
+		{
+			result += a_name.slice(i,i+1).toUpperCase();
+		}
+		else
+		{
+			result += a_name.slice(i,i+1);
+		}
+	}
+
+	return result;
 }
 
 function generateName( a_name, a_gender )
 {
 	var result = "";
+	var seed = calcSeedFromName(a_name);
+	randSeed(seed);
 
 	var doAddSeparatorX = chance(0.25);
 	var doAddSmiley = chance(0.25);
+	var doAddXoxo = chance(0.25);
 
 	for ( var i = 0; i < data.length; i++)
 	{
@@ -46,14 +93,20 @@ function generateName( a_name, a_gender )
 		}
 	}
 
+	result = randomizeCaps( result );
+
 	if ( doAddSmiley )
 	{
 		result += "xD";
 	}
 
+	if ( doAddXoxo )
+	{
+		result = "xX" + result + "Xx";
+	}
+
 	return result;
 }
-
 
 $(function() {
     
