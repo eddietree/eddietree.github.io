@@ -1,18 +1,18 @@
 var data = 
 [
 	{
-		male: ["lil", "asian", "azn", "big", "young", "biggie", "da", "yung"],
-		female: ["lil", "asian", "azn", "sweet", "da", "sweetie"]
+		male: ["lil", "wtfits", "asian", "azn", "big", "young", "biggie", "da", "yung", "rice"],
+		female: ["cutie", "qt", "lil", "asian", "azn", "sweet", "da", "sweetie", "candy", "candi"]
 	},
 
 	{
-		male: ["gangsta", "silly", "lazi", "lazy"],
+		male: ["gangsta", "silly", "lazi", "lazy", "ball3r"],
 		female: ["angel", "honey", "lazy"]
 	},
 
 	{
 		male: ["thug", "namja", "boii", "bboi", "bboy", "4lyfe", "drifter", "dragon", "warrior"],
-		female: ["baby", "babi", "4lyfe", "girl", "gurl", "bby", "princess"]
+		female: ["baby", "babi", "4lyfe", "girl", "gurl", "bby", "princess", "face"]
 	},
 
 ];
@@ -108,7 +108,14 @@ function generateName( a_name, a_gender )
 
 	if ( doAddXoxo )
 	{
-		result = "xX" + result + "Xx";
+		if ( chance(0.5) )
+		{
+			result = "xX" + result + "Xx";
+		}
+		else
+		{
+			result = "Xx" + result + "xX";
+		}
 	}
 
 	return result;
