@@ -114,6 +114,10 @@ body {
     -moz-border-radius: 50%;
 }
 
+.profile {
+	display:none;
+}
+
 #tip {
 	position: absolute;
 	top: 90%;
