@@ -1,0 +1,199 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <link rel="icon"type="image/png" href="img/icon.png">
+  <title>Ghosting.TV 13</title>
+  <meta name="description" content="eddie の stuff">
+  <meta name="author" content="Eddie">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+<!--<canvas id="draw-area">Canvas not supported, yo</canvas>-->
+<div id ="wrap">
+
+  <div id="profile_0">
+    <h1>Eddie Lee</h1>
+    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+    <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pari</p>
+    <p>Loom / LucasArts / Designed by Brian Moriarty / 1990</p>
+  </div>
+
+  <div id="profile_1">
+    <h1>Profile 1</h1>
+    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+    <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pari</p>
+    <p>Loom / LucasArts / Designed by Brian Moriarty / 1990</p>
+  </div>
+
+  <div id="profile_2">
+    <h1>John Wayne</h1>
+    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+    <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pari</p>
+    <p>Loom / LucasArts / Designed by Brian Moriarty / 1990</p>
+  </div>
+
+  <div id="profile_3">
+    <h1>Bily Jean</h1>
+    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+    <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pari</p>
+    <p>Loom / LucasArts / Designed by Brian Moriarty / 1990</p>
+  </div>
+
+  <div id="profile_4">
+    <h1>Final Jean</h1>
+    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+    <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pari</p>
+    <p>Loom / LucasArts / Designed by Brian Moriarty / 1990</p>
+  </div>
+</div>
+
+<div id="tip">
+  <p>Press Arrow Keys to switch</p>
+</div>
+
+<script id="vertexShaderLines" type="x-shader/x-vertex">
+
+      precision mediump float;
+      precision mediump int;
+
+      //attribute vec3 pos;
+      attribute vec4 color;
+      //attribute vec3 data;
+
+      varying vec3 vPosition;
+      varying vec4 vColor;
+
+      uniform float time;
+
+      void main() {
+          float PI = 3.14159;
+          //float deltaY = pow(data.z,2.0);
+
+          float distFromCenter = length(position);
+
+          vec3 posFinal = position;
+          float pulsateDist = sin(distFromCenter*(1.5+sin(time*0.2)*0.5) + time*0.5);
+          float offsetX = pulsateDist * 0.7 * sin( 0.8*position.x  + time );
+          float offsetY = pulsateDist * 0.7 * cos( 0.8*position.y  + time );
+          posFinal.x += offsetX;
+          posFinal.y += offsetY;
+
+          vPosition = posFinal;
+          vColor = color + vec4(offsetX)*0.25;
+
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+      }
+
+  </script>
+
+  <script id="vertexShaderSpikes" type="x-shader/x-vertex">
+
+      precision mediump float;
+      precision mediump int;
+
+      //attribute vec3 pos;
+      attribute vec4 color;
+      //attribute vec3 data;
+
+      varying vec3 vPosition;
+      varying vec4 vColor;
+
+      uniform float time;
+
+      void main() {
+          float distFromCenter = length(position);
+
+          vec3 posFinal = position;
+          float pulsateDist = sin(distFromCenter*(10.5+sin(time*0.2)*0.5) + time*0.5);
+          float offsetX = pulsateDist * 1.7 * sin( 0.8*position.x  + time );
+          float offsetY = pulsateDist * 1.7 * cos( 0.8*position.y  + time );
+          posFinal.x += offsetX;
+          posFinal.y += offsetY;
+          posFinal.z -= offsetY;
+
+          vPosition = posFinal;
+          vColor = color + vec4(offsetY)*0.95;
+
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+      }
+
+  </script>
+
+   <script id="vertexShaderPolybear" type="x-shader/x-vertex">
+
+      precision mediump float;
+      precision mediump int;
+
+      //attribute vec3 pos;
+      attribute vec4 color;
+      //attribute vec3 data;
+
+      varying vec3 vPosition;
+      varying vec4 vColor;
+
+      uniform float time;
+
+      void main() {
+          float distFromCenter = length(position);
+
+          vec3 posFinal = position;
+          float pulsateDist = sin(distFromCenter*(sin(time*0.2) + 0.5) + time*0.5);
+          float offsetX = pulsateDist * 1.7 * sin( 0.8*position.x  + time*0.5 );
+          float offsetY = pulsateDist * 1.7 * cos( 0.8*position.y  + time*0.5 );
+          //posFinal.x += offsetX;
+          posFinal.y += offsetY;
+          //posFinal.z -= offsetY;
+
+          vPosition = posFinal;
+          vColor = color + vec4(offsetY)*0.95;
+
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+      }
+
+  </script>
+
+  <script id="fragmentShaderLines" type="x-shader/x-fragment">
+
+      precision highp float;
+      precision mediump int;
+
+      varying vec3 vPosition;
+      varying vec4 vColor;
+
+      void main() {
+
+          //vec4 color = vec4( sin(time), 0.0, 0.0 ,1.0);
+          //color.b += cos(  time ) * 0.5;
+
+          //gl_FragColor = vec4(1.0,1.0,0.0,1.0);
+          gl_FragColor = vColor;
+
+      }
+
+  </script>
+
+  <script src="js/ext/jquery-1.11.1.min.js"></script>
+  <script src="js/ext/perlin.js"></script>
+  <script src="js/ext/three.min.js"></script>
+  <script src="js/ext/stats.min.js"></script>
+  <script src="js/MathUtil.js"></script>
+  <script src="js/BaseObj.js"></script>
+  <script src="js/Terrain.js"></script>
+  <script src="js/Lines.js"></script>
+  <script src="js/Spikes.js"></script>
+  <script src="js/Polybear.js"></script>
+  <script src="js/ObjManager.js"></script>
+  <script src="js/ProfileManager.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
