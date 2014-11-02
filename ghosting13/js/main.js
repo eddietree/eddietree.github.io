@@ -1,13 +1,3 @@
-// shim layer with setTimeout fallback
-window.requestAnimFrame = (function(){
-  return  window.requestAnimationFrame       ||
-          window.webkitRequestAnimationFrame ||
-          window.mozRequestAnimationFrame    ||
-          function( callback ){
-            window.setTimeout(callback, 1000 / 60);
-          };
-})();
-
 function onWindowResize(){
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -57,7 +47,7 @@ $(function() {
 	  g_time += g_dt;
 	  stats.end();
 
-	  requestAnimFrame(animloop);
+	  requestAnimationFrame(animloop);
 	})();
 });
 

@@ -113,6 +113,5 @@ function Spikes()
 	{
 		this.time += g_dt;
 		this.mesh.material.uniforms.time.value = this.time;
-		this.mesh.material.needsUpdate = true;
 	};
 }
