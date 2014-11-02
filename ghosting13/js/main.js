@@ -32,7 +32,7 @@ $(function() {
 
 	g_profiles = new ProfileManager();
 	g_profiles.init();
-	g_profiles.loadProfile(4);
+	g_profiles.loadProfile(0);
 
 	var stats = new Stats();
 	stats.setMode(1); // 0: fps, 1: ms
