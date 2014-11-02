@@ -32,7 +32,7 @@ function ProfileManager()
 
 		// enable current profile1
 		var currProfile = "profile_" + a_index;
-		//$("#"+currProfile).css("display", "block");
+		$("#"+currProfile).css("display", "block");
 		console.log("Loading profile: " + currProfile );
 
 		// deactivate all objects
@@ -68,8 +68,7 @@ function ProfileManager()
 	};
 }
 
-//$("#tip").delay(4000).fadeOut();
-$("#tip").css("display","none");
+$("#tip").delay(4000).fadeOut();
 
 window.onkeyup = function( event ) {
 	var spaceKeyCode = 32;
