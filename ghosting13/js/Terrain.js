@@ -73,7 +73,6 @@ function Terrain()
 
 		//var geometry = new THREE.BoxGeometry( cubeWidth, cubeWidth, cubeWidth );
 		var geometry = new THREE.SphereGeometry( cubeWidth*0.5, 4, 4 );
-		var material = new THREE.MeshBasicMaterial( { color: 0xB8C671, wireframe: false, } );
 		var phongMaterial =  new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0xdddddd, specular: 0xffffff, shininess: 30, shading: THREE.FlatShading } )
 
 		this.light = new THREE.PointLight( 0xff0040, 2, 4 );
@@ -124,7 +123,7 @@ function Terrain()
 	this.update = function()
 	{
 		var cooldownTime = 0.0;
-		var lerpTime = 3.0;
+		var lerpTime = 2.5;
 
 		this.time += g_dt;
 
