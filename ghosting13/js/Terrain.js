@@ -76,7 +76,7 @@ function Terrain()
 		var material = new THREE.MeshBasicMaterial( { color: 0xB8C671, wireframe: false, } );
 		var phongMaterial =  new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0xdddddd, specular: 0xffffff, shininess: 30, shading: THREE.FlatShading } )
 
-		this.light = new THREE.PointLight( 0xff0040, 2, 3 );
+		this.light = new THREE.PointLight( 0xff0040, 2, 4 );
 		scene.add(this.light);
 		this.light.position.x = camera.position.x;
 		this.light.position.y = camera.position.y;
@@ -139,6 +139,19 @@ function Terrain()
 		var coeffZ = count % 3 == 2;
 
 		this.updateCubes(lerpFactor, coeffX, coeffY, coeffZ);
+
+		var radius = 5.0;
+		var circleTime = this.time* 0.3;
+		camera.position.x = radius* Math.cos(circleTime);
+		camera.position.z = radius* Math.sin(circleTime);
+		camera.position.y = 0;
+
+		camera.lookAt( camera.position.clone().negate() );
+
+		// light
+		this.light.position.x = 0;
+		this.light.position.y = 0;
+		this.light.position.z = 0;
 	};
 
 	this.updateCubes = function( lerpFactor, coeffX, coeffY, coeffZ )
