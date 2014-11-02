@@ -109,8 +109,57 @@ function Terrain()
 			}
 		}
 
+		this.initParticles();
+
 		scene.fog = new THREE.FogExp2( 0x6D3E86, 0.25 );
 		renderer.setClearColor( 0x6D3E86, 1);
+	};
+
+	this.initParticles = function()
+	{
+		var numPoints = 1024;
+		var numFloatsPerPos = 3;
+		var numFloatsPerColor = 3;
+		var posRadius = 4.0;
+
+		var positions = new Float32Array( numPoints*numFloatsPerPos );
+		var colors = new Float32Array( numPoints*numFloatsPerColor );
+
+		for ( var i = 0; i < numPoints; i++ )
+		{
+			var posIndexOffset = i * numFloatsPerPos;
+			var posColorOffset = i * numFloatsPerColor;
+
+			var currPosRadius = posRadius;
+
+			if ( Math.random() < 0.1 )
+			{
+				currPosRadius = 1.0;
+			}
+
+			var posX = (2.0*Math.random()-1.0) * currPosRadius;
+			var posY = (2.0*Math.random()-1.0) * currPosRadius;
+			var posZ = (2.0*Math.random()-1.0) * currPosRadius;
+
+			positions[posIndexOffset+0] = posX;
+			positions[posIndexOffset+1] = posY;
+			positions[posIndexOffset+2] = posZ;
+
+			colors[posColorOffset+0] = 0.75;
+			colors[posColorOffset+1] = 0.75;
+			colors[posColorOffset+2] = 0.75;
+		}
+
+		var geometry = new THREE.BufferGeometry();
+		geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, numFloatsPerPos ) );
+		geometry.addAttribute( 'color', new THREE.BufferAttribute( colors, numFloatsPerColor ) );
+		geometry.computeBoundingBox();
+
+		var pointSize = 0.03;
+		var material = new THREE.PointCloudMaterial( { size: pointSize, vertexColors: THREE.VertexColors } );
+		
+		this.pointcloud = new THREE.PointCloud( geometry, material );
+		this.light.add(this.pointcloud);
 	};
 
 	this.release = function()
