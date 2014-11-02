@@ -1,12 +1,12 @@
-function Terrain()
+function CubeWorld()
 {
 	BaseObj.call(this);
 
 	this.init = function()
 	{
-		var numCubesWidth = 11;
-		var cubeWidth = 1.0;
-		var cubeMargin = 0.5;
+		var numCubesWidth = 7;
+		var cubeWidth = 1.5;
+		var cubeMargin = 0.3;
 		var cubeRowWidth = numCubesWidth * (cubeWidth + cubeMargin );
 
 		this.time = 0.0;
@@ -15,11 +15,12 @@ function Terrain()
 
 		var count = 0;
 
-		//var geometry = new THREE.BoxGeometry( cubeWidth, cubeWidth, cubeWidth );
-		var geometry = new THREE.SphereGeometry( cubeWidth*0.5, 4, 4 );
+		var geometry = new THREE.BoxGeometry( cubeWidth, cubeWidth*0.1, cubeWidth );
+		var material = new THREE.MeshBasicMaterial( { color: 0x00000, wireframe: false, } );
+		//var geometry = new THREE.SphereGeometry( cubeWidth*0.5, 4, 4 );
 		var phongMaterial =  new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0xdddddd, specular: 0xffffff, shininess: 30, shading: THREE.FlatShading } )
 
-		this.light = new THREE.PointLight( 0xff0040, 2, 4 );
+		this.light = new THREE.PointLight( 0xffffff, 2, 4 );
 		scene.add(this.light);
 		this.light.position.x = camera.position.x;
 		this.light.position.y = camera.position.y;
@@ -35,7 +36,7 @@ function Terrain()
 					var posY = -cubeRowWidth*0.5 + y * (cubeWidth + cubeMargin);
 					var posZ = -cubeRowWidth*0.5 + z * (cubeWidth + cubeMargin);
 
-					var cube = new THREE.Mesh( geometry, phongMaterial );
+					var cube = new THREE.Mesh( geometry, material );
 
 					cube.position.x = posX;
 					cube.position.y = posY;
@@ -55,8 +56,8 @@ function Terrain()
 
 		this.initParticles();
 
-		scene.fog = new THREE.FogExp2( 0x6D3E86, 0.25 );
-		renderer.setClearColor( 0x6D3E86, 1);
+		scene.fog = new THREE.FogExp2( 0xffff00, 0.25 );
+		renderer.setClearColor( 0xffff00, 1);
 	};
 
 	this.initParticles = function()
@@ -89,9 +90,9 @@ function Terrain()
 			positions[posIndexOffset+1] = posY;
 			positions[posIndexOffset+2] = posZ;
 
-			colors[posColorOffset+0] = 0.75;
-			colors[posColorOffset+1] = 0.75;
-			colors[posColorOffset+2] = 0.75;
+			colors[posColorOffset+0] = 1.0;
+			colors[posColorOffset+1] = 1.0;
+			colors[posColorOffset+2] = 1.0;
 		}
 
 		var geometry = new THREE.BufferGeometry();
@@ -115,15 +116,15 @@ function Terrain()
 
 	this.update = function()
 	{
-		var cooldownTime = 0.0;
-		var lerpTime = 2.5;
+		var cooldownTime = 5.0;
+		var lerpTime = 2.0;
 
 		this.time += g_dt;
 
 		var time = this.time % (cooldownTime+lerpTime);
 		var lerpFactor = clamp( (time-cooldownTime)/(lerpTime)  );
 
-		lerpFactor = easeBounceInOut(lerpFactor);
+		lerpFactor = easeCubicInOut(lerpFactor);
 
 		var count = Math.floor(this.time / (cooldownTime+lerpTime) );
 		var coeffX = count % 3 == 0;

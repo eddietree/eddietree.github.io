@@ -8,7 +8,7 @@ function ObjManager()
 			lines: new Lines(),
 			spikes: new Spikes(),
 			polybear:new Polybear(),
-			//body:new MascotBody(),
+			cubes:new CubeWorld(),
 			//head:new MascotHead(),
 		};
 
