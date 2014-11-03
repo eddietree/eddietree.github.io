@@ -76,6 +76,10 @@ function ProfileManager()
 
 $("#tip").delay(4000).fadeOut();
 
+window.addEventListener('touchstart', function() {
+	g_profiles.loadNextProfile();
+}, false);
+
 window.onkeyup = function( event ) {
 	var spaceKeyCode = 32;
 	var arrowRightKeyCode = 39;
