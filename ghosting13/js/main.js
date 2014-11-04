@@ -34,20 +34,25 @@ $(function() {
 	g_profiles.init();
 	g_profiles.loadProfile(0);
 
-	var stats = new Stats();
-	stats.setMode(1); // 0: fps, 1: ms
+	if ( Settings.ShowFPS ) {
+		var stats = new Stats();
+		stats.setMode(1); // 0: fps, 1: ms
 
-	// align top-left
-	stats.domElement.style.position = 'absolute';
-	stats.domElement.style.right = '0px';
-	stats.domElement.style.top = '0px';
-	document.body.appendChild( stats.domElement );
+		// align top-left
+		stats.domElement.style.position = 'absolute';
+		stats.domElement.style.right = '0px';
+		stats.domElement.style.top = '0px';
+		document.body.appendChild( stats.domElement );
+	}
 
 	(function animloop(){
-	  stats.begin();
+		
+	  if ( stats ) stats.begin();
+
 	  render();
 	  g_time += g_dt;
-	  stats.end();
+
+	  if ( stats ) stats.end();
 
 	  requestAnimationFrame(animloop);
 	})();

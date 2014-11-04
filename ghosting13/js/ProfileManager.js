@@ -32,8 +32,11 @@ function ProfileManager()
 
 		// enable current profile1
 		var currProfile = "profile_" + a_index;
-		$("#"+currProfile).css("display", "block");
 		console.log("Loading profile: " + currProfile );
+
+		if ( Settings.ShowProfileText ) {
+			$("#"+currProfile).css("display", "block");
+		}
 
 		// deactivate all objects
 		g_objs.deactivateAllObjs();
