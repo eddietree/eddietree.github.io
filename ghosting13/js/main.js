@@ -30,10 +30,12 @@ $(function() {
 	g_objs = new ObjManager();
 	g_objs.init();
 
+	// profile
 	g_profiles = new ProfileManager();
 	g_profiles.init();
-	g_profiles.loadProfile(0);
+	g_profiles.loadProfile( Settings.StartProfileIndex);
 
+	// show stats
 	if ( Settings.ShowFPS ) {
 		var stats = new Stats();
 		stats.setMode(1); // 0: fps, 1: ms
@@ -46,7 +48,7 @@ $(function() {
 	}
 
 	(function animloop(){
-		
+
 	  if ( stats ) stats.begin();
 
 	  render();
