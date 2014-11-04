@@ -14,8 +14,8 @@ function Polybear()
 		var colors = [];
 		var indices_array = [];
 
-		var numPtsX = 96;
-		var numPtsY = 96;
+		var numPtsX = 128;
+		var numPtsY = 128;
 		var numVerts = numPtsX * numPtsY;
 		var deltaStep = 0.15;
 

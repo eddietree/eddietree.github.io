@@ -42,6 +42,7 @@ function ProfileManager()
 		var profile = this.profiles[a_index];
 		for ( var i = 0; i < profile.length; i++ )
 		{
+			console.log("loading item: " + profile[i] );
 			g_objs.activateObj(profile[i]);
 		}
 

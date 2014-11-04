@@ -34,6 +34,7 @@ function Lines()
 				positions.push(posX, posY,posZ);
 				//colors.push(Math.random()*0.5+0.5, Math.random()*0.5+0.5, 1);
 				colors.push(0.6,0.6,0.6);
+				//colors.push(1.0,0.0,1.0);
 			}
 		}
 
