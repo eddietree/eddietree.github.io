@@ -35,6 +35,17 @@ $(function() {
 	g_profiles.init();
 	g_profiles.loadProfile( Settings.StartProfileIndex);
 
+	if ( Settings.Autoplay ) {
+		console.log("autplaying..");
+
+		var DoAutoPlay = function()
+		{
+			var timeoutTime = Settings.AutoplayTimeout;
+			setTimeout(function() { g_profiles.loadNextProfile();  DoAutoPlay(); },timeoutTime)
+		}
+		DoAutoPlay();
+	}
+
 	// show stats
 	if ( Settings.ShowFPS ) {
 		var stats = new Stats();
