@@ -26,49 +26,39 @@ function ObjManager()
 		var obj = this.objs[a_objName];
 		obj.active = true;
 		obj.init();
+
+		console.log("Activated Object: " + a_objName); 
 	};
 
 	this.deactivateAllObjs = function()
 	{
-		for (var property in this.objs ) {
-		    if (this.objs.hasOwnProperty(property)) {
-		        
-		        var obj = this.objs[property];
-
-		        if (  'release' in obj ) {
-		        	obj.release();
-		        	obj.active = false;
-		        }
-		    }
-		}
+	 	Object.keys(this.objs).forEach(function(property) {
+            var obj = this.objs[property];
+            if (obj.release) {
+              obj.release();
+              obj.active = false;
+            }
+        }.bind(this));
 	};
 
 	this.update = function()
 	{
-		for (var property in this.objs ) {
-		    if (this.objs.hasOwnProperty(property)) {
-		        
-		        var obj = this.objs[property];
-
-		        if (  'update' in obj && obj.active) {
-		        	obj.update();
-		        }
-		    }
-		}
+		Object.keys(this.objs).forEach(function(property) {
+            var obj = this.objs[property];
+            if (obj.update && obj.active) {
+              obj.update();
+            }
+        }.bind(this));
 	}
 
 	this.draw = function()
 	{
-		for (var property in this.objs ) {
-		    if (this.objs.hasOwnProperty(property)) {
-		        
-		        var obj = this.objs[property];
-
-		        if (  'draw' in obj && obj.active ) {
-		        	obj.draw();
-		        }
-		    }
-		}
+		Object.keys(this.objs).forEach(function(property) {
+            var obj = this.objs[property];
+            if (obj.draw && obj.active) {
+              obj.draw();
+            }
+        }.bind(this));
 	}
 
 	this.get = function( a_name )
