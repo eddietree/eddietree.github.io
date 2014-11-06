@@ -9,7 +9,7 @@ function ObjManager()
 			spikes: new Spikes(),
 			polybear:new Polybear(),
 			cubes:new CubeWorld(),
-			//head:new MascotHead(),
+			mask:new Mask(),
 		};
 
 		/*for (var property in this.objs ) {
