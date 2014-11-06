@@ -129,6 +129,39 @@
 
   </script>
 
+  <script id="vertexShaderMask" type="x-shader/x-vertex">
+
+      precision mediump float;
+      precision mediump int;
+
+      //attribute vec3 pos;
+      attribute vec4 color;
+      //attribute vec3 data;
+
+      varying vec3 vPosition;
+      varying vec4 vColor;
+
+      uniform float time;
+
+      void main() {
+          float distFromCenter = length(position);
+
+          vec3 posFinal = position;
+          float pulsateDist = sin(distFromCenter*(10.5+sin(time*1.0)*0.5) + time*0.5);
+          float offsetX = pulsateDist * 0.5 * sin( 2.8*position.x  + time );
+          float offsetY = pulsateDist * 0.5 * cos( 2.8*position.y  + time );
+          posFinal.x += offsetX * 0.1;
+          posFinal.y += offsetY;
+          posFinal.z -= offsetY;
+
+          vPosition = posFinal;
+          vColor = color + vec4(offsetY)*0.7;
+
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+      }
+
+  </script>
+
    <script id="vertexShaderPolybear" type="x-shader/x-vertex">
 
       precision mediump float;
@@ -159,7 +192,6 @@
 
           gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
       }
-
   </script>
 
   <script id="fragmentShaderLines" type="x-shader/x-fragment">
@@ -171,21 +203,15 @@
       varying vec4 vColor;
 
       void main() {
-
-          //vec4 color = vec4( sin(time), 0.0, 0.0 ,1.0);
-          //color.b += cos(  time ) * 0.5;
-
-          //gl_FragColor = vec4(1.0,1.0,0.0,1.0);
           gl_FragColor = vColor;
-
       }
-
   </script>
 
   <script src="js/ext/jquery-1.11.1.min.js"></script>
   <script src="js/ext/perlin.js"></script>
   <script src="js/ext/three.min.js"></script>
   <script src="js/ext/stats.min.js"></script>
+  <script src="js/ext/OBJLoader.js"></script>
   <script src="js/Settings.js"></script>
   <script src="js/MathUtil.js"></script>
   <script src="js/BaseObj.js"></script>
