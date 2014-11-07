@@ -149,22 +149,22 @@ body {
 
 #tip {
 	position: absolute;
-	top: 90%;
+	top: 50%;
 	left: 50%;
 
 	transform: translateX(-50%) translateY(-50%);
 	-webkit-transform: translateX(-50%) translateY(-50%);
 	-ms-transform: translateX(-50%) translateY(-50%);
 
-	background-color: black;
+	background-color: blue;
 	color: white;
-	margin: 10px;
 	border-radius: 10px;
+	box-shadow: 5px 5px 10px #555555;
 	font: normal 18px "Conv_Cabin-Regular-TTF", sans-serif !important;
 }
 
 #tip p {
-	padding: 1em;
+	padding: 1.5em;
 }
 
 canvas {
