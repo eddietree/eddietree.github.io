@@ -118,6 +118,12 @@ body {
 	padding: 30px;
 }
 
+.gamedate {
+	font: normal 38px "Conv_Cabin-Regular-TTF", sans-serif !important;
+	float: right;
+	position: relative;
+	top: 0.3em;
+}
 #lags {
 	font: normal 33px "Conv_Cabin-BoldItalic-TTF", sans-serif !important;
 	margin-top: 3em;
