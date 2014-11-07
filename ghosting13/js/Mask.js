@@ -6,7 +6,7 @@ function Mask()
 	{
 		this.time = 0.0;
 
-		renderer.setClearColor( 0xbbbbbb, 1);
+		renderer.setClearColor( 0x777777, 1);
 
 		var manager = new THREE.LoadingManager();
 		manager.onProgress = function ( item, loaded, total ) {
@@ -27,6 +27,7 @@ function Mask()
 		var attributes = {
 			position: {	type: 'f', value: null },
 			color: { type: 'f', value: null },
+			normal: { type: 'f', value: null },
 			//data: { type: 'f', value: null }
 		};
 
@@ -38,10 +39,10 @@ function Mask()
 
 			uniforms: 		uniforms,
 			attributes:     attributes,
-			vertexShader:   document.getElementById( 'vertexShaderMask' ).textContent,
-			fragmentShader: document.getElementById( 'fragmentShaderLines' ).textContent,
+			vertexShader:   document.getElementById( 'vertexShaderMaskNight' ).textContent,
+			fragmentShader: document.getElementById( 'fragmentShaderMaskNight' ).textContent,
 
-			//blending: 		THREE.AdditiveBlending,
+			blending: 		THREE.AdditiveBlending,
 			depthTest: 		true,
 			transparent:	true,
 		});
@@ -64,22 +65,77 @@ function Mask()
 			scene.add( object );
 
 		}, onProgress, onError );
+
+		this.initParticles();
 	};
 
 	this.release = function()
 	{
 		if ( this.obj ) scene.remove(this.obj);
+		if ( this.pointcloud ) scene.remove(this.pointcloud);
+		
 		this.obj = null;
+		this.pointcloud = null;
 	};
 
 	this.rotateCamera = function()
 	{
-		var radius = 6.0;
-		var time = this.time * 0.2;
-		camera.position.z = radius * Math.cos(time);
-		camera.position.x = radius * Math.sin(time);
+		var radius = 7.0;
+		var time = this.time * 0.5;
+		time = Math.PI * 2.0;
+
+		camera.position.x = radius * Math.cos(time*0.5);
+		camera.position.y = radius * Math.sin(time)*0.2;
+		camera.position.z = radius;
 
 		camera.lookAt( camera.position.clone().negate() );
+	};
+
+	this.initParticles = function()
+	{
+		var numPoints = 2048;
+		var numFloatsPerPos = 3;
+		var numFloatsPerColor = 3;
+		var posRadius = 10.0;
+
+		var positions = new Float32Array( numPoints*numFloatsPerPos );
+		var colors = new Float32Array( numPoints*numFloatsPerColor );
+
+		for ( var i = 0; i < numPoints; i++ )
+		{
+			var posIndexOffset = i * numFloatsPerPos;
+			var posColorOffset = i * numFloatsPerColor;
+
+			var currPosRadius = posRadius;
+
+			if ( Math.random() < 0.5 )
+			{
+				currPosRadius = 5.0;
+			}
+
+			var posX = (2.0*Math.random()-1.0) * currPosRadius;
+			var posY = (2.0*Math.random()-1.0) * currPosRadius;
+			var posZ = (2.0*Math.random()-1.0) * currPosRadius;
+
+			positions[posIndexOffset+0] = posX;
+			positions[posIndexOffset+1] = posY;
+			positions[posIndexOffset+2] = posZ;
+
+			colors[posColorOffset+0] = 1.0;
+			colors[posColorOffset+1] = 1.0;
+			colors[posColorOffset+2] = 1.0;
+		}
+
+		var geometry = new THREE.BufferGeometry();
+		geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, numFloatsPerPos ) );
+		geometry.addAttribute( 'color', new THREE.BufferAttribute( colors, numFloatsPerColor ) );
+		geometry.computeBoundingBox();
+
+		var pointSize = 0.03;
+		var material = new THREE.PointCloudMaterial( { size: pointSize, vertexColors: THREE.VertexColors } );
+		
+		this.pointcloud = new THREE.PointCloud( geometry, material );
+		scene.add(this.pointcloud);
 	};
 
 	this.update = function()
@@ -98,7 +154,7 @@ function Mask()
 		}
 
 		this.time += g_dt;
-		//this.rotateCamera();
-		camera.position.z = 6;
+		this.rotateCamera();
+		//camera.position.z = 9;
 	};
 }

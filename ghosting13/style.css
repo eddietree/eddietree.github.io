@@ -49,23 +49,20 @@ table {
 
 /***************************************************/
 
-@font-face {       
-	 font-family: "C64 User";
-	 src: url("fonts/C64_User_v1.0-STYLE.eot");
-}
-@font-face {       
-	 font-family: "C64 User";
-	 src: url("fonts/C64_User_v1.0-STYLE.ttf") format("truetype"),
-	      url("fonts/C64_User_v1.0-STYLE.woff") format("woff");
-}
 @font-face {
-	 font-family: "C64 Pro Mono";
-	 src: url("fonts/C64_Pro_Mono_v1.0-STYLE.eot");
+	font-family: 'Conv_Cabin-Regular-TTF';
+	src: url('fonts/Cabin-Regular-TTF.eot');
+	src: local('☺'), url('fonts/Cabin-Regular-TTF.woff') format('woff'), url('fonts/Cabin-Regular-TTF.ttf') format('truetype'), url('fonts/Cabin-Regular-TTF.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
+
 @font-face {
-	 font-family: "C64 Pro Mono";
-	 src: url("fonts/C64_Pro_Mono_v1.0-STYLE.ttf") format("truetype"),
-	 			url("fonts/C64_Pro_Mono_v1.0-STYLE.woff") format("woff");
+	font-family: 'Conv_Cabin-BoldItalic-TTF';
+	src: url('fonts/Cabin-BoldItalic-TTF.eot');
+	src: local('☺'), url('fonts/Cabin-BoldItalic-TTF.woff') format('woff'), url('fonts/Cabin-BoldItalic-TTF.ttf') format('truetype'), url('fonts/Cabin-BoldItalic-TTF.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
 html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
@@ -75,7 +72,6 @@ body {
 }
 
 #wrap {
-	text-align: center;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -83,8 +79,13 @@ body {
 	-webkit-transform: translateX(-50%) translateY(-50%);
 	-ms-transform: translateX(-50%) translateY(-50%);
 
-	font-family: Georgia, Times, serif;
-	/*font: normal 14pt/18px "C64 User", sans-serif !important; */
+	/*font-family: Georgia, Times, serif;*/
+	font: normal 24px "Conv_Cabin-Regular-TTF", sans-serif !important;
+
+	background-color: white;
+	padding: 30px;
+	display: block;
+	width: 65%;
 }
 
 #wrap a {
@@ -98,14 +99,15 @@ body {
 
 #wrap h1 {
 	font-size:2.5em;
-	margin-top: 0.5em;
-	color: white;
-	padding: 0.3em;
+	border-bottom: 3px solid black;
+	padding-bottom: 15px;
+	margin-bottom: 35px;
+	font: normal 48px "Conv_Cabin-BoldItalic-TTF", sans-serif !important;
 }
 
 #wrap p {
-	margin: 2.0em 0;
-	line-height: 1.7em;
+	margin: 1.0em 0;
+	line-height: 1.3em;
 }
 
 #img-header {
