@@ -6,8 +6,8 @@ function ProfileManager()
 		this.profiles = 
 		[
 			["lines"],
-			["terrain"],
 			["spikes"],
+			["terrain"],
 			["polybear"],
 			["mask"],//["cubes"],
 		];

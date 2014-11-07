@@ -5,7 +5,7 @@ function Polybear()
 	this.init = function()
 	{
 		this.time = 0.0;
-		renderer.setClearColor( 0x0fffff, 1);
+		renderer.setClearColor( 0xA67C52, 1);
 
 		var geometry = new THREE.BufferGeometry();
 		var material = new THREE.LineBasicMaterial({ vertexColors: THREE.VertexColors });
@@ -32,7 +32,7 @@ function Polybear()
 				var posZ = 0.0;
 
 				positions.push(posX, posY,posZ);
-				colors.push(1,1,1,0.5);
+				colors.push(1,1,1,0.2);
 				//colors.push(0.5,0.5,0.5);
 			}
 		}

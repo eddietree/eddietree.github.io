@@ -5,7 +5,7 @@ function Spikes()
 	this.init = function()
 	{
 		this.time = 0.0;
-		renderer.setClearColor( 0xff0fff, 1);
+		renderer.setClearColor( 0x385EAF, 1);
 
 		var geometry = new THREE.BufferGeometry();
 		var material = new THREE.LineBasicMaterial({ vertexColors: THREE.VertexColors });

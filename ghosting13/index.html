@@ -131,7 +131,7 @@
           posFinal.y += offsetY;
 
           vPosition = posFinal;
-          vColor = color + vec4(offsetX)*0.25;
+          vColor = color + vec4(offsetX)*0.1;
 
           gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
       }
@@ -269,7 +269,7 @@
           //posFinal.z -= offsetY;
 
           vPosition = posFinal;
-          vColor = color + vec4(offsetY)*0.95;
+          vColor = color + vec4(offsetY)*0.5;
 
           gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
       }

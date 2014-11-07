@@ -5,7 +5,7 @@ function Lines()
 	this.init = function()
 	{
 		this.time = 0.0;
-		renderer.setClearColor( 0xcccccc, 1);
+		renderer.setClearColor( 0xC2CBAE, 1);
 
 		var geometry = new THREE.BufferGeometry();
 		var material = new THREE.LineBasicMaterial({ vertexColors: THREE.VertexColors });
@@ -33,7 +33,7 @@ function Lines()
 
 				positions.push(posX, posY,posZ);
 				//colors.push(Math.random()*0.5+0.5, Math.random()*0.5+0.5, 1);
-				colors.push(0.6,0.6,0.6);
+				colors.push(0.7,0.7,0.7);
 				//colors.push(1.0,0.0,1.0);
 			}
 		}

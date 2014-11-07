@@ -19,7 +19,7 @@ function Terrain()
 		var geometry = new THREE.SphereGeometry( cubeWidth*0.5, 4, 4 );
 		var phongMaterial =  new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0xdddddd, specular: 0xffffff, shininess: 30, shading: THREE.FlatShading } )
 
-		this.light = new THREE.PointLight( 0xff0040, 2, 4 );
+		this.light = new THREE.PointLight( 0x403300, 2, 4 );
 		scene.add(this.light);
 		this.light.position.x = camera.position.x;
 		this.light.position.y = camera.position.y;
@@ -55,8 +55,8 @@ function Terrain()
 
 		this.initParticles();
 
-		scene.fog = new THREE.FogExp2( 0x6D3E86, 0.25 );
-		renderer.setClearColor( 0x6D3E86, 1);
+		scene.fog = new THREE.FogExp2( 0x38AF62, 0.25 );
+		renderer.setClearColor( 0x38AF62, 1);
 	};
 
 	this.initParticles = function()
