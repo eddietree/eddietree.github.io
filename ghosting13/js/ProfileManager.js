@@ -110,7 +110,7 @@ function ProfileManager()
 	};
 }
 
-$("#tip").delay(4000).fadeOut();
+$("#tip").delay(500).fadeIn().delay(4000).fadeOut();
 
 window.addEventListener('touchstart', function() {
 	g_profiles.loadNextProfile();
