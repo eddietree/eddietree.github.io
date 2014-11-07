@@ -118,6 +118,10 @@ body {
 	padding: 30px;
 }
 
+.annecdote {
+	display: none;
+}
+
 .gamedate {
 	font: normal 38px "Conv_Cabin-Regular-TTF", sans-serif !important;
 	float: right;
@@ -126,7 +130,8 @@ body {
 }
 #lags {
 	font: normal 33px "Conv_Cabin-BoldItalic-TTF", sans-serif !important;
-	margin-top: 3em;
+	margin-top: 3.5em;
+	display: none;
 }
 
 #lags img {
@@ -155,6 +160,7 @@ body {
 	color: white;
 	margin: 10px;
 	border-radius: 10px;
+	font: normal 18px "Conv_Cabin-Regular-TTF", sans-serif !important;
 }
 
 #tip p {

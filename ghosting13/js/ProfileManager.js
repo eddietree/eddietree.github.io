@@ -34,10 +34,6 @@ function ProfileManager()
 		var currProfile = "profile_" + a_index;
 		console.log("Loading profile: " + currProfile );
 
-		if ( Settings.ShowProfileText ) {
-			$("#"+currProfile).css("display", "block");
-		}
-
 		// deactivate all objects
 		g_objs.deactivateAllObjs();
 
@@ -50,6 +46,41 @@ function ProfileManager()
 		}
 
 		this.currProfileIndex = a_index;
+
+		// profile text
+		if ( Settings.ShowProfileText ) {
+			var currProfileElem = $("#"+currProfile);
+			currProfileElem.css("display", "block");
+			$("#lags").css("display", "block");
+
+			// stop all animations
+			$(".annecdote").dequeue();
+			$(".annecdote").stop(true,true);
+			$(".annecdote").hide();
+
+			var annecdoteFirst = $("#"+currProfile + " > div.annecdotes:first > div.annecdote:first");
+			var thisObj = this;
+
+			function fadeSeq( a_annecdote )
+			{
+				var currentProfileTest = "profile_"+thisObj.currProfileIndex;
+				if ( currProfile != currentProfileTest) 
+					return;
+
+				 var seq = a_annecdote.fadeIn().delay(Settings.AnnecdoteWaitTime).fadeOut(null, function() 
+					{ 
+						var nextObj = a_annecdote.next();
+						if ( nextObj.length == 0 )
+						{
+							nextObj = a_annecdote.siblings().first();
+						}
+						//console.log(nextObj);
+						fadeSeq(nextObj);
+					});
+			}
+
+			fadeSeq(annecdoteFirst);
+		}
 
 		// reset camera
 		camera.position.x = 0;

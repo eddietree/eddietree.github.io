@@ -25,9 +25,22 @@
     <div class="profile" id="profile_0">
       <div class="gamedate">1990</div>
       <h1>Jeremy Douglass</h1>
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-      <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pari</p>
-      <p>Border Zone / Infocom / Designed by Marc Blank / 1987</p>
+      <div class="annecdotes">
+        <div class="annecdote">
+          <p>1 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+          <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pari</p>
+        </div>
+
+        <div class="annecdote">
+          <p>2 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+          <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pari</p>
+        </div>
+
+        <div class="annecdote">
+          <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+          <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pari</p>
+        </div>
+      </div>
     </div>
 
     <div class="profile" id="profile_1">
@@ -296,7 +309,7 @@
             //finalColor.xyz = vec3(dotProd);
           }
 
-          finalColor.w += pow(1.0-abs(dot(vNormal, vec3(0.0,0.0,1.0))), 1.0) ;
+          finalColor.w += pow(1.0-abs(dot(vNormal, vec3(0.0,0.0,1.0))), 1.0);
 
           gl_FragColor = finalColor;
       }
