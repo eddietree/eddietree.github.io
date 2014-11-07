@@ -124,9 +124,9 @@
           float distFromCenter = length(position);
 
           vec3 posFinal = position;
-          float pulsateDist = sin(distFromCenter*(1.5+sin(time*0.2)*0.5) + time*0.5);
-          float offsetX = pulsateDist * 0.7 * sin( 0.8*position.x  + time );
-          float offsetY = pulsateDist * 0.7 * cos( 0.8*position.y  + time );
+          float pulsateDist = sin(distFromCenter*(1.5+sin(time*0.2)*0.5) + time*0.3);
+          float offsetX = pulsateDist * 0.7 * sin( 0.8*position.x  + time*0.7 );
+          float offsetY = pulsateDist * 0.7 * cos( 0.8*position.y  + time*0.7 );
           posFinal.x += offsetX;
           posFinal.y += offsetY;
 
@@ -156,9 +156,9 @@
           float distFromCenter = length(position);
 
           vec3 posFinal = position;
-          float pulsateDist = sin(distFromCenter*(10.5+sin(time*0.2)*0.5) + time*0.5);
-          float offsetX = pulsateDist * 1.7 * sin( 0.8*position.x  + time );
-          float offsetY = pulsateDist * 1.7 * cos( 0.8*position.y  + time );
+          float pulsateDist = sin(distFromCenter*(10.5+sin(time*0.2)*0.5) + time*0.25);
+          float offsetX = pulsateDist * 1.7 * sin( 0.8*position.x  + time*0.5 );
+          float offsetY = pulsateDist * 1.7 * cos( 0.8*position.y  + time*0.5 );
           posFinal.x += offsetX;
           posFinal.y += offsetY;
           posFinal.z -= offsetY;

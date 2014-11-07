@@ -61,7 +61,7 @@ function Terrain()
 
 	this.initParticles = function()
 	{
-		var numPoints = 1024;
+		var numPoints = 2048;
 		var numFloatsPerPos = 3;
 		var numFloatsPerColor = 3;
 		var posRadius = 4.0;
@@ -115,7 +115,7 @@ function Terrain()
 
 	this.update = function()
 	{
-		var cooldownTime = 0.0;
+		var cooldownTime = 2.0;
 		var lerpTime = 2.5;
 
 		this.time += g_dt;
@@ -133,7 +133,7 @@ function Terrain()
 		this.updateCubes(lerpFactor, coeffX, coeffY, coeffZ);
 
 		var radius = 5.0;
-		var circleTime = this.time* 0.3;
+		var circleTime = this.time* 0.1;
 		camera.position.x = radius* Math.cos(circleTime);
 		camera.position.z = radius* Math.sin(circleTime);
 		camera.position.y = 0;
