@@ -101,12 +101,31 @@ body {
 	text-decoration: underline;
 }
 
-#profiles h1 {
-	font-size:2.5em;
+.profile-header {
 	border-bottom: 3px solid black;
 	padding-bottom: 15px;
-	margin-bottom: 35px;
+}
+
+.profile-header h1 {
 	font: normal 48px "Conv_Cabin-BoldItalic-TTF", sans-serif !important;
+	margin-right: 20px;
+	float: left;
+	position: relative;
+	top: 5px;
+}
+
+.profile-header .gamedate {
+	font: normal 38px "Conv_Cabin-Regular-TTF", sans-serif !important;
+	float: left;
+	position: relative;
+	top: 12px;
+}
+
+.profile-header h2 {
+	font: normal 30px "Conv_Cabin-Italic-TTF", sans-serif !important;
+	float: right;
+	text-align: right;
+	width: 150px;
 }
 
 #profiles p {
@@ -130,12 +149,6 @@ body {
 	display: none;
 }
 
-.gamedate {
-	font: normal 38px "Conv_Cabin-Regular-TTF", sans-serif !important;
-	float: right;
-	position: relative;
-	top: 0.3em;
-}
 #lags {
 	font: normal 33px "Conv_Cabin-BoldItalic-TTF", sans-serif !important;
 	margin-top: 3.0em;
