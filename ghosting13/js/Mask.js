@@ -82,7 +82,7 @@ function Mask()
 	{
 		var radius = 7.0;
 		var time = this.time * 0.5;
-		time = Math.PI * 2.0;
+		//time = Math.PI * 2.0;
 
 		camera.position.x = radius * Math.cos(time*0.5);
 		camera.position.y = radius * Math.sin(time)*0.2;

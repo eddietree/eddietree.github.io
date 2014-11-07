@@ -151,6 +151,7 @@
       //attribute vec3 data;
 
       varying vec3 vPosition;
+      varying vec4 vPositionMVP;
       varying vec4 vColor;
 
       uniform float time;
@@ -167,9 +168,11 @@
           posFinal.z -= offsetY;
 
           vPosition = posFinal;
+          vec4 posFinalMVP = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+          vPositionMVP = posFinalMVP;
           vColor = color + vec4(offsetY)*0.7;
 
-          gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+          gl_Position = posFinalMVP;
       }
 
   </script>
@@ -186,6 +189,7 @@
       varying vec3 vPosition;
       varying vec4 vColor;
       varying vec3 vNormal;
+      varying vec4 vPositionMVP;
       varying float vTime;
 
       uniform float time;
@@ -200,7 +204,11 @@
           vColor = vec4(normal.xyz, 1.0);
 
           vTime = time;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+
+          vPosition = posFinal;
+          vec4 posFinalMVP = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+          vPositionMVP = posFinalMVP;
+          gl_Position = posFinalMVP;
       }
 
   </script>
@@ -258,25 +266,29 @@
       varying vec3 vPosition;
       varying vec4 vColor;
       varying vec3 vNormal;
+      varying vec4 vPositionMVP;
+
       varying float vTime;
 
       void main() {
 
           vec4 finalColor = vec4(vNormal, 1.0);
+          vec2 screenUV = vPositionMVP.xy / vPositionMVP.w;
 
           vec3 lightVec = normalize(vec3( 1.0, 1.0, 1.0 ));
           float dotProd = dot( vNormal, lightVec);
 
-          if (dotProd > 0.55 )
+          if (dotProd > 0.65 )
           {
-            float repeatVal = 40.0;
-            float lineThickPercentage = 0.7;
-            finalColor.xyz = vec3( step(lineThickPercentage, sin( repeatVal*(vPosition.x + vPosition.y) + vTime*15.0 ) ) );
+            float repeatVal = 150.0;
+            float lineThickPercentage = 0.5;
+            finalColor.xyz = vec3( step(lineThickPercentage, sin( repeatVal*(screenUV.x + screenUV.y) + vTime*20.0 ) ) );
           }
           else if ( dotProd > 0.25 )
           {
             //finalColor.xyz = vec3(1.0,0.0,0.0)*(1.0-dotProd);
             finalColor.xyz = vNormal * dotProd;
+             //finalColor.xyz = vec3(screenUV.xy, 0.0);
           }
           else
           {
