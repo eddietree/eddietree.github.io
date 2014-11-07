@@ -56,8 +56,8 @@ function CubeWorld()
 
 		this.initParticles();
 
-		scene.fog = new THREE.FogExp2( 0xffff00, 0.25 );
-		renderer.setClearColor( 0xffff00, 1);
+		scene.fog = new THREE.FogExp2( 0xF0D586, 0.25 );
+		renderer.setClearColor( 0xF0D586, 1);
 	};
 
 	this.initParticles = function()

@@ -9,7 +9,8 @@ function ProfileManager()
 			["spikes"],
 			["terrain"],
 			["polybear"],
-			["mask"],//["cubes"],
+			["mask"],
+			["cubes"],
 		];
 	};
 
