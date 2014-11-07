@@ -81,23 +81,19 @@ body {
 
 	/*font-family: Georgia, Times, serif;*/
 	font: normal 24px "Conv_Cabin-Regular-TTF", sans-serif !important;
-
-	background-color: white;
-	padding: 30px;
-	display: block;
-	width: 65%;
+	width: 75%;
 }
 
-#wrap a {
+#profiles a {
 	color: black;
 	text-decoration: none;
 }
 
-#wrap a:hover {
+#profiles a:hover {
 	text-decoration: underline;
 }
 
-#wrap h1 {
+#profiles h1 {
 	font-size:2.5em;
 	border-bottom: 3px solid black;
 	padding-bottom: 15px;
@@ -105,7 +101,7 @@ body {
 	font: normal 48px "Conv_Cabin-BoldItalic-TTF", sans-serif !important;
 }
 
-#wrap p {
+#profiles p {
 	margin: 1.0em 0;
 	line-height: 1.3em;
 }
@@ -118,6 +114,26 @@ body {
 
 .profile {
 	display:none;
+	background-color:rgba(255, 255, 255, 0.75);
+	padding: 30px;
+}
+
+#lags {
+	font: normal 33px "Conv_Cabin-BoldItalic-TTF", sans-serif !important;
+	margin-top: 3em;
+}
+
+#lags img {
+	float: left;
+	position: relative;
+	top: -7px;
+	left: -5px;
+}
+
+#lags p {
+	text-align: right;
+	background-color:rgba(255, 255, 255, 0.75);
+	padding: 7px;
 }
 
 #tip {
