@@ -126,14 +126,14 @@ body {
 #lags img {
 	float: left;
 	position: relative;
-	top: -7px;
-	left: -5px;
+	top: -13px;
+	left: -17px;
 }
 
 #lags p {
 	text-align: right;
 	background-color:rgba(255, 255, 255, 0.75);
-	padding: 7px;
+	padding: 7px 20px;
 }
 
 #tip {
