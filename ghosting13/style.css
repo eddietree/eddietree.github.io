@@ -90,6 +90,7 @@ body {
 	/*font-family: Georgia, Times, serif;*/
 	font: normal 24px "Conv_Cabin-Regular-TTF", sans-serif !important;
 	width: 75%;
+	max-width: 800px;
 }
 
 #profiles a {
