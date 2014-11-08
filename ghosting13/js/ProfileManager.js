@@ -28,7 +28,8 @@ function ProfileManager()
 		{
 			var currProfileName = "profile_" + i;
 			var divElem = $("#"+currProfileName);
-			divElem.css("display", "none");
+			divElem.stop();
+			divElem.hide();
 		}
 
 		// enable current profile1
@@ -51,8 +52,9 @@ function ProfileManager()
 		// profile text
 		if ( Settings.ShowProfileText ) {
 			var currProfileElem = $("#"+currProfile);
-			currProfileElem.css("display", "block");
-			$("#lags").css("display", "block");
+			currProfileElem.fadeIn();
+
+			$("#lags").fadeIn();
 
 			// stop all animations
 			$(".annecdote").dequeue();
@@ -110,7 +112,7 @@ function ProfileManager()
 	};
 }
 
-$("#tip").delay(500).fadeIn().delay(4000).fadeOut();
+$("#tip").delay(1000).fadeIn().delay(4000).fadeOut();
 
 window.addEventListener('touchstart', function() {
 	g_profiles.loadNextProfile();
