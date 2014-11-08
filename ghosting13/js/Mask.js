@@ -80,7 +80,7 @@ function Mask()
 
 	this.rotateCamera = function()
 	{
-		var radius = 7.0;
+		var radius = 9.0;
 		var time = this.time * 0.5;
 		//time = Math.PI * 2.0;
 
@@ -93,7 +93,7 @@ function Mask()
 
 	this.initParticles = function()
 	{
-		var numPoints = 2048;
+		var numPoints = 512;
 		var numFloatsPerPos = 3;
 		var numFloatsPerColor = 3;
 		var posRadius = 10.0;
@@ -131,10 +131,33 @@ function Mask()
 		geometry.addAttribute( 'color', new THREE.BufferAttribute( colors, numFloatsPerColor ) );
 		geometry.computeBoundingBox();
 
+		var attributes = {
+			position: {	type: 'f', value: null },
+			color: { type: 'f', value: null },
+		};
+
+		uniforms = {
+			time: {type: 'f', value: 2.0},
+			camPos: {type: 'v3', value: new THREE.Vector3( 0, 1, 2 ) }
+		};
+
+		var shaderMaterial = new THREE.ShaderMaterial( {
+
+			uniforms: 		uniforms,
+			attributes:     attributes,
+			vertexShader:   document.getElementById( 'vertexShaderParticles' ).textContent,
+			fragmentShader: document.getElementById( 'fragmentShaderParticles' ).textContent,
+
+			//blending: 		THREE.AdditiveBlending,
+			depthTest: 		false,
+			transparent:	true,
+			size: 10
+		});
+
 		var pointSize = 0.03;
 		var material = new THREE.PointCloudMaterial( { size: pointSize, vertexColors: THREE.VertexColors } );
 		
-		this.pointcloud = new THREE.PointCloud( geometry, material );
+		this.pointcloud = new THREE.PointCloud( geometry, shaderMaterial );
 		scene.add(this.pointcloud);
 	};
 
@@ -152,6 +175,10 @@ function Mask()
 				}
 			} );
 		}
+
+		this.pointcloud.material.uniforms.time.value = this.time;
+		//console.log(this.pointcloud.material.uniforms);
+		this.pointcloud.material.uniforms.camPos.value = camera.position;
 
 		this.time += g_dt;
 		this.rotateCamera();

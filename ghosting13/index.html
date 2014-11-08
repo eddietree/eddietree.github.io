@@ -460,6 +460,61 @@
       }
   </script>
 
+   <script id="vertexShaderParticles" type="x-shader/x-vertex">
+
+      precision mediump float;
+      precision mediump int;
+
+      //attribute vec3 pos;
+      attribute vec4 color;
+
+      varying vec3 vPosition;
+      varying float vDistance;
+      //varying vec4 vColor;
+
+      uniform float time;
+      uniform vec3 camPos;
+
+      float distanceToPlane( vec4 planeEq, vec3 pt )
+      {
+        float dotProd = dot( planeEq.xyz, pt.xyz );
+        return dotProd + planeEq.w;
+      }
+
+      void main() {
+          vec3 posFinal = position;
+
+          vec3 planeNormal = normalize(-camPos);
+          vec4 planeEq = vec4(planeNormal, 0.0);
+          float distance = distanceToPlane( planeEq, posFinal );
+
+          gl_PointSize = 2.0+abs(distance)*20.0;
+
+          vPosition = posFinal;
+          vDistance = distance;
+          //vColor = color;
+
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+      }
+  </script>
+
+  <script id="fragmentShaderParticles" type="x-shader/x-fragment">
+      precision highp float;
+      precision mediump int;
+
+      varying vec3 vPosition;
+      varying float vDistance;
+      //varying vec4 vColor;
+
+      void main() {
+          vec2 uv = gl_PointCoord.xy;
+          float distFromCenter = length( uv*2.0 - vec2(1.0) );
+          float alpha = smoothstep(0.0, abs(vDistance), 1.0-distFromCenter);
+
+          gl_FragColor = vec4(1.0,1.0,1.0,alpha);
+      }
+  </script>
+
   <script id="fragmentShaderMaskNight" type="x-shader/x-fragment">
 
       precision highp float;
