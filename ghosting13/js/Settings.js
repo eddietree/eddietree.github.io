@@ -4,5 +4,5 @@ var Settings = {
 	StartProfileIndex: 0,
 	Autoplay: false, // will auto-cycle scenes
 	AutoplayTimeout: 10000, // how long to wait for timeout
-	AnnecdoteWaitTime: 10000,
+	AnnecdoteWaitTime: 30000,
 };
