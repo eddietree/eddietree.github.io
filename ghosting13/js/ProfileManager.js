@@ -130,10 +130,12 @@ window.onkeyup = function( event ) {
 	if ( keyCode == spaceKeyCode || keyCode == arrowRightKeyCode )
 	{
 		g_profiles.loadNextProfile();
+		$("#tip").dequeue().stop().fadeOut();
 	}
 	else if ( keyCode == arrowLeftKeyCode )
 	{
 		g_profiles.loadPrevProfile();
+		$("#tip").dequeue().stop().fadeOut();
 	}
 	else if ( keyCode >= numOffset && keyCode < numMax )
 	{
