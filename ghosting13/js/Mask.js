@@ -138,6 +138,7 @@ function Mask()
 
 		uniforms = {
 			time: {type: 'f', value: 2.0},
+			distToEyePlane: {type: 'f', value: 2.0},
 			camPos: {type: 'v3', value: new THREE.Vector3( 0, 1, 2 ) }
 		};
 
@@ -176,7 +177,13 @@ function Mask()
 			} );
 		}
 
+		var screenWidth = 0.5;//window.innerWidth;
+		var fovAngle = camera.fov * Math.PI / 180.0;
+		var distToEyePlane = screenWidth*0.5 / Math.tan( fovAngle*0.5 );
+		//console.log(distToEyePlane);
+
 		this.pointcloud.material.uniforms.time.value = this.time;
+		this.pointcloud.material.uniforms.distToEyePlane.value = distToEyePlane;
 		//console.log(this.pointcloud.material.uniforms);
 		this.pointcloud.material.uniforms.camPos.value = camera.position;
 
