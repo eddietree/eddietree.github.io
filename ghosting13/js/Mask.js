@@ -96,7 +96,7 @@ function Mask()
 		var numPoints = 512;
 		var numFloatsPerPos = 3;
 		var numFloatsPerColor = 3;
-		var posRadius = 10.0;
+		var posRadius = 9.0;
 
 		var positions = new Float32Array( numPoints*numFloatsPerPos );
 		var colors = new Float32Array( numPoints*numFloatsPerColor );
@@ -107,11 +107,6 @@ function Mask()
 			var posColorOffset = i * numFloatsPerColor;
 
 			var currPosRadius = posRadius;
-
-			if ( Math.random() < 0.5 )
-			{
-				currPosRadius = 5.0;
-			}
 
 			var posX = (2.0*Math.random()-1.0) * currPosRadius;
 			var posY = (2.0*Math.random()-1.0) * currPosRadius;
