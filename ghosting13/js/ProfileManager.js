@@ -112,8 +112,6 @@ function ProfileManager()
 	};
 }
 
-$("#tip").delay(1000).fadeIn().delay(4000).fadeOut();
-
 window.addEventListener('touchstart', function() {
 	g_profiles.loadNextProfile();
 }, false);

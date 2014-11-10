@@ -12,7 +12,31 @@ var g_profiles;
 var g_dt = 1.0 / 60.0;
 var g_time = 0.0;
 
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    console.log('Query variable %s not found', variable);
+}
+
 $(function() {
+
+	var cmdVisual = getQueryVariable("visual");
+	var cmdShowText = getQueryVariable("text");
+	
+	if ( cmdShowText ) Settings.ShowProfileText = cmdShowText != 0;
+
+	if ( Settings.ShowProfileText ) {
+		$("#tip").delay(1000).fadeIn().delay(4000).fadeOut();
+	}
+	if ( cmdVisual ) {
+		Settings.StartProfileIndex = cmdVisual;
+	}
 
   	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -33,7 +57,7 @@ $(function() {
 	// profile
 	g_profiles = new ProfileManager();
 	g_profiles.init();
-	g_profiles.loadProfile( Settings.StartProfileIndex);
+	g_profiles.loadProfile( Settings.StartProfileIndex );
 
 	if ( Settings.Autoplay ) {
 		console.log("autplaying..");
