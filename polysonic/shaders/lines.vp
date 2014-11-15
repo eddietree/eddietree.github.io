@@ -1,0 +1,36 @@
+precision mediump float;
+precision mediump int;
+
+//attribute vec3 pos;
+attribute vec4 color;
+attribute vec4 data;
+
+varying vec3 vPosition;
+varying vec3 vNormal;
+varying vec4 vColor;
+varying vec4 vData;
+varying vec4 vAudioData;
+varying float vTime;
+
+uniform float time;
+uniform vec4 audioData;
+
+void main() {
+
+	float pitch = audioData.w;
+
+    vec3 posFinal = position;
+    vec3 normalVec = normalize(position);
+
+    float scale = mix( 0.95 - pitch*0.1,1.0, sin(time*2.0 + normalVec.y*(5.0+pitch*10.0) + cos(normalVec.z * 3.0 + time) )*0.5+0.5 )  - pitch*0.1;
+    posFinal *= scale;
+
+    vPosition = posFinal;
+    vData = data;
+    vColor = vec4(1.0,1.0,0.5-pitch, 1.0);
+    vNormal = normalVec;
+    vAudioData = audioData;
+    vTime = time;
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+}

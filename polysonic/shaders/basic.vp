@@ -1,0 +1,30 @@
+precision mediump float;
+precision mediump int;
+
+//attribute vec3 pos;
+attribute vec4 color;
+attribute vec4 data;
+
+varying vec3 vPosition;
+varying vec3 vNormal;
+varying vec4 vColor;
+varying vec4 vData;
+varying vec4 vAudioData;
+varying float vTime;
+
+uniform float time;
+uniform vec4 audioData;
+
+void main() {
+
+    vec3 posFinal = position;
+
+    vPosition = posFinal;
+    vData = data;
+    vColor = color;
+    vNormal = normalize(position);
+    vAudioData = audioData;
+    vTime = time;
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+}

@@ -1,0 +1,39 @@
+precision mediump float;
+precision mediump int;
+
+//attribute vec3 pos;
+attribute vec4 color;
+
+varying vec3 vPosition;
+varying float vDistance;
+//varying vec4 vColor;
+
+uniform float time;
+uniform float distToEyePlane;
+uniform vec3 camPos;
+
+float distanceToPlane( vec4 planeEq, vec3 pt )
+{
+float dotProd = dot( planeEq.xyz, pt.xyz );
+return dotProd + planeEq.w;
+}
+
+void main() {
+  vec3 posFinal = position;
+
+  vec3 planeNormal = normalize(-camPos);
+  vec4 planeEq = vec4(planeNormal, 0.0);
+  float distance = distanceToPlane( planeEq, posFinal );
+  float distanceToCamera = length( camPos - posFinal);
+
+  float pointSizeReal = 4.0;
+  float pointSize = pointSizeReal * distToEyePlane / distanceToCamera;
+
+  gl_PointSize = pointSize + abs(distance)*10.0;
+
+  vPosition = posFinal;
+  vDistance = distance;
+  //vColor = color;
+
+  gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+}
