@@ -62,9 +62,9 @@ function ProfileManager()
 	};
 }
 
-window.addEventListener('touchstart', function() {
+/*window.addEventListener('touchstart', function() {
 	g_profiles.loadNextProfile();
-}, false);
+}, false);*/
 
 
 
