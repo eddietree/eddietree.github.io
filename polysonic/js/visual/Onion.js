@@ -252,13 +252,14 @@ window.addEventListener('touchstart', function(e) {
 
 	console.log( "Touch Down", currTouchX , currTouchY);
  	//var onion = GetObj("onion");
+ 	GetObj("waves").injectSoundVal(-20.0);
 }, false);
 
 window.addEventListener('touchmove', function(e) {
 
 	var currTouchX = e.touches[0].clientX;
 	var currTouchY = e.touches[0].clientY;
-	
+
 	var diffX = currTouchX - touchPressPos.x;
 	var diffY = currTouchY - touchPressPos.Y;
 
@@ -269,5 +270,6 @@ window.addEventListener('touchmove', function(e) {
 
 	var onion = GetObj("onion");
  	onion.time += diffX * 0.03;
+ 	onion.camRotateSpeed = 0.0;
 }, false);
 

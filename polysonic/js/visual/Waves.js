@@ -158,7 +158,7 @@ function Waves()
 
 	this.injectSoundVal = function( val )
 	{
-		this.mesh.material.uniforms.soundArray.value[0] = val;
+		this.mesh.material.uniforms.soundArray.value[0] = lerp( this.mesh.material.uniforms.soundArray.value[0], val, 0.7 );
 	}
 
 	this.update = function()
@@ -172,6 +172,8 @@ function Waves()
 		{
 			soundArray[i] = lerp( soundArray[i], soundArray[i-1], lerpFactor );
 		}
+
+		soundArray[0] = lerp( soundArray[0], 0.0, 0.1 );
 
 		//this.mesh.material.uniforms.soundArray.value[0] = Math.sin(this.time);
 		//this.mesh.material.uniforms.soundArray.value[1] = Math.cos(this.time);
