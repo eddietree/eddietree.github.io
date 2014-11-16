@@ -239,3 +239,9 @@ function Onion()
 		camera.lookAt( camera.position.clone().negate() );
 	};
 }
+
+//touchstart
+window.addEventListener('touchstart', function() {
+ 	var onion = GetObj("onion");
+ 	onion.camRotateSpeed = 20.0;
+}, false);
