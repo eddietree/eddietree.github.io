@@ -241,7 +241,33 @@ function Onion()
 }
 
 //touchstart
-window.addEventListener('touchstart', function() {
- 	var onion = GetObj("onion");
- 	onion.camRotateSpeed = 20.0;
+var touchPressPos = {x:0.0, y:0.0};
+
+window.addEventListener('touchstart', function(e) {
+
+	var currTouchX = e.touches[0].clientX;
+	var currTouchY = e.touches[0].clientY;
+	touchPressPos.x = e.touches[0].clientX;
+	touchPressPos.y = e.touches[0].clientY;
+
+	console.log( "Touch Down", currTouchX , currTouchY);
+ 	//var onion = GetObj("onion");
 }, false);
+
+window.addEventListener('touchmove', function(e) {
+
+	var currTouchX = e.touches[0].clientX;
+	var currTouchY = e.touches[0].clientY;
+	
+	var diffX = currTouchX - touchPressPos.x;
+	var diffY = currTouchY - touchPressPos.Y;
+
+	touchPressPos.x = currTouchX;
+	touchPressPos.y = currTouchY;
+
+	//console.log(currTouchX , currTouchY);
+
+	var onion = GetObj("onion");
+ 	onion.time += diffX * 0.03;
+}, false);
+
