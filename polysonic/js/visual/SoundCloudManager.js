@@ -14,38 +14,67 @@ function SoundCloudManager()
 	this.clearColor = new THREE.Color();
 
 	this.init = function()
-	{
-		//http://stackoverflow.com/questions/13455956/setup-web-audio-api-source-node-from-soundcloud
-		var ctx = new webkitAudioContext(),
-		    audio = new Audio(),
-		    source,
-		    url = 'http://api.soundcloud.com/tracks/175342694/stream' +
-		          '?client_id=f0e7d787e5b20cddd319cf439a5d1cb3';
+    {
+    	var clientId = "f0e7d787e5b20cddd319cf439a5d1cb3";
+    	var trackId = "175342694";
 
-		audio.src = url;
-		source = ctx.createMediaElementSource(audio);
-		analyser = ctx.createAnalyser();
-		analyser.fftSize = 1024;
-		analyser.smoothingTimeConstant = 0.85;
-		source.connect(analyser);
-		analyser.connect(ctx.destination);
-		source.mediaElement.play();
+        var ctx = new AudioContext(),
+            audio = new Audio(),
+            invocation = new XMLHttpRequest(),
+            source,
+            url = 'http://api.soundcloud.com/tracks/' + trackId + '/stream' +
+                  '?client_id=' + clientId
+            ;
 
-		freqByteData = new Uint8Array(analyser.frequencyBinCount);
+        audio.controls = false;
+        analyser = ctx.createAnalyser();
+        analyser.fftSize = 1024;
+        analyser.smoothingTimeConstant = .85;
 
-		var canvasId = "canvas-fft";
+        /*https://developers.soundcloud.com/blog/of-cors-we-do*/
+        /*http://stackoverflow.com/questions/25476137/mp3-issue-with-html5-audio-in-firefox*/
+        fetchAudioAsset(url, ctx, function( buffer ) {
+          audioSource = [];
+          audioSource[0] = ctx.createBufferSource();
+          audioSource[0].buffer = buffer;
+          audioSource[0].connect(ctx.destination);
+          audioSource[0].connect(analyser);
+          audioSource[0].start();
+        });
 
-		if ( Settings.ShowGraph ) {
-			$("#"+canvasId).show();
-		}
+        function fetchAudioAsset (path, audioCtx, callback) {
+          invocation.open('GET', path, true);
+          invocation.responseType = 'arraybuffer';
+          invocation.onload = function() {
+            if (invocation.readyState != 4) return;
+            audioCtx.decodeAudioData(invocation.response, function(buffer) {
+              callback && callback(buffer);
+            });
+          }.bind(this);
+          invocation.onprogress = function(ev) {
+            console.log('burrefing audio', (((ev.loaded / ev.total) * 100) + '%') );
+          };
 
-		this.canvas = document.getElementById(canvasId);
-		this.ctx = this.canvas.getContext("2d");
+          fetchAudioAsset.request && fetchAudioAsset.request.abort();
+          fetchAudioAsset.request = invocation;
+          invocation.send();
+        };
 
-		console.log("Number of freq bins: " + analyser.frequencyBinCount);
+        freqByteData = new Uint8Array(analyser.frequencyBinCount);
 
-		$("#soundcloud").delay(600).fadeIn();
-	};
+        var canvasId = "canvas-fft";
+
+        if ( Settings.ShowGraph ) {
+            $("#"+canvasId).show();
+        }
+
+        this.canvas = document.getElementById(canvasId);
+        this.ctx = this.canvas.getContext("2d");
+
+        console.log("Number of freq bins: " + analyser.frequencyBinCount);
+
+        $("#soundcloud").delay(600).fadeIn();
+    };
 
 	this.setMeshUniform = function( meshIndex, channel )
 	{
