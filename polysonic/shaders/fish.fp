@@ -103,17 +103,14 @@ float snoise(vec3 v)
 void main() {
 	//if ( length(vPosition) < 0.8 ) {
 
-	if ( snoise(vNormal.xyz*vec3(0.5, 4.0, 0.5)+vec3(vTime*0.5 + cos(vTime*2.0 + vNormal.y*(vAudioData.w*10.0+3.0)))) < 0.3 
-    || abs(vNormal.y)>0.9 ) {
-  //if ( snoise(vNormal.xyz*vec3(0.5, 5.0, 0.5)+vec3(vTime)) < mix(0.6,0.1, vAudioData.w) ) {
-	    discard;
+  float noiseVal = snoise(vNormal.xyz*vec3(0.5, 4.0, 0.5)+vec3(vTime*0.5 + cos(vTime*2.0 + vNormal.y*(vAudioData.w*10.0+3.0))));
+	
+  if ( noiseVal  < 0.3 || abs(vNormal.y)>0.9 ) {
 	}
-
-	//gl_FragColor = vec4( vNormal.xyz*0.5 + vec3(0.5), 1.0 );
 
 	if ( gl_FrontFacing )
 	{
-		gl_FragColor = vec4(0.0, 0.0,0.0,1.0);
+		gl_FragColor = vec4( vec3(noiseVal*0.15), 1.0);
 	} else {
 		gl_FragColor = vColor;
 	}
