@@ -105,8 +105,11 @@ void main() {
 
   float noiseVal = snoise(vNormal.xyz*vec3(0.5, 4.0, 0.5)+vec3(vTime*0.5 + cos(vTime*2.0 + vNormal.y*(vAudioData.w*10.0+3.0))));
 	
+
   if ( noiseVal  < 0.3 || abs(vNormal.y)>0.9 ) {
+	    discard;
 	}
+
 
 	if ( gl_FrontFacing )
 	{
