@@ -26,6 +26,18 @@ function setOrientationControls(e) {
   window.removeEventListener('deviceorientation', setOrientationControls);
 }
 
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    console.log('Query variable %s not found', variable);
+}
+
 var scene;
 var camera;
 var renderer;
@@ -62,9 +74,13 @@ function main( err, files ) {
   window.addEventListener( 'resize', onWindowResize, false );
 
   // VR?
-  if ( Settings.VRMode ) {
+  var useVR = getQueryVariable("vr");
+  if ( useVR ) {
+    Settings.VRMode = (useVR == 1) || useVR == "true";  
+  }
 
-     camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
+  if ( Settings.VRMode ) {
+    camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
     camera.position.z = 3;
 
     effect = new THREE.StereoEffect(renderer);
