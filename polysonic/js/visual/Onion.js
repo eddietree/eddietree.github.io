@@ -226,6 +226,10 @@ function Onion()
 
 	this.updateCamera = function()
 	{
+		if ( Settings.VRMode ) {
+			return;
+		}
+		
 		var radius = this.camRadius;
 
 		// radius modulated by pitch

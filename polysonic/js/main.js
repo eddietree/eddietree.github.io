@@ -1,7 +1,29 @@
 function onWindowResize(){
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight );
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize( width, height );
+  
+  if ( effect ) { 
+    effect.setSize(width, height);
+  }
+}
+
+function setOrientationControls(e) {
+  if (!e.alpha) {
+    return;
+  }
+
+  if ( controls ) {
+    controls = new THREE.DeviceOrientationControls(camera, true);
+    controls.connect();
+    controls.update();
+  }
+
+  element.addEventListener('click', fullscreen, false);
+  window.removeEventListener('deviceorientation', setOrientationControls);
 }
 
 var scene;
@@ -14,6 +36,9 @@ var g_dt = 1.0 / 60.0;
 var g_time = 0.0;
 var g_shader_files;
 var g_soundcloud;
+var element;
+var effect;
+var controls;
 
 function main( err, files ) {
   
@@ -23,16 +48,36 @@ function main( err, files ) {
 
   g_shaderFiles = files;
 
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000 );
-  camera.position.z = 5;
-  console.log(camera.position.x, camera.position.y, camera.position.z);
-
   renderer = new THREE.WebGLRenderer();
   renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.setClearColor( 0xffffff, 1);
-  document.body.appendChild( renderer.domElement );
+  element = renderer.domElement;
+  document.body.appendChild( element );
+
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000 );
+  camera.position.z = 5;
+  
+  window.addEventListener( 'deviceorientation', setOrientationControls, true );
   window.addEventListener( 'resize', onWindowResize, false );
+
+  // VR?
+  if ( Settings.VRMode ) {
+
+     camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    camera.position.z = 3;
+
+    effect = new THREE.StereoEffect(renderer);
+    controls = new THREE.OrbitControls(camera, element);
+      controls.rotateUp(Math.PI / 4);
+      controls.target.set(
+        camera.position.x,
+        camera.position.y,
+        camera.position.z
+      );
+    controls.noZoom = true;
+    controls.noPan = true;
+  }
 
   // objs
   g_objs = new ObjManager();
@@ -69,6 +114,7 @@ function main( err, files ) {
     if ( stats ) stats.begin();
     if ( g_audioManager ) g_audioManager.update();
     if ( g_soundcloud ) g_soundcloud.update();
+    if ( controls ) controls.update();
 
     render();
     g_time += g_dt;
@@ -77,11 +123,29 @@ function main( err, files ) {
 
     requestAnimationFrame(animloop);
   })();
+
+  onWindowResize();
+}
+
+function fullscreen() {
+  if (container.requestFullscreen) {
+    container.requestFullscreen();
+  } else if (container.msRequestFullscreen) {
+    container.msRequestFullscreen();
+  } else if (container.mozRequestFullScreen) {
+    container.mozRequestFullScreen();
+  } else if (container.webkitRequestFullscreen) {
+    container.webkitRequestFullscreen();
+  }
 }
 
 function render()
 {
-  renderer.render( scene, camera );
+  if ( effect ) {
+    effect.render(scene, camera);
+  } else {
+    renderer.render( scene, camera );
+  }
 
   if ( g_soundcloud ) {
      g_soundcloud.draw();
