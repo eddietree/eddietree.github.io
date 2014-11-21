@@ -73,7 +73,9 @@ function SoundCloudManager()
 
         console.log("Number of freq bins: " + analyser.frequencyBinCount);
 
-        $("#soundcloud").delay(600).fadeIn();
+        if ( !Settings.VRMode ) {
+        	$("#soundcloud").delay(600).fadeIn();
+        }
     };
 
 	this.setMeshUniform = function( meshIndex, channel )
