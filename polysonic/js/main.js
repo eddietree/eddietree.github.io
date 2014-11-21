@@ -81,16 +81,14 @@ function main( err, files ) {
 
   if ( Settings.VRMode ) {
     camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
-    camera.position.z = 3;
+    camera.position.z = 5;
+    scene.add(camera);
 
     effect = new THREE.StereoEffect(renderer);
+    
     controls = new THREE.OrbitControls(camera, element);
-      controls.rotateUp(Math.PI / 4);
-      controls.target.set(
-        camera.position.x,
-        camera.position.y,
-        camera.position.z
-      );
+    //controls.rotateUp(Math.PI / 4);
+    controls.target.set(0,0,0);
     controls.noZoom = true;
     controls.noPan = true;
   }
