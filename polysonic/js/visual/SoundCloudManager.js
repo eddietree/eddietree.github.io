@@ -18,7 +18,8 @@ function SoundCloudManager()
     	var clientId = "f0e7d787e5b20cddd319cf439a5d1cb3";
     	var trackId = "175342694";
 
-        var ctx = new AudioContext(),
+    	var webAudioAPI = window.AudioContext || window.webkitAudioContext;
+        var ctx = new webAudioAPI(),
             audio = new Audio(),
             invocation = new XMLHttpRequest(),
             source,
