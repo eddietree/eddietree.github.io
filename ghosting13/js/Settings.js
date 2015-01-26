@@ -3,6 +3,6 @@ var Settings = {
 	ShowFPS: false,
 	StartProfileIndex: 0,
 	Autoplay: false, // will auto-cycle scenes
-	AutoplayTimeout: 10000, // how long to wait for timeout
+	AutoplayTimeout: 300000, // how long to wait for timeout
 	AnnecdoteWaitTime: 30000,
 };

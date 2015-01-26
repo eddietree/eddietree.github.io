@@ -28,8 +28,10 @@ $(function() {
 
 	var cmdVisual = getQueryVariable("visual");
 	var cmdShowText = getQueryVariable("text");
+	var cmdAutoplay = getQueryVariable("autoplay");
 	
 	if ( cmdShowText ) Settings.ShowProfileText = cmdShowText != 0;
+	if ( cmdAutoplay ) Settings.Autoplay = cmdAutoplay != 0;
 
 	if ( Settings.ShowProfileText ) {
 		$("#tip").delay(1000).fadeIn().delay(4000).fadeOut();
