@@ -230,7 +230,6 @@ function Onion()
 
 	this.updateCamera = function()
 	{
-		return;
 		if ( Settings.VRMode ) {
 			return;
 		}

@@ -165,7 +165,8 @@ function Waves()
 	{
 		this.time += g_dt;
 
-		this.mesh.rotation.y = this.time*0.2;
+		if ( Settings.VRMode )
+			this.mesh.rotation.y = this.time*0.2;
 
 		var soundArray = this.mesh.material.uniforms.soundArray.value;
 		var lerpFactor = 0.2;
