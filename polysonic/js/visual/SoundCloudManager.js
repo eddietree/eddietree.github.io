@@ -53,7 +53,7 @@ function SoundCloudManager()
           }.bind(this);
           invocation.onprogress = function(ev) {
           	var percentBuffered = (ev.loaded / ev.total) * 100;
-            //console.log('buffering audio', (percentBuffered + '%') );
+            console.log('Buffering audio: ', (percentBuffered + '%') );
           };
 
           fetchAudioAsset.request && fetchAudioAsset.request.abort();
