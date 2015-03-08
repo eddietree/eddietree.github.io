@@ -247,6 +247,17 @@ function Onion()
 //touchstart
 var touchPressPos = {x:0.0, y:0.0};
 
+function onkey(event) {
+	    event.preventDefault();
+
+	    if (event.keyCode == 90) { // z
+	    	controls.zeroSensor();
+	    }
+	  };
+
+	window.addEventListener("keydown", onkey, true);
+
+
 window.addEventListener('touchstart', function(e) {
 
 	var currTouchX = e.touches[0].clientX;
