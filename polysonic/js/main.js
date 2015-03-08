@@ -5,7 +5,7 @@ function onWindowResize(){
   camera.aspect = width / height;
 
   if ( Settings.VRMode ) {
-    camera.aspect *= 2.0;
+    //camera.aspect *= 2.0;
   }
 
   camera.updateProjectionMatrix();
@@ -85,17 +85,32 @@ function main( err, files ) {
   }
 
   if ( Settings.VRMode ) {
-    camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    console.log("Using VRMode");
+
+    camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
     camera.position.z = 5;
     scene.add(camera);
 
-    effect = new THREE.StereoEffect(renderer);
+    /*effect = new THREE.StereoEffect(renderer);
     
     controls = new THREE.OrbitControls(camera, element);
     //controls.rotateUp(Math.PI / 4);
     controls.target.set(0,0,0);
     controls.noZoom = true;
-    controls.noPan = true;
+    controls.noPan = true;*/
+
+    controls = new THREE.VRControls( camera );
+
+    /*
+    Apply VR stereo rendering to renderer
+    */
+    effect = new THREE.VREffect( renderer );
+    effect.setSize( window.innerWidth, window.innerHeight );
+
+    document.body.addEventListener( 'dblclick', function() {
+      effect.setFullScreen( true );
+    });
+
   }
 
   // objs
@@ -133,7 +148,11 @@ function main( err, files ) {
     if ( stats ) stats.begin();
     if ( g_audioManager ) g_audioManager.update();
     if ( g_soundcloud ) g_soundcloud.update();
-    if ( controls ) controls.update();
+    if ( controls ) 
+    {
+      //console.log("UPDATONG");
+      controls.update();
+    }
 
     render();
     g_time += g_dt;
@@ -161,6 +180,7 @@ function fullscreen() {
 function render()
 {
   if ( effect ) {
+    console.log("EFFE");
     effect.render(scene, camera);
   } else {
     renderer.render( scene, camera );
