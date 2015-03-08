@@ -4,7 +4,7 @@ function onWindowResize(){
 
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  
+
   renderer.setSize( width, height );
   
   if ( effect ) { 
@@ -176,7 +176,6 @@ function fullscreen() {
 function render()
 {
   if ( effect ) {
-    console.log("EFFE");
     effect.render(scene, camera);
   } else {
     renderer.render( scene, camera );
