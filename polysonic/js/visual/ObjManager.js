@@ -2,6 +2,10 @@ function GetObj( a_name ) {
 	return g_objs.get(a_name);
 }
 
+function ObjExists( a_name ) {
+	return g_objs.exists(a_name);
+}
+
 function ObjManager()
 {
 	this.init = function()
@@ -60,6 +64,13 @@ function ObjManager()
               obj.draw();
             }
         }.bind(this));
+	}
+
+	this.exists = function( a_name )
+	{
+		//console.log( this.objs[a_name] );
+		return (this.objs[a_name] != undefined)
+			 || ( this.objs[a_name].active );
 	}
 
 	this.get = function( a_name )

@@ -82,9 +82,12 @@ function SoundCloudManager()
 	this.setMeshUniform = function( meshIndex, channel )
 	{
 		var channelVal = this.getChannelVal(channel);
-		var onion = GetObj("onion");
 
-		onion.meshes[meshIndex].mesh.material.uniforms.audioData.value.w = channelVal;
+		if ( ObjExists("onion") )
+		{
+			var onion = GetObj("onion");
+			onion.meshes[meshIndex].mesh.material.uniforms.audioData.value.w = channelVal;
+		}
 	}
 
 	this.update = function()
