@@ -166,6 +166,11 @@ function Onion()
 		this.camRadius = 5.0;
 		this.camRotateSpeed = 1.0;
 
+		if ( Settings.VRMode ) 
+		{
+			camera.position.y = -0.3;
+		}
+
 		//var geometry = new THREE.BoxGeometry( cubeWidth, cubeWidth, cubeWidth );
 		//var geometry = new THREE.SphereGeometry( radius, 16, 16 );
 		//var phongMaterial =  new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0xdddddd, specular: 0xffffff, shininess: 30, shading: THREE.FlatShading } )
