@@ -87,19 +87,7 @@ function main( err, files ) {
     camera.position.z = 5;
     scene.add(camera);
 
-    /*effect = new THREE.StereoEffect(renderer);
-    
-    controls = new THREE.OrbitControls(camera, element);
-    //controls.rotateUp(Math.PI / 4);
-    controls.target.set(0,0,0);
-    controls.noZoom = true;
-    controls.noPan = true;*/
-
     controls = new THREE.VRControls( camera );
-
-    /*
-    Apply VR stereo rendering to renderer
-    */
     effect = new THREE.VREffect( renderer );
     effect.setSize( window.innerWidth, window.innerHeight );
 
@@ -125,7 +113,7 @@ function main( err, files ) {
   // profile
   g_profiles = new ProfileManager();
   g_profiles.init();
-  g_profiles.loadProfile( 0 );
+  g_profiles.loadProfile(1);
 
   // show stats
   if ( Settings.ShowFPS ) {
