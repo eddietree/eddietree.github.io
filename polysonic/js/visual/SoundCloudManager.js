@@ -47,13 +47,21 @@ function SoundCloudManager()
           invocation.responseType = 'arraybuffer';
           invocation.onload = function() {
             if (invocation.readyState != 4) return;
+
+            g_profiles.loadProfile( 0 );
             audioCtx.decodeAudioData(invocation.response, function(buffer) {
               callback && callback(buffer);
             });
           }.bind(this);
           invocation.onprogress = function(ev) {
-          	var percentBuffered = (ev.loaded / ev.total) * 100;
-            console.log('Buffering audio: ', (percentBuffered + '%') );
+          	var percentBuffered = (ev.loaded / ev.total);
+            console.log('Buffering audio: ', (percentBuffered * 100 + '%') );
+
+            if ( ObjExists("loadFx") )
+            {
+            	var obj = GetObj("loadFx");
+            	obj.setLoadingPercent(percentBuffered);
+            }
           };
 
           fetchAudioAsset.request && fetchAudioAsset.request.abort();

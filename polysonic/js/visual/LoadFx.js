@@ -5,13 +5,13 @@ function LoadFx()
 
 	this.init = function()
 	{
-
 		// bg
 		g_soundcloud.clearColor0 = new THREE.Color( 0xD60062 );
 
-		var numBoxes = 10;
-		var boxWidthCoeff = 0.1;
-		var boxPaddingCoeff = 0.1;
+		var numBoxes = 20;
+		var boxWidthCoeff = 0.05;
+		var boxHeightCoeff = 0.5;
+		var boxPaddingCoeff = 0.05;
 
 		// boxes
 		this.meshes = new Array( numBoxes );
@@ -20,21 +20,35 @@ function LoadFx()
 			var totalWidth = ( boxWidthCoeff + boxPaddingCoeff ) * numBoxes;
 			var x = totalWidth*-0.5 + i * (boxWidthCoeff + boxPaddingCoeff );
 
-			var geometry = new THREE.BoxGeometry( boxWidthCoeff, 1, 0.01 );
-			var material = new THREE.MeshBasicMaterial( { color : new THREE.Color( 0xff00ff ) } );
+			var geometry = new THREE.BoxGeometry( boxWidthCoeff, boxHeightCoeff, 0.01 );
+			var material = new THREE.MeshBasicMaterial( { color : new THREE.Color( 0xff55ff ) } );
 			mesh = new THREE.Mesh( geometry, material );
 			mesh.position.x = x;
 
 			this.meshes[i] = mesh;
-
 			scene.add( mesh );
+		}
+	};
+
+	this.setLoadingPercent = function( a_percent )
+	{
+		if ( this.meshes )
+		{
+			var indexPercent = Math.floor( a_percent * this.meshes.length );
+
+			for ( var i=0; i < this.meshes.length; i+=1 )
+			{
+				var mesh = this.meshes[i];
+				if ( i < indexPercent )
+				{
+					mesh.material.color.setHex(0xffffff);
+				}
+			}
 		}
 	};
 
 	this.release = function()
 	{
-		g_soundcloud.clearColor0 = new THREE.Color( 0x38AF62 );
-
 		if ( this.meshes )
 		{
 			for ( var i=0; i < this.meshes.length; i+=1 )
@@ -48,7 +62,5 @@ function LoadFx()
 	this.update = function()
 	{
 		this.time += g_dt;
-
-		//renderer.setClearColor( 0xffffff, 1);
 	};
 }
