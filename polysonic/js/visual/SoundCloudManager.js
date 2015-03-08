@@ -53,7 +53,8 @@ function SoundCloudManager()
             });
           }.bind(this);
           invocation.onprogress = function(ev) {
-            console.log('burrefing audio', (((ev.loaded / ev.total) * 100) + '%') );
+          	var percentBuffered = (ev.loaded / ev.total) * 100;
+            //console.log('buffering audio', (percentBuffered + '%') );
           };
 
           fetchAudioAsset.request && fetchAudioAsset.request.abort();
@@ -99,9 +100,15 @@ function SoundCloudManager()
 		this.setMeshUniform( 2, "chords" );
 		//this.setMeshUniform( 1, "bass" );
 
-		GetObj("waves").injectSoundVal( -this.getChannelVal("bass")*2.0 );
-		GetObj("onion").camRadius = lerp( GetObj("onion").camRadius, 5.0 - 0.5 * this.getChannelVal("bass"), 0.2 );
-		GetObj("onion").camRotateSpeed = lerp( GetObj("onion").camRotateSpeed, 1.0 + 15.0 * (this.getChannelVal("snare")+this.getChannelVal("bass")*0.1 ), 0.1 );
+		if ( ObjExists("waves") ) 
+			GetObj("waves").injectSoundVal( -this.getChannelVal("bass")*2.0 );
+
+		if ( ObjExists("onion") )
+		{
+			var obj = GetObj("onion");
+			obj.camRadius = lerp( obj.camRadius, 5.0 - 0.5 * this.getChannelVal("bass"), 0.2 );
+			obj.camRotateSpeed = lerp( obj.camRotateSpeed, 1.0 + 15.0 * (this.getChannelVal("snare")+this.getChannelVal("bass")*0.1 ), 0.1 );
+		}
 
 		var clearSoundVal = this.getChannelVal("snare")*0.15;
 		renderer.setClearColor( this.clearColor0.clone().lerp( this.clearColor1, clearSoundVal ), 1); 

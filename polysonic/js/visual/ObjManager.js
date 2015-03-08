@@ -68,9 +68,9 @@ function ObjManager()
 
 	this.exists = function( a_name )
 	{
+		var obj = this.objs[a_name];
 		//console.log( this.objs[a_name] );
-		return (this.objs[a_name] != undefined)
-			 || ( this.objs[a_name].active );
+		return ( obj != undefined) && ( obj.active == true );
 	}
 
 	this.get = function( a_name )
