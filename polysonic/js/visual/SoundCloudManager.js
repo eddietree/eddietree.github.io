@@ -11,7 +11,6 @@ function SoundCloudManager()
 
 	this.clearColor0 = new THREE.Color( 0x38AF62 );
 	this.clearColor1 = new THREE.Color( 0xffff00 );
-	this.clearColor = new THREE.Color();
 
 	this.init = function()
     {

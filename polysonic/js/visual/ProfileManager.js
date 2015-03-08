@@ -6,6 +6,7 @@ function ProfileManager()
 		this.profiles = 
 		[
 			["onion", "particles", "waves"],
+			["loadFx"],
 		];
 	};
 

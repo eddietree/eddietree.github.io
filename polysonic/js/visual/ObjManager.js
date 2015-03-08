@@ -15,6 +15,7 @@ function ObjManager()
 			onion:new Onion(),
 			particles:new Particles(),
 			waves:new Waves(),
+			loadFx:new LoadFx(),
 		};
 
 		/*for (var property in this.objs ) {
