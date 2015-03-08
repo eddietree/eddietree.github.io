@@ -21,7 +21,7 @@ function LoadFx()
 			var x = totalWidth*-0.5 + i * (boxWidthCoeff + boxPaddingCoeff );
 
 			var geometry = new THREE.BoxGeometry( boxWidthCoeff, boxHeightCoeff, 0.01 );
-			var material = new THREE.MeshBasicMaterial( { color : new THREE.Color( 0xff55ff ) } );
+			var material = new THREE.MeshBasicMaterial( { color : new THREE.Color( 0x333333 ) } );
 			mesh = new THREE.Mesh( geometry, material );
 			mesh.position.x = x;
 

@@ -4,6 +4,7 @@ function Particles()
 
 	this.init = function()
 	{
+		this.time = 0.0;
 		this.initParticles();
 	};
 
@@ -12,7 +13,7 @@ function Particles()
 		var numPoints = 2048;
 		var numFloatsPerPos = 3;
 		var numFloatsPerColor = 3;
-		var posRadius = 3.0;
+		var posRadius = 7.0;
 
 		var positions = new Float32Array( numPoints*numFloatsPerPos );
 		var colors = new Float32Array( numPoints*numFloatsPerColor );
@@ -85,6 +86,9 @@ function Particles()
 	this.update = function()
 	{
 		this.time += g_dt;
+
+		if ( Settings.VRMode )		
+			this.pointcloud.rotation.y = -this.time*0.07;
 
 		var screenWidth = 0.5;//window.innerWidth;
 		var fovAngle = camera.fov * Math.PI / 180.0;
