@@ -3,12 +3,8 @@ function onWindowResize(){
   var height = window.innerHeight;
 
   camera.aspect = width / height;
-
-  if ( Settings.VRMode ) {
-    //camera.aspect *= 2.0;
-  }
-
   camera.updateProjectionMatrix();
+  
   renderer.setSize( width, height );
   
   if ( effect ) { 
