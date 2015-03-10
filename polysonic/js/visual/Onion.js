@@ -208,8 +208,7 @@ function Onion()
 		var lerpTime = 2.0;
 
 		//g_soundcloud.clearColor0 = new THREE.Color( 0x38AF62 );
-		g_soundcloud.clearColor0.lerp( new THREE.Color( 0x38AF62 ), 0.05 );
-
+		if ( g_soundcloud ) g_soundcloud.clearColor0.lerp( new THREE.Color( 0x38AF62 ), 0.05 );
 
 		this.time += g_dt * this.camRotateSpeed;
 

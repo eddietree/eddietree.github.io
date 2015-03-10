@@ -80,6 +80,12 @@ function main( err, files ) {
     Settings.VRMode = (useVR == 1) || useVR == "true";  
   }
 
+  // mute audio
+  var muteAudio = getQueryVariable("mute");
+   if ( muteAudio ) {
+    Settings.MuteAudio = (muteAudio == 1) || muteAudio == "true";  
+  }
+
   if ( Settings.VRMode ) {
     console.log("Using VRMode");
 
@@ -101,19 +107,28 @@ function main( err, files ) {
   g_objs = new ObjManager();
   g_objs.init();
 
-  if ( Settings.UseSoundCloud ) {
-  	g_soundcloud = new SoundCloudManager();
-  	g_soundcloud.init();
-  } else {
-     // audio manager
-    g_audioManager = new AudioManager();
-    g_audioManager.init();
+  if ( !Settings.MuteAudio )
+  {
+    if ( Settings.UseSoundCloud ) {
+    	g_soundcloud = new SoundCloudManager();
+  	 g_soundcloud.init();
+    } else {
+      // audio manager
+      g_audioManager = new AudioManager();
+      g_audioManager.init();
+    }
   }
 
   // profile
   g_profiles = new ProfileManager();
   g_profiles.init();
-  g_profiles.loadProfile(1);
+
+
+  if ( Settings.MuteAudio )
+    g_profiles.loadProfile(0);
+  else
+    g_profiles.loadProfile(1);
+
 
   // show stats
   if ( Settings.ShowFPS ) {

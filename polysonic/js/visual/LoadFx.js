@@ -6,7 +6,8 @@ function LoadFx()
 	this.init = function()
 	{
 		// bg
-		g_soundcloud.clearColor0 = new THREE.Color( 0xE61072 );
+		if ( g_soundcloud )
+			g_soundcloud.clearColor0 = new THREE.Color( 0xE61072 );
 
 		var numBoxes = 20;
 		var boxWidthCoeff = 0.05;
