@@ -33,8 +33,8 @@ var App = function (firstName) {
 
   		var render = function () {
 			requestAnimationFrame( render );
-			app.update();
-			app.draw();
+			g_app.update();
+			g_app.draw();
 		};
 
 		render();
