@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "threejs": "*",
-    "jquery": "*"
+    "jquery": "*",
+    "bootstrap": "~3.3.4"
   }
 }

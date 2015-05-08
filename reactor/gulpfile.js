@@ -14,7 +14,7 @@ var gulp = require('gulp'),
     del = require('del');
 
 
-gulp.task('bowerz', function() {
+gulp.task('bower-files', function() {
     return gulp.src(mainBowerFiles())
         .pipe(gulp.dest('dist/assets/js/lib'))
 });
@@ -22,8 +22,8 @@ gulp.task('bowerz', function() {
 gulp.task('scripts', function() {
   return gulp.src('src/scripts/*.js')
     .pipe(jshint())
-    .pipe(jshint.reporter('default', { verbose: true }))
-    //.pipe(jshint.reporter('default'))
+    //.pipe(jshint.reporter('default', { verbose: true }))
+    .pipe(jshint.reporter('default'))
     .pipe(concat('main.js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
@@ -57,13 +57,14 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('scripts', 'images', 'html', 'styles');
+    gulp.start('scripts', 'images', 'html', 'styles', 'bower-files');
 });
 
 gulp.task('watch', function() {
 
   // Watch .scss files
   gulp.watch('src/styles/*.css', ['styles']);
+  gulp.watch('bower_components*', ['bower-files']);
   gulp.watch('src/scripts/*.js', ['scripts']);
   gulp.watch('src/images/*', ['images']);
   gulp.watch('src/html/*', ['html']);
