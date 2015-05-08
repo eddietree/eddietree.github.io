@@ -17,4 +17,4 @@ THREEx.WindowResize = function(renderer, camera){
       window.removeEventListener('resize', callback);
     }
   };
-}
+};
