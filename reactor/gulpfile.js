@@ -12,6 +12,7 @@ var gulp = require('gulp'),
     open = require('gulp-open'),
     webserver = require('gulp-webserver'),
     livereload = require('gulp-livereload'),
+    runSequence  = require('run-sequence'),
     mainBowerFiles = require('main-bower-files'),
     del = require('del');
 
@@ -58,15 +59,17 @@ gulp.task('clean', function(cb) {
     del(['dist'], cb)
 });
 
-function DoYoThang()
-{
-  gulp.start('scripts', 'images', 'html', 'styles', 'bower-files');
-};
+// RUN 
+gulp.task('run', function(cb) {
+  runSequence('clean', 
+  	['scripts', 'images', 'html', 'styles', 'bower-files'],  // all the build tasks
+  	'webserver', 
+  	'watch', 
+  	cb);
+});
 
 gulp.task('default', ['clean'], function() {
-  
-  //gulp.start('scripts', 'images', 'html', 'styles', 'bower-files');
-  DoYoThang();
+  gulp.start('run');
 });
 
 gulp.task('webserver', function() {
@@ -76,18 +79,9 @@ gulp.task('webserver', function() {
       //directoryListing: true,
       open: true
     }));
-
-    // open file
-  	//gulp.src('dist/*.html')
-  	//.pipe(open('', {app: 'chrome', url: 'http://localhost:3000'}));
 });
 
 gulp.task('watch', function() {
-
-  DoYoThang();
-
-  gulp.start( 'webserver');
-
 
   // Watch .scss files
   gulp.watch('src/styles/*.css', ['styles']);
