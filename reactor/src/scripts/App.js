@@ -31,13 +31,14 @@ var App = function (firstName) {
   {
   	THREEx.WindowResize(g_renderer, g_camera);
 
-  		var render = function () {
-			requestAnimationFrame( render );
-			g_app.update();
-			g_app.draw();
-		};
+	var render = function () 
+	{
+		requestAnimationFrame( render );
+		g_app.update();
+		g_app.draw();
+	};
 
-		render();
+	render();
   };
 
   this.update = function()
