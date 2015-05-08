@@ -53,14 +53,22 @@ gulp.task('html', function() {
 });
 
 gulp.task('clean', function(cb) {
-    del(['dist/assets/css', 'dist/assets/js', 'dist/assets/img'], cb)
+    del(['dist'], cb)
 });
+
+function DoYoThang()
+{
+  gulp.start('scripts', 'images', 'html', 'styles', 'bower-files');
+};
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('scripts', 'images', 'html', 'styles', 'bower-files');
+  
+  DoYoThang();
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['clean'], function() {
+
+  DoYoThang();
 
   // Watch .scss files
   gulp.watch('src/styles/*.css', ['styles']);
