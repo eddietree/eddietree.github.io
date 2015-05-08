@@ -17,6 +17,7 @@
   "dependencies": {
     "threejs": "*",
     "jquery": "*",
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "reset-css": "~2.0.20110126"
   }
 }

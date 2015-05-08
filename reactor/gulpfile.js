@@ -16,7 +16,7 @@ var gulp = require('gulp'),
 
 gulp.task('bower-files', function() {
     return gulp.src(mainBowerFiles())
-        .pipe(gulp.dest('dist/assets/js/lib'))
+        .pipe(gulp.dest('dist/assets/lib'))
 });
 
 gulp.task('scripts', function() {
