@@ -17,6 +17,9 @@ var gulp = require('gulp'),
     del = require('del');
 
 
+/////////////////////////////////////////////////
+//	BUILD files into dist/
+/////////////////////////////////////////////////
 gulp.task('bower-files', function() {
     return gulp.src(mainBowerFiles())
         .pipe(gulp.dest('dist/assets/lib'))
@@ -40,7 +43,6 @@ gulp.task('styles', function() {
     .pipe(notify({ message: 'Styles task complete' }));
 });
 
-
 gulp.task('images', function() {
   return gulp.src('src/images/*')
     .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
@@ -55,23 +57,9 @@ gulp.task('html', function() {
     .pipe(notify({ message: 'Html task complete' }));
 });
 
-gulp.task('clean', function(cb) {
-    del(['dist'], cb)
-});
-
-// RUN 
-gulp.task('run', function(cb) {
-  runSequence('clean', 
-  	['scripts', 'images', 'html', 'styles', 'bower-files'],  // all the build tasks
-  	'webserver', 
-  	'watch', 
-  	cb);
-});
-
-gulp.task('default', ['clean'], function() {
-  gulp.start('run');
-});
-
+/////////////////////////////////////////////////
+//	Webserver
+/////////////////////////////////////////////////
 gulp.task('webserver', function() {
   gulp.src('dist')
     .pipe(webserver({
@@ -97,3 +85,30 @@ gulp.task('watch', function() {
   gulp.watch(['dist/**']).on('change', livereload.changed);
 });
 
+
+/////////////////////////////////////////////////
+//	Build commands
+/////////////////////////////////////////////////
+
+// scripts that need to be called
+var build_cmds = ['scripts', 'images', 'html', 'styles', 'bower-files'];
+
+gulp.task('build', function(cb) {
+    runSequence('clean', build_cmds, cb);
+});
+
+gulp.task('clean', function(cb) {
+    del(['dist'], cb)
+});
+
+gulp.task('run', function(cb) {
+  runSequence('clean', 
+  	['scripts', 'images', 'html', 'styles', 'bower-files'],  // all the build tasks
+  	'webserver', 
+  	'watch', 
+  	cb);
+});
+
+gulp.task('default', ['clean'], function() {
+  gulp.start('run');
+});
