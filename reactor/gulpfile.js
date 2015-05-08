@@ -10,8 +10,15 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
+    mainBowerFiles = require('main-bower-files'),
     //includeSources = require('gulp-include-source');
     del = require('del');
+
+
+gulp.task('bowerz', function() {
+    return gulp.src(mainBowerFiles())
+        .pipe(gulp.dest('dist/assets/js/lib'))
+});
 
 gulp.task('scripts', function() {
   return gulp.src('src/scripts/*.js')

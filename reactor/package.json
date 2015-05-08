@@ -23,6 +23,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-ruby-sass": "^1.0.5",
     "gulp-uglify": "^1.2.0",
+    "main-bower-files": "^2.7.0",
     "sass": "^0.5.0"
   }
 }
