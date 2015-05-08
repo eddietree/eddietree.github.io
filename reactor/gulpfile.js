@@ -11,7 +11,6 @@ var gulp = require('gulp'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
     mainBowerFiles = require('main-bower-files'),
-    //includeSources = require('gulp-include-source');
     del = require('del');
 
 
@@ -26,7 +25,6 @@ gulp.task('scripts', function() {
     .pipe(jshint.reporter('default', { verbose: true }))
     //.pipe(jshint.reporter('default'))
     .pipe(concat('main.js'))
-    //.pipe(gulp.dest('dist/assets/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest('dist/assets/js'))
@@ -42,7 +40,6 @@ gulp.task('styles', function() {
 
 gulp.task('images', function() {
   return gulp.src('src/images/*')
-    //.pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
     .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
     .pipe(gulp.dest('dist/assets/img'))
     .pipe(notify({ message: 'Images task complete' }));
