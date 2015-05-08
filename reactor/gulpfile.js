@@ -66,7 +66,7 @@ gulp.task('default', ['clean'], function() {
   DoYoThang();
 });
 
-gulp.task('watch', ['clean'], function() {
+gulp.task('watch', function() {
 
   DoYoThang();
 
