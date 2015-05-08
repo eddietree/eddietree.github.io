@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
+    open = require('gulp-open'),
     livereload = require('gulp-livereload'),
     mainBowerFiles = require('main-bower-files'),
     del = require('del');
@@ -69,6 +70,11 @@ gulp.task('default', ['clean'], function() {
 gulp.task('watch', function() {
 
   DoYoThang();
+
+  // open file
+  gulp.src('dist/*.html')
+  .pipe(open('', {app: 'chrome', url: 'http://localhost:3000'}));
+
 
   // Watch .scss files
   gulp.watch('src/styles/*.css', ['styles']);
