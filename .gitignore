@@ -1,3 +1,4 @@
 /reactor/node_modules
 /reactor/dist
 /reactor/bower_components
+/reactor/build

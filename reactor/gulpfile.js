@@ -18,11 +18,11 @@ var gulp = require('gulp'),
 
 
 /////////////////////////////////////////////////
-//	BUILD files into dist/
+//	BUILD files into build/
 /////////////////////////////////////////////////
 gulp.task('bower-files', function() {
     return gulp.src(mainBowerFiles())
-        .pipe(gulp.dest('dist/assets/lib'))
+        .pipe(gulp.dest('build/assets/lib'))
 });
 
 gulp.task('scripts', function() {
@@ -33,27 +33,27 @@ gulp.task('scripts', function() {
     .pipe(concat('main.js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
-    .pipe(gulp.dest('dist/assets/js'))
+    .pipe(gulp.dest('build/assets/js'))
     .pipe(notify({ message: 'Scripts task complete' }));
 });
 
 gulp.task('styles', function() {
   return gulp.src('src/styles/*')
-    .pipe(gulp.dest('dist/assets/styles'))
+    .pipe(gulp.dest('build/assets/styles'))
     .pipe(notify({ message: 'Styles task complete' }));
 });
 
 gulp.task('images', function() {
   return gulp.src('src/images/*')
     .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
-    .pipe(gulp.dest('dist/assets/img'))
+    .pipe(gulp.dest('build/assets/img'))
     .pipe(notify({ message: 'Images task complete' }));
 });
 
 gulp.task('html', function() {
 	return gulp.src('src/html/index.html')
 	//.pipe( includeSources() )
-	.pipe(gulp.dest('dist'))
+	.pipe(gulp.dest('build'))
     .pipe(notify({ message: 'Html task complete' }));
 });
 
@@ -61,7 +61,7 @@ gulp.task('html', function() {
 //	Webserver
 /////////////////////////////////////////////////
 gulp.task('webserver', function() {
-  gulp.src('dist')
+  gulp.src('build')
     .pipe(webserver({
       livereload: true,
       //directoryListing: true,
@@ -81,8 +81,8 @@ gulp.task('watch', function() {
   // Create LiveReload server
   livereload.listen();
 
-  // Watch any files in dist/, reload on change
-  gulp.watch(['dist/**']).on('change', livereload.changed);
+  // Watch any files in build/, reload on change
+  gulp.watch(['build/**']).on('change', livereload.changed);
 });
 
 
@@ -98,7 +98,7 @@ gulp.task('build', function(cb) {
 });
 
 gulp.task('clean', function(cb) {
-    del(['dist'], cb)
+    del(['build'], cb)
 });
 
 gulp.task('run', function(cb) {
