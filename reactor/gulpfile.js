@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
     open = require('gulp-open'),
+    webserver = require('gulp-webserver'),
     livereload = require('gulp-livereload'),
     mainBowerFiles = require('main-bower-files'),
     del = require('del');
@@ -64,16 +65,28 @@ function DoYoThang()
 
 gulp.task('default', ['clean'], function() {
   
+  //gulp.start('scripts', 'images', 'html', 'styles', 'bower-files');
   DoYoThang();
+});
+
+gulp.task('webserver', function() {
+  gulp.src('dist')
+    .pipe(webserver({
+      livereload: true,
+      //directoryListing: true,
+      open: true
+    }));
+
+    // open file
+  	//gulp.src('dist/*.html')
+  	//.pipe(open('', {app: 'chrome', url: 'http://localhost:3000'}));
 });
 
 gulp.task('watch', function() {
 
   DoYoThang();
 
-  // open file
-  gulp.src('dist/*.html')
-  .pipe(open('', {app: 'chrome', url: 'http://localhost:3000'}));
+  gulp.start( 'webserver');
 
 
   // Watch .scss files
@@ -83,7 +96,7 @@ gulp.task('watch', function() {
   gulp.watch('src/images/*', ['images']);
   gulp.watch('src/html/*', ['html']);
 
-   // Create LiveReload server
+  // Create LiveReload server
   livereload.listen();
 
   // Watch any files in dist/, reload on change
