@@ -483,17 +483,12 @@
       }
 
       void main() {
-          //float PI = 3.14159;
-
-          float phi = acos(position.y);
+          float PI = 3.14159;
           float theta = atan(position.z, position.x);
+          float phi = -(acos(position.y) - PI*0.5);
 
-          float a = 1.0 ;//+ sin(time * 2.5 ) * 0.1 + u_n3;
-          float b = 1.0 ;
-          
-          //float n1 = 1.0;
-          //float n2 = 1.0 ;
-          //float n3 = 1.0;
+          float a = 1.0;
+          float b = 1.0;
 
           float m = u_m;//cos(time * 10.0 + theta * 5.0)*0.1;
           float n1 = u_n1;
@@ -515,7 +510,7 @@
           posFinal.xyz = mix( posFinal, goal_pos, 1.0 );
 
           vPosition = posFinal;
-          vColor = vec4(position.xyz, 1.0);
+          vColor = vec4(position.xyz * 0.5 + vec3(0.5), 1.0);
 
           gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
       }

@@ -4,17 +4,17 @@ function SuperFormula()
 
 	this.init = function()
 	{
-		this.u_m = 3;
-		this.u_n1 = 2;
-		this.u_n2 = 5;
-		this.u_n3 = 7;
+		this.u_m = 8;
+		this.u_n1 = 0.5;
+		this.u_n2 = 0.5;
+		this.u_n3 = 8;
 		this.time = 0.0;
 
 		var gui = new dat.GUI();
-		gui.add(this, 'u_m', 0.0, 10.0);
-		gui.add(this, 'u_n1', 0.0, 20.0);
-		gui.add(this, 'u_n2', 0.0, 20.0);
-		gui.add(this, 'u_n3', 0.0, 20.0);
+		gui.add(this, 'u_m', 0.1, 10.0);
+		gui.add(this, 'u_n1', 0.1, 20.0);
+		gui.add(this, 'u_n2', 0.1, 20.0);
+		gui.add(this, 'u_n3', 0.1, 20.0);
 		gui.add(this, 'time', 1.0, 5.0);
 
 
@@ -64,7 +64,7 @@ function SuperFormula()
 
 	this.update = function()
 	{
-		var radius = 5.5;
+		var radius = 3.5;
 		//camera.position.x = 0;
 		camera.position.y = 0;
 		camera.position.x = radius * Math.cos(this.time); 
