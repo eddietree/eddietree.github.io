@@ -11,6 +11,7 @@ function ProfileManager()
 			["polybear"],
 			["mask"],
 			["cubes"],
+			["superformula"],
 		];
 	};
 

@@ -10,6 +10,7 @@ function ObjManager()
 			polybear:new Polybear(),
 			cubes:new CubeWorld(),
 			mask:new Mask(),
+			superformula:new SuperFormula(),
 		};
 
 		/*for (var property in this.objs ) {

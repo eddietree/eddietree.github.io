@@ -447,6 +447,48 @@
       }
   </script>
 
+  <script id="vertexShaderSuperFormula" type="x-shader/x-vertex">
+
+       precision mediump float;
+      precision mediump int;
+
+      //attribute vec3 pos;
+      attribute vec4 color;
+      //attribute vec3 data;
+
+      varying vec3 vPosition;
+      varying vec4 vColor;
+
+      uniform float time;
+
+      void main() {
+          float PI = 3.14159;
+          //float deltaY = pow(data.z,2.0);
+
+          float distFromCenter = length(position);
+
+          vec3 posFinal = position;
+          vPosition = posFinal;
+          vColor = color;
+
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
+      }
+
+  </script>
+
+  <script id="fragmentShaderSuperFormula" type="x-shader/x-fragment">
+
+      precision highp float;
+      precision mediump int;
+
+      varying vec3 vPosition;
+      varying vec4 vColor;
+
+      void main() {
+          gl_FragColor = vColor;
+      }
+  </script>
+
   <script id="fragmentShaderLines" type="x-shader/x-fragment">
 
       precision highp float;
@@ -580,6 +622,7 @@
   <script src="js/Mask.js"></script>
   <script src="js/ObjManager.js"></script>
   <script src="js/ProfileManager.js"></script>
+  <script src="js/SuperFormula.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
