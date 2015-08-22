@@ -465,9 +465,10 @@
           float PI = 3.14159;
           //float deltaY = pow(data.z,2.0);
 
-          float distFromCenter = length(position);
+          //float distFromCenter = length(position);
 
           vec3 posFinal = position;
+          posFinal.x += sin(time + posFinal.x);
           vPosition = posFinal;
           vColor = color;
 
