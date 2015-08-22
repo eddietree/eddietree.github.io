@@ -477,7 +477,20 @@
       {
         float left = pow( abs(cos( m * superangle * 0.25) / a), a_n2 );
         float right = pow( abs(sin( m * superangle * 0.25) / b), a_n3 );
-        float result = pow( abs(left + right), -1.0 / a_n1 );
+        float result = 1.0 / pow( abs(left + right), 1.0 / a_n1 );
+
+
+
+    /*r1=abs(1/a*abs(cos( m * theta/4)))^n2+abs(1/b*abs(sin( m * theta/4)))^n3;
+      r1=abs(r1)^(-1/n1);
+
+      r2=abs(1/a*abs(cos( m * phi/4)))^n2+abs(1/b*abs(sin( m * phi/4)))^n3;
+      r2=abs(r2)^(-1/n1);
+
+      x = r1*cos(theta)*r2*cos(phi);
+      y = r1*sin(theta)*r2*cos(phi);
+      z = r2*sin(phi);
+*/
 
         return result;
       }
@@ -490,7 +503,7 @@
           float a = 1.0;
           float b = 1.0;
 
-          float m = u_m;//cos(time * 10.0 + theta * 5.0)*0.1;
+          float m = u_m + cos(time * 10.0 + phi * 5.0)*0.1;
           float n1 = u_n1;
           float n2 = u_n2;
           float n3 = u_n3;

@@ -12,9 +12,9 @@ function SuperFormula()
 
 		var gui = new dat.GUI();
 		gui.add(this, 'u_m', 0.1, 10.0);
-		gui.add(this, 'u_n1', 0.1, 20.0);
-		gui.add(this, 'u_n2', 0.1, 20.0);
-		gui.add(this, 'u_n3', 0.1, 20.0);
+		gui.add(this, 'u_n1', 0.1, 8.0);
+		gui.add(this, 'u_n2', 0.1, 8.0);
+		gui.add(this, 'u_n3', 0.1, 8.0);
 		gui.add(this, 'time', 1.0, 5.0);
 
 
@@ -66,7 +66,7 @@ function SuperFormula()
 	{
 		var radius = 3.5;
 		//camera.position.x = 0;
-		camera.position.y = 0;
+		camera.position.y = 1;
 		camera.position.x = radius * Math.cos(this.time); 
 		camera.position.z = radius * Math.sin(this.time);
 		camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
