@@ -461,16 +461,52 @@
 
       uniform float time;
 
+      float superf(
+        float superangle, 
+          float m, 
+          float a, 
+          float b, 
+          float n1, 
+          float n2, 
+          float n3
+          )
+      {
+        float left = pow(cos( m * superangle * 0.25) / a, n2 );
+        float right = pow(sin( m * superangle * 0.25) / b, n3 );
+        float result = pow( left + right, -1.0 / n1 );
+
+        return result;
+      }
+
       void main() {
           float PI = 3.14159;
           //float deltaY = pow(data.z,2.0);
 
+          float phi = acos(position.y);
+          float theta = atan(position.z, position.x);
+
+
+          float m = cos(time * 10.0 + theta * 5.0)*0.1;
+          float a = 1.0 + sin(time * 2.5) * 0.1;
+          float b = 1.0 ;
+          float n1 = 1.0;
+          float n2 = 1.0 ;
+          float n3 = 1.0;
+
+          
+          float pos_x = superf(theta, m, a, b, n1, n2, n3) * cos(theta) * superf(phi, m, a, b, n1, n2, n3) * cos(phi);
+          float pos_y = superf(theta, m, a, b, n1, n2, n3) * sin(theta) * superf(phi, m, a, b, n1, n2, n3) * cos(phi);
+          float pos_z = superf(phi, m, a, b, n1, n2, n3) * sin(phi);
+
           //float distFromCenter = length(position);
 
           vec3 posFinal = position;
-          posFinal.x += sin(time + posFinal.x);
+
+          vec3 goal_pos = vec3(pos_x, pos_y, pos_z);
+          posFinal.xyz = mix( posFinal, goal_pos, 0.4 );
+
           vPosition = posFinal;
-          vColor = color;
+          vColor = vec4(position.xyz, 1.0);
 
           gl_Position = projectionMatrix * modelViewMatrix * vec4( posFinal, 1.0 );
       }

@@ -30,8 +30,8 @@ function SuperFormula()
 		});
 
 
-		var geometry = new THREE.SphereGeometry( 1, 96, 96 );
-		this.mesh = new THREE.Line( geometry, shaderMaterial, THREE.LinePieces );
+		var geometry = new THREE.SphereGeometry( 1, 64, 64 );
+		this.mesh = new THREE.Line( geometry, shaderMaterial, THREE.LineStrip  );
 		scene.add( this.mesh );
 
 
@@ -47,10 +47,12 @@ function SuperFormula()
 
 	this.update = function()
 	{
-		camera.position.x = 0;
+		var radius = 2.0;
+		//camera.position.x = 0;
 		camera.position.y = 0;
-		camera.position.z = 5;
-		camera.lookAt( new THREE.Vector3( 0, 0, -1 ) );
+		camera.position.x = radius * Math.cos(this.time); 
+		camera.position.z = radius * Math.sin(this.time);
+		camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
 
 
 		this.time += g_dt;
