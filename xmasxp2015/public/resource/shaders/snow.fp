@@ -1,5 +1,6 @@
 uniform vec3 uColorSky;
 uniform vec3 uColorSnow;
+uniform float uPhongCoeff;
 
 varying float vTime;
 varying vec3 vNormal;
@@ -112,7 +113,7 @@ void main() {
 
 
 	float phong = dot( vecToLight, vNormal );
-	vec3 color = mix( color0, color1, phong*phong);
+	vec3 color = mix( color0, color1, mix(1.0, phong*phong, uPhongCoeff ));
 
 	float fogCoeff = clamp(distToCamera*0.002,0.0,1.0);
 
