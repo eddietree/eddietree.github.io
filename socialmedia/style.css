@@ -66,8 +66,10 @@ body
 	color: gray;
 	text-align: center;
 	line-height: 1.5em;
-	width: 80%;
-
+	
+	width: 50%;
+	min-width: 300px;
+	max-width: 600px;
 	background-color: white;
 	border-radius: 5px;
 }
@@ -96,6 +98,12 @@ body
 
 #notification-on {
 	color: white;
+	position: relative;
+}
+
+#notification-on:hover {
+	color: red;
+	cursor: pointer;
 }
 
 #notification-on p {
